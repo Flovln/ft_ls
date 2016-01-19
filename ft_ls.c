@@ -31,19 +31,19 @@ int		main()
 	int				files;
 	struct dirent	*read;
 	struct stat		st;
-	DIR				*dirp;
+	DIR				*dir_ptr;
 
 	read = NULL;
-	dirp = NULL;
-	dirp = opendir(".");
+	dir_ptr = NULL;
+	dir_ptr = opendir(".");
 	//else
-  	if (dirp == NULL)
+  	if (dir_ptr == NULL)
    		return (1);
 	printf("Success opening file\n");
-	while ((read = readdir(dirp)) != NULL)
+	while ((read = readdir(dir_ptr)) != NULL)
 		files += ft_count_obj(read);
 /* s'il y a un soucis avec la fermeture */
-	if (closedir(dirp) == -1)
+	if (closedir(dir_ptr) == -1)
 		return (-1);
 	printf("Success closing file\n");
 }
