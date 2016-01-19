@@ -6,20 +6,21 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 12:21:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/18 13:19:46 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/19 17:22:26 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	int	ft_count_obj(struct dirent *rd, struct stat *st)
+static	int	ft_count_obj(struct dirent *read)
 {
 	int count;
 
 	count = 0;
-	if (ft_strcmp(rd->d_name, ".") != 0 && ft_strcmp(rd->d_name , "..") != 0)
+/*si le repertoire contient un '.' dans son nom, alors on ne l'affiche pas */
+	if (ft_strncmp(read->d_name, ".", 1) != 0)
 	{
-		ft_putendl(rd->d_name);
+		ft_putendl(read->d_name); // = ft_putstr + rajoute \n a la fin
 		count++;
 	}
 	return (count);
@@ -28,22 +29,20 @@ static	int	ft_count_obj(struct dirent *rd, struct stat *st)
 int		main()
 {
 	int				files;
-	struct dirent	*rd;
+	struct dirent	*read;
 	struct stat		st;
 	DIR				*dirp;
 
-	rd = NULL;
+	read = NULL;
 	dirp = NULL;
 	dirp = opendir(".");
 	//else
   	if (dirp == NULL)
    		return (1);
 	printf("Success opening file\n");
-	while ((rd = readdir(dirp)) != NULL)
-	{
-		files += ft_count_obj(rd, &st);
-//		printf("Success reading file\n");
-	}
+	while ((read = readdir(dirp)) != NULL)
+		files += ft_count_obj(read);
+/* s'il y a un soucis avec la fermeture */
 	if (closedir(dirp) == -1)
 		return (-1);
 	printf("Success closing file\n");
