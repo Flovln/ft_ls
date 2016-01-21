@@ -6,17 +6,30 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/15 15:52:04 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/21 16:24:03 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-#include <dirent.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
+#include <dirent.h> // struct qui permet d'utiliser opendir readdir closedir
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
 #include <stdio.h>
-#include ".libft/libft.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include "libft/libft.h"
+
+typedef struct		s_file_info
+{
+	mode_t			mode;
+	off_t			size;
+	uid_t			*uid;
+	char			*gid;
+}					t_file_info;
 
 #endif
