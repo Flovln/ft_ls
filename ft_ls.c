@@ -6,44 +6,49 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 12:21:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/19 17:22:26 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/21 16:24:00 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	int	ft_count_obj(struct dirent *read)
+t_file_info		*ft_init_file_info(t_file_info *get_info)
 {
-	int count;
-
-	count = 0;
-/*si le repertoire contient un '.' dans son nom, alors on ne l'affiche pas */
-	if (ft_strncmp(read->d_name, ".", 1) != 0)
-	{
-		ft_putendl(read->d_name); // = ft_putstr + rajoute \n a la fin
-		count++;
-	}
-	return (count);
+	get_info->mode = 0;
+	get_info->size = 0;
+	get_info-> uid = 0;
+	get_info->gid = 0;
+	return (get_info);
 }
-
-int		main()
+/*
+static void		ft_file_stat(struct stat *get_stat, t_file_info *get_info)
 {
-	int				files;
-	struct dirent	*read;
-	struct stat		st;
-	DIR				*dirp;
+	get_info->uid = &get_stat->st_uid;
+	printf("Valeur uid : %d\n", get_info->uid);	
+}
+*/
+int		main(int ac, char **av)
+{
+	DIR				*dir_ptr;
+	struct dirent	*read_ptr;
+	struct stat		*get_stat; //path
+	t_file_info		*get_info;
 
-	read = NULL;
-	dirp = NULL;
-	dirp = opendir(".");
-	//else
-  	if (dirp == NULL)
-   		return (1);
-	printf("Success opening file\n");
-	while ((read = readdir(dirp)) != NULL)
-		files += ft_count_obj(read);
-/* s'il y a un soucis avec la fermeture */
-	if (closedir(dirp) == -1)
-		return (-1);
-	printf("Success closing file\n");
+	dir_ptr = NULL;
+	read_ptr = NULL;
+	get_info = NULL;
+	dir_ptr = opendir(".");
+	if (dir_ptr == NULL)
+		return (1);
+	while ((read_ptr = readdir(dir_ptr)) != NULL)
+	{
+		if (stat(av[1], get_stat) > 0)
+			return (1);
+//		get_info = ft_init_file_info(get_info);
+//		ft_file_stat(get_stat, get_info);
+		if (ft_strncmp(read_ptr->d_name, ".", 1) != 0)
+			ft_putendl(read_ptr->d_name);
+	}
+	closedir (dir_ptr);
+	return (0);
 }
