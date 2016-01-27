@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 14:21:33 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/27 17:50:39 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/27 18:40:39 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* Afficher les Permissions d'acces */
+/* Affiche les Permissions d'acces */
 
 void			ft_permission_rights(struct stat file_stat)
 {
@@ -28,7 +28,7 @@ void			ft_permission_rights(struct stat file_stat)
 	ft_putstr( (file_stat.st_mode & S_IXOTH) ? "x" : "-"); // execute/search permission, other/world
 }
 
-/* Afficher le nom du proprietaire du fichier cible */
+/* Affiche le nom du proprietaire du fichier cible */
 
 void			ft_get_file_uid(struct stat file_stat) //, t_file_info *get_info)
 {
@@ -37,37 +37,43 @@ void			ft_get_file_uid(struct stat file_stat) //, t_file_info *get_info)
 	user_name = NULL;
 	if ((user_name = getpwuid(file_stat.st_uid)) != NULL)
 		ft_putstr(user_name->pw_name);
-		ft_putchar('\n');
 }
 
-/* Afficher le nom du Fichier */
+/* Affiche group name */
 
-void		ft_get_file_name(struct dirent *get_name)
+void			ft_get_group_name(struct stat file_stat)
 {
-	ft_putstr(get_name->d_name);
+	struct group *group_name;
+
+	group_name = NULL;
+	if ((group_name = getgrgid(file_stat.st_gid)) != NULL)
+		ft_putstr(group_name->gr_name);
+}
+
+/* Affiche la date et heure */
+
+void			ft_get_time(struct stat file_stat)
+{
+	ft_putstr(ctime(&file_stat.st_mtime));
 }
 
 int		main(int ac, char **av)
 {
-	DIR				*dir_ptr;
 	struct stat 	file_stat;
 	struct dirent	*read;
 	t_file_info		*get_info;
 
-	dir_ptr = opendir(".");
 	if (ac != 2)
 		return (1);
-	while ((read = readdir(dir_ptr)) != NULL)
-	{
-		if (stat(av[1], &file_stat) < 0)
-			return (1);
-		ft_permission_rights(file_stat);
-		ft_putchar('\t');
-		ft_get_file_uid(file_stat);
-		ft_putchar('\t');
-		ft_get_file_name(read);
-		ft_putchar('\t');
-	}
-	closedir(dir_ptr);
+	if (stat(av[1], &file_stat) < 0)
+		return (1);
+	ft_permission_rights(file_stat);
+	ft_putchar('\t');
+	ft_get_file_uid(file_stat);
+	ft_putchar('\t');
+	ft_get_group_name(file_stat);
+	ft_putchar('\t');
+	ft_get_time(file_stat);
+	ft_putchar('\n');
 	return (0);
 }
