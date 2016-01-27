@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 12:21:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/21 17:03:42 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/27 15:47:34 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ t_file_info		*ft_init_file_info(t_file_info *get_info)
 	return (get_info);
 }
 */
-static void		ft_file_stat(struct stat *get_stat, t_file_info *get_info)
-{
-
-	/*
-	struct passwd *pwd;
-
-	pwd = NULL;
-	if ((pwd = getpwuid(get_stat->st_uid)) != NULL)
-	{		
-		get_info->uid = pwd->pw_name;
-	}
-	printf("Valeur uid : %s\n", get_info->uid);	*/
-}
 
 static void		ft_list_files(struct dirent *read_ptr)
 {
@@ -46,21 +33,18 @@ int		main(int ac, char **av)
 	DIR				*dir_ptr;
 	struct dirent	*read_ptr;
 	struct stat		*get_stat; //path
-	t_file_info		*get_info;
 
 	dir_ptr = NULL;
 	read_ptr = NULL;
-	get_info = NULL;
+	get_stat = NULL;
 	dir_ptr = opendir(".");
+	if (ac >= 2)
 	if (dir_ptr == NULL)
 		return (1);
 	while ((read_ptr = readdir(dir_ptr)) != NULL)
 	{
 		if (stat(av[1], get_stat) > 0)
 			return (1);
-//		get_info = malloc(sizeof(t_file_info));
-//		get_info = ft_init_file_info(get_info);
-		ft_file_stat(get_stat, get_info);
 		ft_list_files(read_ptr); //affiche les fichiers + dossiers du repertoire courant
 	}
 	closedir (dir_ptr);
