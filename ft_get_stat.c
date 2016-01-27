@@ -17,7 +17,7 @@
 void			ft_permission_rights(struct stat file_stat)
 {
 	ft_putstr( (S_ISDIR(file_stat.st_mode)) ? "d" : "-"); // d = Directory / '-' = file
-	ft_putstr( (file_stat.st_mode & S_IRUSR) ? "" : "-"); // read permission, owner
+	ft_putstr( (file_stat.st_mode & S_IRUSR) ? "r" : "-"); // read permission, owner
 	ft_putstr( (file_stat.st_mode & S_IWUSR) ? "w" : "-"); // write permission, owner
 	ft_putstr( (file_stat.st_mode & S_IXUSR) ? "x" : "-"); // execute/search permission, owner
 	ft_putstr( (file_stat.st_mode & S_IRGRP) ? "r" : "-"); // read permission, group
