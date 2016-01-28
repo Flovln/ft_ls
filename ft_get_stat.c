@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 14:21:33 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/27 18:40:39 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/28 13:30:23 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void			ft_permission_rights(struct stat file_stat)
 	ft_putstr( (file_stat.st_mode & S_IROTH) ? "r" : "-"); // read permission, other/world
 	ft_putstr( (file_stat.st_mode & S_IWOTH) ? "w" : "-"); // write permission, other/world
 	ft_putstr( (file_stat.st_mode & S_IXOTH) ? "x" : "-"); // execute/search permission, other/world
+}
+
+/* Affiche le nombre de links */
+
+void			ft_links_nb(struct stat file_stat)
+{
+	printf("%d", file_stat.st_nlink);
 }
 
 /* Affiche le nom du proprietaire du fichier cible */
@@ -50,6 +57,13 @@ void			ft_get_group_name(struct stat file_stat)
 		ft_putstr(group_name->gr_name);
 }
 
+/* Affiche taille du fichier/dossier */
+
+void			ft_get_file_size(struct stat file_stat)
+{
+	printf("%lld", file_stat.st_size);
+}
+
 /* Affiche la date et heure */
 
 void			ft_get_time(struct stat file_stat)
@@ -61,7 +75,7 @@ int		main(int ac, char **av)
 {
 	struct stat 	file_stat;
 	struct dirent	*read;
-	t_file_info		*get_info;
+	t_lst_info		*get_info;
 
 	if (ac != 2)
 		return (1);
@@ -69,9 +83,13 @@ int		main(int ac, char **av)
 		return (1);
 	ft_permission_rights(file_stat);
 	ft_putchar('\t');
+	ft_links_nb(file_stat);
+	ft_putchar('\t');
 	ft_get_file_uid(file_stat);
 	ft_putchar('\t');
 	ft_get_group_name(file_stat);
+	ft_putchar('\t');
+	ft_get_file_size(file_stat);
 	ft_putchar('\t');
 	ft_get_time(file_stat);
 	ft_putchar('\n');
