@@ -27,6 +27,7 @@
 
 typedef struct				s_lst_info
 {
+	char					*chem; // path
 	char					get_perm[11];
 	char					*date;
 	char					*name;
@@ -45,7 +46,7 @@ typedef struct				s_data
 }							t_data;
 */
 void		ft_perm_acc(t_lst_info *elem, struct stat *file_stat);
-void		ft_new_node(t_lst_info **head, t_lst_info *new_node);
+void		ft_add_node(t_lst_info *head, t_lst_info *new_node);
 t_lst_info	*ft_get_data(t_lst_info *head, char *path, char *file);
 
 #endif

@@ -11,21 +11,19 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
+/*
 static void		ft_list_files(struct dirent *read)
 {
 	if (ft_strncmp(read->d_name, ".", 1) != 0)
 		ft_putendl(read->d_name);
 }
-
+*/
 static void		ft_read_param(char *path)
 {
 	DIR				*dir;
 	struct dirent	*ret;
 	t_lst_info		*node;
-	t_lst_info		*head;
 
-	head = NULL;
 	if (!(dir = opendir(path)))
 	{
 		ft_putendl("opening error");
@@ -37,10 +35,14 @@ static void		ft_read_param(char *path)
 	node->next = NULL;
 	while ((ret = readdir(dir)))
 	{
-		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name)); //ret->d_name == char *file
-		ft_new_node(&head, node);
-		//node = node->next;
-		ft_list_files(ret);
+		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
+		ft_putstr(node->name);
+		ft_putstr("\n");
+		//ft_putstr(node->gid);
+		//ft_putstr("\t\t");
+		//ft_putstr(node->uid);
+		//ft_putstr("\n");
+//		ft_list_files(ret);
 	}
 	closedir(dir);
 }

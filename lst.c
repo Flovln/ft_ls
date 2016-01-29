@@ -12,48 +12,40 @@
 
 #include "ft_ls.h"
 
-void			ft_new_node(t_lst_info **head, t_lst_info *new_node)
+void			ft_add_node(t_lst_info *head, t_lst_info *new_node)
 {
-	t_lst_info	*current;
-
-	if (!*head) // == NULL
+	if (!head) // == NULL
 	{
-		*head = new_node;
+		head = new_node;
 		return ;
 	}
-	else
-		current = *head;
-	while (current->next)
-		current = current->next;
-	current->next = new_node;
+	while (head->next)
+		head = head->next;
+	head->next = new_node;
 }
 
-static void		ft_add_data(struct stat *file_stat, t_lst_info *node, char *file, char *path)
+static void		ft_add_data(struct stat file_stat, t_lst_info *node, char *file, char *path)
 {
 	struct passwd	*user_name;
 	struct group	*group_name;
 
-	if ((user_name = getpwuid(file_stat->st_uid)))
+	if ((user_name = getpwuid(file_stat.st_uid)))
 		node->uid = user_name->pw_name;
-	if ((group_name = getgrgid(file_stat->st_gid)))
+	if ((group_name = getgrgid(file_stat.st_gid)))
 		node->gid = group_name->gr_name;
 	node->name = file;
+	node->chem = path;
 }
 
-t_lst_info		*ft_get_data(t_lst_info *head, char *path, char *file)
+t_lst_info		*ft_get_data(t_lst_info *head, char *file, char *path)
 {
-	struct stat file_stat;
-	t_lst_info	*node_data;
+	struct stat file_st;
+	t_lst_info	*tmp;
 
-	node_data = (t_lst_info *)malloc(sizeof(t_lst_info));
-	node_data->next = NULL;
-	if (stat(path, &file_stat) == 1)
-	{	
-		ft_putendl("fail to get stats");
-		exit(EXIT_FAILURE);
-	}
-	if (lstat(path, &file_stat) <= 0)
-		ft_add_data(&file_stat, node_data, file, path);
-	ft_new_node(&head, node_data);
-	return (node_data);
+	tmp = (t_lst_info *)malloc(sizeof(t_lst_info));
+	tmp->next = NULL;
+	if (lstat(path, &file_st) <= 0)
+		ft_add_data(file_st, tmp, file, path);
+	ft_add_node(head, tmp);
+	return (tmp);
 }
