@@ -6,13 +6,13 @@
 #    By: fviolin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/15 11:41:32 by fviolin           #+#    #+#              #
-#    Updated: 2016/01/29 11:55:23 by fviolin          ###   ########.fr        #
+#    Updated: 2016/01/29 15:43:23 by fviolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = main.c
+SRC = main.c data.c lst.c
 
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a
