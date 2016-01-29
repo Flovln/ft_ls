@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/29 16:32:26 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/29 17:14:59 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ typedef struct				s_data
 */
 void		ft_perm_acc(t_lst_info *elem, struct stat *file_stat);
 void		ft_new_node(t_lst_info **head, t_lst_info *new_node);
-t_lst_info	*ft_get_data(t_lst_info **head, char *path); //char *file
+t_lst_info	*ft_get_data(t_lst_info *head, char *path, char *file);
 
 #endif

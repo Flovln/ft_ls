@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/29 16:35:30 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/01/29 17:55:12 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void		ft_read_param(char *path)
 	t_lst_info		*node;
 	t_lst_info		*head;
 
+	head = NULL;
 	if (!(dir = opendir(path)))
 	{
 		ft_putendl("opening error");
@@ -33,9 +34,10 @@ static void		ft_read_param(char *path)
 	node = (t_lst_info *)malloc(sizeof(t_lst_info));
 	if (!node)
 		return ;
+	node->next = NULL;
 	while ((ret = readdir(dir)))
 	{
-		node = ft_get_data(&node, ft_strjoin(path, ret->d_name)); //ret->d_name == char *file
+		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name)); //ret->d_name == char *file
 		ft_new_node(&head, node);
 		//node = node->next;
 		ft_list_files(ret);
