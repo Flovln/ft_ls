@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 17:12:50 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 17:25:21 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ static void		ft_add_data(struct stat file_stat, t_lst *node, char *file) // char
 	struct passwd	*user_name;
 	struct group	*group_name;
 
+	ft_perm_acc(node, &file_stat);
+	node->file_data->links = ft_itoa(file_stat.st_nlink);
 	if ((user_name = getpwuid(file_stat.st_uid)))
 		node->file_data->uid = ft_strdup(user_name->pw_name);
 	if ((group_name = getgrgid(file_stat.st_gid)))
 		node->file_data->gid = ft_strdup(group_name->gr_name);
-	node->name = file;
-	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
-	node->file_data->links = ft_itoa(file_stat.st_nlink);
 	node->file_data->size = ft_itoa(file_stat.st_size);
-	ft_perm_acc(node, &file_stat);
+	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
+	node->name = file;
 }
 
 t_lst			*ft_get_data(t_lst *head, char *file, char *path)
