@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 16:48:43 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 17:12:50 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void		ft_add_data(struct stat file_stat, t_lst *node, char *file) // char
 	struct group	*group_name;
 
 	if ((user_name = getpwuid(file_stat.st_uid)))
-		node->uid = ft_strdup(user_name->pw_name);
+		node->file_data->uid = ft_strdup(user_name->pw_name);
 	if ((group_name = getgrgid(file_stat.st_gid)))
-		node->gid = ft_strdup(group_name->gr_name);
+		node->file_data->gid = ft_strdup(group_name->gr_name);
 	node->name = file;
 	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
-	node->links = ft_itoa(file_stat.st_nlink);
-	node->size = ft_itoa(file_stat.st_size);
+	node->file_data->links = ft_itoa(file_stat.st_nlink);
+	node->file_data->size = ft_itoa(file_stat.st_size);
 	ft_perm_acc(node, &file_stat);
 }
 
@@ -46,6 +46,7 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	t_lst		*tmp;
 
 	tmp = (t_lst *)malloc(sizeof(t_lst));
+	tmp->file_data = (t_data *)malloc(sizeof(t_data)); //pour structure t_data appelee dans struct t_lst
 	tmp->next = NULL;
 	if (stat(path, &file_st) == 1)
 	{

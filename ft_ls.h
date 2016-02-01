@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 16:47:16 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:59:55 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,25 @@ typedef struct 		s_opt
 	int				t;
 }					t_opt;
 */
-typedef struct				s_lst
-{
-	char					*size;
-	char					*links;
-	char					get_perm[11];
-	char					*date;
-	char					*name;
-	char					*uid;
-	char					*gid;
-	//t_data					*file_data;
-	struct s_lst			*next;
-}							t_lst;
-/*
+
 typedef struct				s_data
 {
-	char				*date;
-   char					*links; // nlink_t nb de fichiers/sous dossiers/fichiers
-   char					*uid; // owner name
-   char					*gid; // group name
-   char					*size; // off_t taille en octets du fichier/dossier
+	char					get_perm[11];
+   	char					*links; // nlink_t nb de fichiers/sous dossiers/fichiers
+   	char					*uid; // owner name
+   	char					*gid; // group name
+   	char					*size; // off_t taille en octets du fichier/dossier
 }							t_data;
-*/
+
+typedef struct				s_lst
+{
+//	char					*path;
+	char					*date;
+	char					*name;
+	t_data					*file_data;
+	struct s_lst			*next;
+}							t_lst;
+
 void		ft_perm_acc(t_lst *elem, struct stat *file_stat);
 void		ft_add_node(t_lst *head, t_lst *new_node);
 t_lst		*ft_get_data(t_lst *head, char *path, char *file);
