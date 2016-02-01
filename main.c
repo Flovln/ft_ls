@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/29 17:55:12 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 15:01:14 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static void		ft_read_param(char *path)
 		ft_putendl("opening error");
 		exit(EXIT_FAILURE);
 	}
+/*
+	if (!(node = (t_lst_info *)malloc(sizeof(t_lst_info))))
+	{
+		ft_putendl("failure malloc read_param");
+		exit(EXIT_FAILURE);
+	}
+	node = NULL;
+*/
 	node = (t_lst_info *)malloc(sizeof(t_lst_info));
 	if (!node)
 		return ;
@@ -36,13 +44,12 @@ static void		ft_read_param(char *path)
 	while ((ret = readdir(dir)))
 	{
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
+		ft_putstr(node->uid);
+		ft_putstr("  ");
+		ft_putstr(node->gid);
+		ft_putstr("  ");
 		ft_putstr(node->name);
 		ft_putstr("\n");
-		//ft_putstr(node->gid);
-		//ft_putstr("\t\t");
-		//ft_putstr(node->uid);
-		//ft_putstr("\n");
-//		ft_list_files(ret);
 	}
 	closedir(dir);
 }
@@ -50,18 +57,23 @@ static void		ft_read_param(char *path)
 int				main(int ac, char **av)
 {
 	int i;
+	t_opt opt;
 
 	if (ac > 1)
 	{
 		i = 1;
+		if (av[i][0] == '-' && av[i][1])
+		{
+			get_opt(av[i], &opt);
+			i = 2;
+		}
 		while (av[i])
 		{
 			ft_read_param(av[i]);
-			ft_putchar('\n');
 			i++;
 		}
 	}
 	else
-		ft_read_param(".");
+		ft_read_param("./");
 	return (0);
 }
