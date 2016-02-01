@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 16:33:13 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:48:46 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		ft_list_files(struct dirent *read)
 }
 */
 
-static void		ft_panning(t_lst_info *node)
+static void		ft_panning(t_lst *node)
 {
 		ft_putstr(node->get_perm);
 		ft_putstr("  ");
@@ -41,14 +41,14 @@ static void		ft_read_param(char *path)
 {
 	DIR				*dir;
 	struct dirent	*ret;
-	t_lst_info		*node;
+	t_lst			*node;
 
 	if (!(dir = opendir(path)))
 	{
 		ft_putendl("opening error");
 		exit(EXIT_FAILURE);
 	}
-	node = (t_lst_info *)malloc(sizeof(t_lst_info));
+	node = (t_lst *)malloc(sizeof(t_lst));
 	if (!node)
 		return ;
 	node->next = NULL;
