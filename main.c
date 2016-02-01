@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 15:01:14 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 15:08:03 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@ static void		ft_read_param(char *path)
 		ft_putendl("opening error");
 		exit(EXIT_FAILURE);
 	}
-/*
-	if (!(node = (t_lst_info *)malloc(sizeof(t_lst_info))))
-	{
-		ft_putendl("failure malloc read_param");
-		exit(EXIT_FAILURE);
-	}
-	node = NULL;
-*/
 	node = (t_lst_info *)malloc(sizeof(t_lst_info));
 	if (!node)
 		return ;
