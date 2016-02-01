@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 16:07:38 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:33:13 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void		ft_panning(t_lst_info *node)
 		ft_putstr(node->uid);
 		ft_putstr("  ");
 		ft_putstr(node->gid);
+		ft_putstr("  ");
+		ft_putstr(node->size);
 		ft_putstr("  ");
 		ft_putstr(node->date);
 		ft_putstr("  ");
@@ -61,16 +63,10 @@ static void		ft_read_param(char *path)
 int				main(int ac, char **av)
 {
 	int i;
-	t_opt opt;
 
 	if (ac > 1)
 	{
 		i = 1;
-		if (av[i][0] == '-' && av[i][1])
-		{
-			get_opt(av[i], &opt);
-			i = 2;
-		}
 		while (av[i])
 		{
 			ft_read_param(av[i]);

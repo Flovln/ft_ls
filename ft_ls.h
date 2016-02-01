@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/29 17:14:59 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:31:53 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft/libft.h"
-
+/*
+typedef struct 		s_opt
+{
+	int				l;
+	int				R;
+	int				a;
+	int				r;
+	int				t;
+}					t_opt;
+*/
 typedef struct				s_lst_info
 {
-	char					*chem; // path
+	char					*size;
+	char					*links;
+//	char					*chem; // path
 	char					get_perm[11];
 	char					*date;
 	char					*name;
@@ -39,10 +50,10 @@ typedef struct				s_lst_info
 /*
 typedef struct				s_data
 {
-	char					*link; // nlink_t nb de fichiers/sous dossiers/fichiers
-	char					*uid; // owner name
-	char					*gid; // group name
-	char					*size; // off_t taille en octets du fichier/dossier
+   char					*link; // nlink_t nb de fichiers/sous dossiers/fichiers
+   char					*uid; // owner name
+   char					*gid; // group name
+   char					*size; // off_t taille en octets du fichier/dossier
 }							t_data;
 */
 void		ft_perm_acc(t_lst_info *elem, struct stat *file_stat);
