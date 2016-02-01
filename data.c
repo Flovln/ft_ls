@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/01/29 16:15:18 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:42:56 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_perm_acc(t_lst_info *elem, struct stat *file_stat)
+void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 {
 	ft_memset(elem->get_perm, 0, 11);
 	elem->get_perm[0] = (S_ISDIR(file_stat->st_mode)) ? 'd' : '-'; // d = Directory / '-' = file
