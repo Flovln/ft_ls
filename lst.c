@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 15:06:44 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:07:41 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			ft_add_node(t_lst_info *head, t_lst_info *new_node)
+static void		ft_new_node(t_lst_info *head, t_lst_info *new_node)
 {
 	if (!head) // == NULL
 	{
@@ -34,7 +34,9 @@ static void		ft_add_data(struct stat file_stat, t_lst_info *node, char *file) //
 	if ((group_name = getgrgid(file_stat.st_gid)))
 		node->gid = ft_strdup(group_name->gr_name);
 	node->name = file;
-//	node->chem = path;
+	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
+	node->links = ft_itoa(file_stat.st_nlink);
+	ft_perm_acc(node, &file_stat);
 }
 
 t_lst_info		*ft_get_data(t_lst_info *head, char *file, char *path)
@@ -51,6 +53,6 @@ t_lst_info		*ft_get_data(t_lst_info *head, char *file, char *path)
 	}
 	if (lstat(path, &file_st) <= 0)
 		ft_add_data(file_st, tmp, file); //, path);
-	ft_add_node(head, tmp);
+	ft_new_node(head, tmp);
 	return (tmp);
 }

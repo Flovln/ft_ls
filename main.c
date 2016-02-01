@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 15:08:03 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:07:38 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ static void		ft_list_files(struct dirent *read)
 		ft_putendl(read->d_name);
 }
 */
+
+static void		ft_panning(t_lst_info *node)
+{
+		ft_putstr(node->get_perm);
+		ft_putstr("  ");
+		ft_putstr(node->links);
+		ft_putstr("  ");
+		ft_putstr(node->uid);
+		ft_putstr("  ");
+		ft_putstr(node->gid);
+		ft_putstr("  ");
+		ft_putstr(node->date);
+		ft_putstr("  ");
+		ft_putstr(node->name);
+		ft_putstr("\n");
+}
+
 static void		ft_read_param(char *path)
 {
 	DIR				*dir;
@@ -36,12 +53,7 @@ static void		ft_read_param(char *path)
 	while ((ret = readdir(dir)))
 	{
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
-		ft_putstr(node->uid);
-		ft_putstr("  ");
-		ft_putstr(node->gid);
-		ft_putstr("  ");
-		ft_putstr(node->name);
-		ft_putstr("\n");
+		ft_panning(node);
 	}
 	closedir(dir);
 }
