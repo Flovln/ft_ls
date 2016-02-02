@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/01 17:12:54 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/02 17:45:59 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,28 @@
    }
    */
 
-static void		ft_panning(t_lst *node)
+static void		display_list(t_lst *node)
 {
-	ft_putstr(node->file_data->get_perm);
-	ft_putstr("  ");
-	ft_putstr(node->file_data->links);
-	ft_putstr("  ");
-	ft_putstr(node->file_data->uid);
-	ft_putstr("  ");
-	ft_putstr(node->file_data->gid);
-	ft_putstr("  ");
-	ft_putstr(node->file_data->size);
-	ft_putstr("  ");
-	ft_putstr(node->date);
-	ft_putstr("  ");
-	ft_putstr(node->name);
-	ft_putstr("\n");
+	t_lst	*tmp;
+
+	tmp = node->next;
+	while (tmp)
+	{
+		ft_putstr(tmp->file_data->get_perm);
+		ft_putstr("  ");
+		ft_putstr(tmp->file_data->links);
+		ft_putstr("  ");
+		ft_putstr(tmp->file_data->uid);
+		ft_putstr("  ");
+		ft_putstr(tmp->file_data->gid);
+		ft_putstr("  ");
+		ft_putstr(tmp->file_data->size);
+		ft_putstr("  ");
+		ft_putstr(tmp->date);
+		ft_putstr("  ");
+		ft_putendl(tmp->name);
+		tmp = tmp->next;
+	}
 }
 
 static void		ft_read_param(char *path)
@@ -42,21 +48,27 @@ static void		ft_read_param(char *path)
 	DIR				*dir;
 	struct dirent	*ret;
 	t_lst			*node;
+	t_lst			*head;
+	t_pad			*pad;
 
 	if (!(dir = opendir(path)))
 	{
 		ft_putendl("opening error");
 		exit(EXIT_FAILURE);
 	}
+	pad = (t_pad *)malloc(sizeof(t_lst));
 	node = (t_lst *)malloc(sizeof(t_lst));
 	if (!node)
 		return ;
+	head = node;
 	node->next = NULL;
 	while ((ret = readdir(dir)))
 	{
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
-		ft_panning(node);
+		node = head;
 	}
+	ft_padding(node, pad);
+	display_list(node);
 	closedir(dir);
 }
 
