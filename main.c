@@ -6,24 +6,32 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 14:12:18 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 16:09:29 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 /*
-   static void		ft_list_files(struct dirent *read)
-   {
-   if (ft_strncmp(read->d_name, ".", 1) != 0)
-   ft_putendl(read->d_name);
-   }
-   */
+static void		ft_read_current(char *path)
+{
+	DIR				*dir;
+	struct dirent	*ret;
 
+	if (!(dir = opendir(path)))
+		return ;
+	while ((ret = readdir(dir)))
+	{
+		if (ft_strncmp(ret->d_name, ".", 1) != 0)
+			ft_putendl(ret->d_name);
+	}
+	closedir(dir);
+}
+*/
 static void    display_list(t_lst *node)
 {
 	t_lst   *tmp;
 
-	tmp = node->next;
+	tmp = node->next; //!!
 	while (tmp)
 	{
 		if (tmp->next == NULL)
@@ -34,7 +42,7 @@ static void    display_list(t_lst *node)
 		}
 		tmp = tmp->next;
 	}
-	tmp = node->next;
+	tmp = node->next; //!!
 	display_data(tmp);
 }
 
@@ -81,6 +89,7 @@ int				main(int ac, char **av)
 		}
 	}
 	else
+	//	ft_read_current(".");	
 		ft_read_param("./");
 	return (0);
 }

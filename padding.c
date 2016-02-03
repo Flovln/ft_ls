@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 14:16:10 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 15:07:43 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		ft_set_padding(t_lst *head, t_pad *pad)
 	t_lst *tmp;
 
 	tmp = head;
-	while (tmp->next)
+	while (tmp->next) //!!
 	{
 		tmp = tmp->next;
 		tmp->file_data->links = ft_add_space(tmp->file_data->links, pad->links);
@@ -94,7 +94,7 @@ void			ft_padding(t_lst *head, t_pad *pad)
 
 	tmp = head;
 	ft_init_pad(pad);
-	while (tmp->next)
+	while (tmp->next) //!!
 	{
 		if (pad->links < ft_strlen(tmp->next->file_data->links))
 			pad->links = ft_strlen(tmp->next->file_data->links);
