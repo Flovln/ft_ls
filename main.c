@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/02 17:45:59 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 10:42:02 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,6 @@
    ft_putendl(read->d_name);
    }
    */
-
-static void		display_list(t_lst *node)
-{
-	t_lst	*tmp;
-
-	tmp = node->next;
-	while (tmp)
-	{
-		ft_putstr(tmp->file_data->get_perm);
-		ft_putstr("  ");
-		ft_putstr(tmp->file_data->links);
-		ft_putstr("  ");
-		ft_putstr(tmp->file_data->uid);
-		ft_putstr("  ");
-		ft_putstr(tmp->file_data->gid);
-		ft_putstr("  ");
-		ft_putstr(tmp->file_data->size);
-		ft_putstr("  ");
-		ft_putstr(tmp->date);
-		ft_putstr("  ");
-		ft_putendl(tmp->name);
-		tmp = tmp->next;
-	}
-}
 
 static void		ft_read_param(char *path)
 {

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/02 17:52:33 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 10:30:53 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,30 @@ static void		ft_init_pad(t_pad *pad)
 	pad->uid = 0;
 	pad->gid = 0;
 	pad->size = 0;
+}
+
+void     display_list(t_lst *node)
+{
+	t_lst   *tmp;
+
+	tmp = node->next;
+	while (tmp)
+	{
+		ft_putstr(tmp->file_data->get_perm);
+		ft_putstr("  ");
+		ft_putstr(tmp->file_data->links);
+		ft_putstr(" ");
+		ft_putstr(tmp->file_data->uid);
+		ft_putstr("  ");
+		ft_putstr(tmp->file_data->gid);
+		ft_putstr(" ");
+		ft_putstr(tmp->file_data->size);
+		ft_putstr("  ");
+		ft_putstr(tmp->date);
+		ft_putstr(" ");
+		ft_putendl(tmp->name);
+		tmp = tmp->next;
+	}
 }
 
 static	char	*ft_add_space(char *s, int max)

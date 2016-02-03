@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/02 17:35:51 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 10:53:57 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,12 @@ typedef struct				s_lst
 	struct s_lst			*next;
 }							t_lst;
 
-void						ft_perm_acc(t_lst *elem, struct stat *file_stat);
+//void						ft_perm_acc(t_lst *elem, struct stat *file_stat);
+void						ft_add_data(struct stat file_stat, t_lst *node, char *file);
 void						ft_add_node(t_lst *head, t_lst *new_node);
 t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst *head, t_pad *pad);
+void						display_list(t_lst *node);
 //void						ft_sort_lst(t_lst *head);
 
 #endif
