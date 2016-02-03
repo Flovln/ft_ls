@@ -6,35 +6,15 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 10:56:29 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 14:23:18 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /////void			ft_free_list(t_lst *head)
-/*
-void		ft_sort_lst(t_lst *head)
-{
-	t_lst 	*tmp;
-	char	*swap;
+//if ((ft_strcmp(head->name, head->next->name) < 0))
 
-	tmp = head;
-	while (head->next)
-	{
-		if ((ft_strcmp(head->next->name, head->name) < 0))
-		{
-			swap = head->name;
-			head->name = head->next->name;
-			head->next->name = swap;
-			head = tmp;
-		}
-		else
-			head = head->next;
-	}
-	head = tmp;
-}
-*/
 static void		ft_new_node(t_lst *head, t_lst *new_node)
 {
 	if (!head) // == NULL
