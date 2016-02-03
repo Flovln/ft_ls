@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 10:42:02 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 14:12:18 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,25 @@
    ft_putendl(read->d_name);
    }
    */
+
+static void    display_list(t_lst *node)
+{
+	t_lst   *tmp;
+
+	tmp = node->next;
+	while (tmp)
+	{
+		if (tmp->next == NULL)
+		{
+			ft_putstr("total ");
+			ft_putstr(tmp->file_data->blocks);
+			ft_putstr("\n");
+		}
+		tmp = tmp->next;
+	}
+	tmp = node->next;
+	display_data(tmp);
+}
 
 static void		ft_read_param(char *path)
 {

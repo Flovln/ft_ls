@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 10:30:53 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/03 14:16:10 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void		ft_init_pad(t_pad *pad)
 	pad->size = 0;
 }
 
-void     display_list(t_lst *node)
+void	display_data(t_lst *node)
 {
-	t_lst   *tmp;
+	t_lst *tmp;
 
-	tmp = node->next;
+	tmp = node;
 	while (tmp)
 	{
 		ft_putstr(tmp->file_data->get_perm);
@@ -43,7 +43,7 @@ void     display_list(t_lst *node)
 		tmp = tmp->next;
 	}
 }
-
+		
 static	char	*ft_add_space(char *s, int max)
 {
 	int 	i;
