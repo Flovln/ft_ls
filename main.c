@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:09:29 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/04 16:17:41 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void		ft_read_current(char *path)
 	closedir(dir);
 }
 */
-static void    display_list(t_lst *node)
+static void    display_list(t_lst **node)
 {
 	t_lst   *tmp;
 
-	tmp = node->next; //!!
+	tmp = *node;
 	while (tmp)
 	{
 		if (tmp->next == NULL)
@@ -42,7 +42,8 @@ static void    display_list(t_lst *node)
 		}
 		tmp = tmp->next;
 	}
-	tmp = node->next; //!!
+	tmp = *node;
+//	printf("TMP NAME is %s\n", tmp->name);
 	display_data(tmp);
 }
 
@@ -67,11 +68,12 @@ static void		ft_read_param(char *path)
 	node->next = NULL;
 	while ((ret = readdir(dir)))
 	{
-		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
+		ft_get_data(&node, ret->d_name, ft_strjoin(path, ret->d_name));
+//		head = node; //for new_node_head()
 		node = head;
 	}
-	ft_padding(node, pad);
-	display_list(node);
+	ft_padding(&node, pad);
+	display_list(&node);
 	closedir(dir);
 }
 

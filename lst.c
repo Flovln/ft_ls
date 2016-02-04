@@ -6,28 +6,35 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 15:13:16 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/04 16:13:39 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /////void			ft_free_list(t_lst *head)
-//if ((ft_strcmp(head->name, head->next->name) < 0))
-
-static void		ft_new_node(t_lst *head, t_lst *new_node)
+/*
+static void		ft_new_node_head(t_lst **head, t_lst *new_node)
 {
-	if (!head) // == NULL
+	if (!*head)
+		*head = new_node;
+	else
 	{
-		head = new_node;
-		return ;
+		new_node->next = *head;
+		*head = new_node;
 	}
-	while (head->next)
-		head = head->next;
-	head->next = new_node;
+}
+*/
+static void		ft_new_node_end(t_lst **head, t_lst *new_node)
+{
+	if (!*head)
+		*head = new_node;
+	while ((*head)->next)
+		*head = (*head)->next;
+	(*head)->next = new_node;
 }
 
-t_lst			*ft_get_data(t_lst *head, char *file, char *path)
+void		ft_get_data(t_lst **head, char *file, char *path)
 {
 	struct stat file_st;
 	t_lst		*tmp;
@@ -42,6 +49,7 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	}
 	if (lstat(path, &file_st) <= 0)
 		ft_add_data(file_st, tmp, file); //, path);
-	ft_new_node(head, tmp);
-	return (tmp);
+	ft_new_node_end(head, tmp);
+// 	ft_new_node_head(head, tmp);
+//	printf("HEAD NAME is %s\n", (*head)->name);
 }

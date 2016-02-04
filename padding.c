@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/03 15:07:43 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/04 16:17:14 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	display_data(t_lst *node)
 {
 	t_lst *tmp;
 
-	tmp = node;
+	tmp = node->next; // !!
 	while (tmp)
 	{
 		ft_putstr(tmp->file_data->get_perm);
@@ -72,11 +72,11 @@ static	char	*ft_add_space(char *s, int max)
 		return (s);
 }
 
-static void		ft_set_padding(t_lst *head, t_pad *pad)
+static void		ft_set_padding(t_lst **head, t_pad *pad)
 {
 	t_lst *tmp;
 
-	tmp = head;
+	tmp = *head;
 	while (tmp->next) //!!
 	{
 		tmp = tmp->next;
@@ -88,11 +88,11 @@ static void		ft_set_padding(t_lst *head, t_pad *pad)
 	tmp->next = NULL;
 }
 
-void			ft_padding(t_lst *head, t_pad *pad)
+void			ft_padding(t_lst **head, t_pad *pad)
 {
 	t_lst	*tmp;
 
-	tmp = head;
+	tmp = *head;
 	ft_init_pad(pad);
 	while (tmp->next) //!!
 	{
