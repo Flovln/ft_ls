@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/04 16:17:41 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 12:50:40 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void    display_list(t_lst **node)
 		tmp = tmp->next;
 	}
 	tmp = *node;
-//	printf("TMP NAME is %s\n", tmp->name);
 	display_data(tmp);
 }
 
@@ -52,7 +51,6 @@ static void		ft_read_param(char *path)
 	DIR				*dir;
 	struct dirent	*ret;
 	t_lst			*node;
-	t_lst			*head;
 	t_pad			*pad;
 
 	if (!(dir = opendir(path)))
@@ -60,17 +58,14 @@ static void		ft_read_param(char *path)
 		ft_putendl("opening error");
 		exit(EXIT_FAILURE);
 	}
-	pad = (t_pad *)malloc(sizeof(t_lst));
-	node = (t_lst *)malloc(sizeof(t_lst));
-	if (!node)
-		return ;
-	head = node;
-	node->next = NULL;
+	pad = (t_pad *)malloc(sizeof(t_pad));
+	if (!(node = (t_lst *)malloc(sizeof(t_lst))))
+		exit (EXIT_FAILURE);
+	node = NULL;
 	while ((ret = readdir(dir)))
 	{
-		ft_get_data(&node, ret->d_name, ft_strjoin(path, ret->d_name));
-//		head = node; //for new_node_head()
-		node = head;
+		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
+	//	printf("NODE is %s\n", node->name);
 	}
 	ft_padding(&node, pad);
 	display_list(&node);
