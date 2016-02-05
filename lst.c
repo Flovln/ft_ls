@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:04:47 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:51:12 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void		ft_add_node(t_lst **head, t_lst *current, t_lst *new_node)
 //	printf("HEAD in new_node is %s\n", (*head)->name);
 }
 */
+
 t_lst		*ft_get_data(t_lst *head, char *file, char *path)
 {
 	struct stat file_st;
@@ -55,4 +56,3 @@ t_lst		*ft_get_data(t_lst *head, char *file, char *path)
 //	ft_add_node(&head, current, tmp);
 	return (head);
 }
-

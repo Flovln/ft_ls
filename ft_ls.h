@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 12:57:10 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:32:16 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <pwd.h>
 # include <uuid/uuid.h>
-# include <dirent.h> // opendir readdir closedir
+# include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <grp.h>
@@ -25,8 +25,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-
-typedef struct 				s_opt
+typedef struct				s_opt
 {
 	int						l;
 	int						R;
@@ -34,7 +33,6 @@ typedef struct 				s_opt
 	int						r;
 	int						t;
 }							t_opt;
-
 
 typedef struct				s_pad
 {
@@ -63,11 +61,14 @@ typedef struct				s_lst
 	struct s_lst			*next;
 }							t_lst;
 
-void						ft_add_data(struct stat file_stat, t_lst *node, char *file);
-void						ft_add_node(t_lst **head, t_lst *current, t_lst *new_node);
+void						ft_add_data(struct stat file_stat,
+								t_lst *node, char *file);
+void						ft_add_node(t_lst **head, t_lst *current,
+								t_lst *new_node);
 t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst **head, t_pad *pad);
 void						display_data(t_lst *node);
 int							ft_options(char *s, t_opt *opt);
+t_lst						*ft_ascii_sort(t_lst *file);
 
 #endif

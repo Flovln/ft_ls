@@ -6,11 +6,12 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 12:50:40 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:43:16 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
 /*
 static void		ft_read_current(char *path)
 {
@@ -27,9 +28,10 @@ static void		ft_read_current(char *path)
 	closedir(dir);
 }
 */
-static void    display_list(t_lst **node)
+
+static	void	display_list(t_lst **node)
 {
-	t_lst   *tmp;
+	t_lst	*tmp;
 
 	tmp = *node;
 	while (tmp)
@@ -46,7 +48,7 @@ static void    display_list(t_lst **node)
 	display_data(tmp);
 }
 
-static void		ft_read_param(char *path)
+static	void	ft_read_param(char *path)
 {
 	DIR				*dir;
 	struct dirent	*ret;
@@ -60,7 +62,7 @@ static void		ft_read_param(char *path)
 	}
 	pad = (t_pad *)malloc(sizeof(t_pad));
 	if (!(node = (t_lst *)malloc(sizeof(t_lst))))
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	node = NULL;
 	while ((ret = readdir(dir)))
 	{
@@ -68,6 +70,7 @@ static void		ft_read_param(char *path)
 	//	printf("NODE is %s\n", node->name);
 	}
 	ft_padding(&node, pad);
+	ft_ascii_sort(node); //
 	display_list(&node);
 	closedir(dir);
 }
@@ -86,7 +89,7 @@ int				main(int ac, char **av)
 		}
 	}
 	else
-	//	ft_read_current(".");	
+	//	ft_read_current(".");
 		ft_read_param("./");
 	return (0);
 }

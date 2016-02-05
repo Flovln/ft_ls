@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:04:15 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:43:39 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
+static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 {
 	ft_memset(elem->file_data->get_perm, 0, 11);
 	elem->file_data->get_perm[0] = (S_ISDIR(file_stat->st_mode)) ? 'd' : '-';
@@ -27,7 +27,7 @@ static void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 	elem->file_data->get_perm[9] = (file_stat->st_mode & S_IXOTH) ? 'x' : '-';
 }
 
-void	ft_add_data(struct stat file_stat, t_lst *node, char *file) // char *path)
+void			ft_add_data(struct stat file_stat, t_lst *node, char *file) // char *path)
 {
 	struct passwd	*user_name;
 	struct group	*group_name;

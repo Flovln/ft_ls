@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:02:49 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:50:53 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_init_pad(t_pad *pad)
+static	void	ft_init_pad(t_pad *pad)
 {
 	pad->links = 0;
 	pad->uid = 0;
@@ -20,7 +20,7 @@ static void		ft_init_pad(t_pad *pad)
 	pad->size = 0;
 }
 
-void	display_data(t_lst *node)
+void			display_data(t_lst *node)
 {
 	t_lst *tmp;
 
@@ -43,12 +43,12 @@ void	display_data(t_lst *node)
 		tmp = tmp->next;
 	}
 }
-		
+
 static	char	*ft_add_space(char *s, int max)
 {
-	int 	i;
-	int 	j;
-	int 	k;
+	int		i;
+	int		j;
+	int		k;
 	char	*tmp;
 
 	i = 0;
