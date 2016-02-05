@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 12:47:38 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:02:49 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	display_data(t_lst *node)
 {
 	t_lst *tmp;
 
-	tmp = node; //->next; // !!
+	tmp = node;
 	while (tmp)
 	{
 		ft_putstr(tmp->file_data->get_perm);
@@ -77,15 +77,14 @@ static void		ft_set_padding(t_lst **head, t_pad *pad)
 	t_lst *tmp;
 
 	tmp = *head;
-	while (tmp->next) //!!
+	while (tmp)
 	{
-		tmp = tmp->next;
 		tmp->file_data->links = ft_add_space(tmp->file_data->links, pad->links);
 		tmp->file_data->uid = ft_add_space(tmp->file_data->uid, pad->uid);
 		tmp->file_data->gid = ft_add_space(tmp->file_data->gid, pad->gid);
 		tmp->file_data->size = ft_add_space(tmp->file_data->size, pad->size);
+		tmp = tmp->next;
 	}
-	tmp->next = NULL;
 }
 
 void			ft_padding(t_lst **head, t_pad *pad)

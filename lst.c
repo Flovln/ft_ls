@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 12:49:09 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 13:04:47 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void		ft_new_node_head(t_lst **head, t_lst *new_node)
 		*head = new_node;
 	}
 }
-*//*
-void		ft_new_node_end(t_lst **head, t_lst *new_node)
+
+void		ft_add_node(t_lst **head, t_lst *current, t_lst *new_node)
 {
 	if (!*head)
 		*head = new_node;
@@ -52,7 +52,7 @@ t_lst		*ft_get_data(t_lst *head, char *file, char *path)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = tmp;
-//	ft_new_node_end(&current, tmp);
+//	ft_add_node(&head, current, tmp);
 	return (head);
 }
 
