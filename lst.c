@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/04 16:13:39 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/05 12:49:09 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,35 @@ static void		ft_new_node_head(t_lst **head, t_lst *new_node)
 		*head = new_node;
 	}
 }
-*/
-static void		ft_new_node_end(t_lst **head, t_lst *new_node)
+*//*
+void		ft_new_node_end(t_lst **head, t_lst *new_node)
 {
 	if (!*head)
 		*head = new_node;
 	while ((*head)->next)
 		*head = (*head)->next;
 	(*head)->next = new_node;
+//	printf("HEAD in new_node is %s\n", (*head)->name);
 }
-
-void		ft_get_data(t_lst **head, char *file, char *path)
+*/
+t_lst		*ft_get_data(t_lst *head, char *file, char *path)
 {
 	struct stat file_st;
 	t_lst		*tmp;
+	t_lst		*current;
 
 	tmp = (t_lst *)malloc(sizeof(t_lst));
 	tmp->file_data = (t_data *)malloc(sizeof(t_data)); //pour structure t_data appelee dans struct t_lst
-	tmp->next = NULL;
-	if (stat(path, &file_st) == 1)
-	{
-		ft_putendl("ft_get_data failed");
-		exit(EXIT_FAILURE);
-	}
+	current = head;
 	if (lstat(path, &file_st) <= 0)
 		ft_add_data(file_st, tmp, file); //, path);
-	ft_new_node_end(head, tmp);
-// 	ft_new_node_head(head, tmp);
-//	printf("HEAD NAME is %s\n", (*head)->name);
+//	printf("TMP is %s\n", tmp->name);
+	if (head == NULL)
+		return (tmp);
+	while (current->next != NULL)
+		current = current->next;
+	current->next = tmp;
+//	ft_new_node_end(&current, tmp);
+	return (head);
 }
+
