@@ -6,14 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:43:16 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/09 17:30:38 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/*
-static void		ft_read_current(char *path)
+void		ft_display_curr(char *path) // ls command
 {
 	DIR				*dir;
 	struct dirent	*ret;
@@ -27,9 +26,9 @@ static void		ft_read_current(char *path)
 	}
 	closedir(dir);
 }
-*/
 
-static	void	display_list(t_lst **node)
+
+void		ft_display_l(t_lst **node) // ls -l command
 {
 	t_lst	*tmp;
 
@@ -48,7 +47,7 @@ static	void	display_list(t_lst **node)
 	display_data(tmp);
 }
 
-static	void	ft_read_param(char *path)
+static	void	ft_read_param(char *path) //, int options)
 {
 	DIR				*dir;
 	struct dirent	*ret;
@@ -65,20 +64,20 @@ static	void	ft_read_param(char *path)
 		exit(EXIT_FAILURE);
 	node = NULL;
 	while ((ret = readdir(dir)))
-	{
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
-	//	printf("NODE is %s\n", node->name);
-	}
-	ft_padding(&node, pad);
+	ft_padding(&node, pad);// ls -l
 	ft_ascii_sort(node); //
-	display_list(&node);
+	ft_display_l(&node); // ls -l
+//	ft_sort_options(node, options); //, path);
 	closedir(dir);
 }
 
 int				main(int ac, char **av)
 {
-	int i;
+	int 	i;
+//	t_opt	options;
 
+	i = 0;
 	if (ac > 1)
 	{
 		i = 1;
@@ -89,7 +88,36 @@ int				main(int ac, char **av)
 		}
 	}
 	else
-	//	ft_read_current(".");
 		ft_read_param("./");
 	return (0);
+}
+/*
+int				main(int ac, char **av)
+{
+	int 	i;
+	char	*path;
+	t_opt	options;
+
+	i = 0;
+	path = NULL;
+	ft_init_opt(&options);
+	while (i < ac)
+	{
+		if (av[1][0] == '-')
+		{
+			while (av[i][0] == '-')
+			{
+				ft_options(av[i], options);
+				i++;
+			}
+		}
+		else
+		{
+			path = av[i];
+			ft_read_param(path);
+		}
+		i++;
+	}
+	if (path == NULL)
+		ft_display_curr(path);		
 }

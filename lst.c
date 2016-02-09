@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:14:08 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:51:12 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/09 17:03:09 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 
 /////void			ft_free_list(t_lst *head)
 /*
-static void		ft_new_node_head(t_lst **head, t_lst *new_node)
-{
-	if (!*head)
-		*head = new_node;
-	else
-	{
-		new_node->next = *head;
-		*head = new_node;
-	}
-}
-
 void		ft_add_node(t_lst **head, t_lst *current, t_lst *new_node)
 {
 	if (!*head)

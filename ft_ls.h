@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:32:16 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/09 17:15:33 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct				s_lst
 {
 //	char					*path;
 	t_data					*file_data;
-	char					*date;
+	char					*date; //time display
+	int						last_edit; //time sort
 	char					*name;
 	struct s_lst			*next;
 }							t_lst;
@@ -69,6 +70,10 @@ t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst **head, t_pad *pad);
 void						display_data(t_lst *node);
 int							ft_options(char *s, t_opt *opt);
+void						ft_display_curr(char *path); // ls
+void						ft_display_l(t_lst **node); // ls -l
+t_lst						*ft_display_time(t_lst *node); // ls -t
 t_lst						*ft_ascii_sort(t_lst *file);
+//void						ft_sort_options(t_lst *node, t_opt options);
 
 #endif
