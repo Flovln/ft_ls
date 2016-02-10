@@ -6,48 +6,49 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/09 17:30:38 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 13:23:52 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_display_curr(char *path) // ls command
+char		*ft_add_slash(char *path)
 {
-	DIR				*dir;
-	struct dirent	*ret;
-
-	if (!(dir = opendir(path)))
-		return ;
-	while ((ret = readdir(dir)))
-	{
-		if (ft_strncmp(ret->d_name, ".", 1) != 0)
-			ft_putendl(ret->d_name);
-	}
-	closedir(dir);
+	if (path[ft_strlen(path) - 1] != '/')
+		path = ft_strjoin(path, "/");
+	return (path);
 }
 
+void		ft_display_curr(t_lst **node) // ls command
+{
+	while (*node)
+	{
+		if (ft_strncmp((*node)->name, ".", 1) != 0)
+		ft_putendl((*node)->name);
+		*node = (*node)->next;
+	}
+}
 
 void		ft_display_l(t_lst **node) // ls -l command
 {
-	t_lst	*tmp;
+	t_lst	*head;
 
-	tmp = *node;
-	while (tmp)
+	head = *node;
+	while (*node)
 	{
-		if (tmp->next == NULL)
+		if ((*node)->next == NULL)
 		{
 			ft_putstr("total ");
-			ft_putstr(tmp->file_data->blocks);
+			ft_putstr((*node)->file_data->blocks);
 			ft_putstr("\n");
 		}
-		tmp = tmp->next;
+		*node = (*node)->next;
 	}
-	tmp = *node;
-	display_data(tmp);
+	*node = head;
+	display_data(node);
 }
 
-static	void	ft_read_param(char *path) //, int options)
+static	void	ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
 	struct dirent	*ret;
@@ -57,67 +58,40 @@ static	void	ft_read_param(char *path) //, int options)
 	if (!(dir = opendir(path)))
 	{
 		ft_putendl("opening error");
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	pad = (t_pad *)malloc(sizeof(t_pad));
 	if (!(node = (t_lst *)malloc(sizeof(t_lst))))
-		exit(EXIT_FAILURE);
+		exit(1);
 	node = NULL;
 	while ((ret = readdir(dir)))
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
-	ft_padding(&node, pad);// ls -l
-	ft_ascii_sort(node); //
-	ft_display_l(&node); // ls -l
-//	ft_sort_options(node, options); //, path);
 	closedir(dir);
+	ft_padding(&node, pad); //general padding
+	ft_sort_options(node, options);
 }
 
-int				main(int ac, char **av)
-{
-	int 	i;
-//	t_opt	options;
-
-	i = 0;
-	if (ac > 1)
-	{
-		i = 1;
-		while (av[i])
-		{
-			ft_read_param(av[i]);
-			i++;
-		}
-	}
-	else
-		ft_read_param("./");
-	return (0);
-}
-/*
 int				main(int ac, char **av)
 {
 	int 	i;
 	char	*path;
 	t_opt	options;
 
-	i = 0;
+	i = 1;
 	path = NULL;
 	ft_init_opt(&options);
 	while (i < ac)
 	{
-		if (av[1][0] == '-')
-		{
-			while (av[i][0] == '-')
-			{
-				ft_options(av[i], options);
-				i++;
-			}
-		}
+		if (av[i][0] == '-')
+			ft_options(av[i], &options);
 		else
 		{
 			path = av[i];
-			ft_read_param(path);
+			ft_read_param(ft_add_slash(path), &options);
 		}
 		i++;
 	}
-	if (path == NULL)
-		ft_display_curr(path);		
+	if (!path)
+		ft_read_param("./", &options);
+	return (0);
 }

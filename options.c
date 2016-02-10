@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/09 17:30:48 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 13:06:40 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_init_opt(t_opt *opt)
+void			ft_init_opt(t_opt *opt)
 {
 	opt->l = 0;
 	opt->R = 0;
@@ -51,15 +51,20 @@ int				ft_options(char *s, t_opt *opt)
 	//	print_opt(opt);
 	return (0);
 }
-/*
-void			ft_sort_options(t_lst *node, t_opt *options) //, char *path)
+
+void			ft_sort_options(t_lst *node, t_opt *opt) //, char *path)
 {
-	if (!options)
-		ft_display_curr(node);
 	node = ft_ascii_sort(node);
-	if (options->l)
-		ft_display_l(node);
-	else if (options->t)
-		ft_display_time(node);
+	if (!opt)
+	{
+		ft_display_curr(&node);
+		return ;
+	}
+	if (opt->l == 0 && opt->R == 0 && opt->a == 0 && opt->r == 0 && opt->t == 0)
+		ft_display_curr(&node);
+	if (node != NULL && opt->l)
+		ft_display_l(&node);
+	else if (opt->t)
+		node = ft_time_sort(node);
 }
-*/
+

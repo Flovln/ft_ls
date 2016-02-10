@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/09 17:15:33 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 13:24:19 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ void						ft_add_node(t_lst **head, t_lst *current,
 								t_lst *new_node);
 t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst **head, t_pad *pad);
-void						display_data(t_lst *node);
+void						display_data(t_lst **node);
 int							ft_options(char *s, t_opt *opt);
-void						ft_display_curr(char *path); // ls
+void						ft_init_opt(t_opt *opt);
+void						ft_display_curr(t_lst **node); // ls
 void						ft_display_l(t_lst **node); // ls -l
-t_lst						*ft_display_time(t_lst *node); // ls -t
+t_lst						*ft_time_sort(t_lst *node); // ls -t
 t_lst						*ft_ascii_sort(t_lst *file);
-//void						ft_sort_options(t_lst *node, t_opt options);
+void						ft_sort_options(t_lst *node, t_opt *opt); // char *path);
 
 #endif

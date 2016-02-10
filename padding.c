@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/05 13:50:53 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 13:23:54 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,26 @@ static	void	ft_init_pad(t_pad *pad)
 	pad->size = 0;
 }
 
-void			display_data(t_lst *node)
+void			display_data(t_lst **node)
 {
-	t_lst *tmp;
-
-	tmp = node;
-	while (tmp)
+	//t_lst *head; ?
+	while (*node)
 	{
-		ft_putstr(tmp->file_data->get_perm);
+		//if (ft_strncmp(tmp->name, ".", 1) != 0)
+		ft_putstr((*node)->file_data->get_perm);
 		ft_putstr("  ");
-		ft_putstr(tmp->file_data->links);
+		ft_putstr((*node)->file_data->links);
 		ft_putstr(" ");
-		ft_putstr(tmp->file_data->uid);
+		ft_putstr((*node)->file_data->uid);
 		ft_putstr("  ");
-		ft_putstr(tmp->file_data->gid);
+		ft_putstr((*node)->file_data->gid);
 		ft_putstr(" ");
-		ft_putstr(tmp->file_data->size);
+		ft_putstr((*node)->file_data->size);
 		ft_putstr("  ");
-		ft_putstr(tmp->date);
+		ft_putstr((*node)->date);
 		ft_putstr(" ");
-		ft_putendl(tmp->name);
-		tmp = tmp->next;
+		ft_putendl((*node)->name);
+		*node = (*node)->next;
 	}
 }
 
