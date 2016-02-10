@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/09 15:59:02 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 17:53:03 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,36 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file) // char *path
 	node->name = file;
 	node->next = NULL;
 }
+
+/*function for creating linked list*/
+
+t_lst		*ft_get_data(t_lst *head, char *file, char *path)
+{
+	struct stat file_st;
+	t_lst		*tmp;
+	t_lst		*current;
+
+	tmp = (t_lst *)malloc(sizeof(t_lst));
+	tmp->file_data = (t_data *)malloc(sizeof(t_data)); //pour structure t_data appelee dans struct t_lst
+	current = head;
+	if (lstat(path, &file_st) <= 0)
+		ft_add_data(file_st, tmp, file);
+	if (head == NULL)
+		return (tmp);
+	while (current->next != NULL)
+		current = current->next;
+	current->next = tmp;
+//	ft_add_node(&head, current, tmp);
+	return (head);
+}
+
+/*
+   void		ft_add_node(t_lst **head, t_lst *current, t_lst *new_node)
+{
+   if (!*head)
+ *head = new_node;
+ while ((*head)->next)
+ *head = (*head)->next;
+ (*head)->next = new_node;
+}
+*/
