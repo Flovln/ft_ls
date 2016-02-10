@@ -20,9 +20,8 @@ static	void	ft_init_pad(t_pad *pad)
 	pad->size = 0;
 }
 
-void			display_data(t_lst **node)
+void			ft_display_data(t_lst **node)
 {
-	//t_lst *head; ?
 	while (*node)
 	{
 		if (ft_strncmp((*node)->name, ".", 1) != 0)

@@ -12,17 +12,7 @@
 
 #include "ft_ls.h"
 
-void        ft_display_curr(t_lst **node) // ls command
-{
-	while (*node)
-	{
-		if (ft_strncmp((*node)->name, ".", 1) != 0)
-			ft_putendl((*node)->name);
-		*node = (*node)->next;
-	}
-}
-
-void        ft_display_l(t_lst **node) // ls -l command
+static void	ft_display_total(t_lst **node)
 {
 	t_lst   *head;
 
@@ -38,12 +28,48 @@ void        ft_display_l(t_lst **node) // ls -l command
 		*node = (*node)->next;
 	}
 	*node = head;
-	display_data(node);
+}
+
+void        ft_display_curr(t_lst **node) // ls command
+{
+	while (*node)
+	{
+		if (ft_strncmp((*node)->name, ".", 1) != 0)
+			ft_putendl((*node)->name);
+		*node = (*node)->next;
+	}
+}
+
+void        ft_display_l(t_lst **node, int i) // ls -l + -a command
+{
+	ft_display_total(node);
+	if (i == 1) // -a
+	{
+		while (*node)
+		{
+			ft_putstr((*node)->file_data->get_perm);
+			ft_putstr("  ");
+			ft_putstr((*node)->file_data->links);
+			ft_putstr(" ");
+			ft_putstr((*node)->file_data->uid);
+			ft_putstr("  ");
+			ft_putstr((*node)->file_data->gid);
+			ft_putstr(" ");
+			ft_putstr((*node)->file_data->size);
+			ft_putstr("  ");
+			ft_putstr((*node)->date);
+			ft_putstr(" ");
+			ft_putendl((*node)->name);
+			*node = (*node)->next;
+		}
+	}
+	else // -l
+		ft_display_data(node);
 }
 
 void        ft_display_r(t_lst **node, int i) // ls -r command
 {
-	if (i == 1) //display all  i for '-a'
+	if (i == 1) //display all for '-a'
 	{
 		if (*node)
 		{

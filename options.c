@@ -75,7 +75,8 @@ void			ft_sort_options(t_lst *node, t_opt *opt) //, char *path)
 		if (opt->r) // OK
 			ft_display_r(&node, i);
 		if (opt->l) // OK
-			ft_display_l(&node);
+			ft_display_l(&node, i);
+	//	if (opt->l && opt->r)
 	}
 //	ft_display_curr(&node);
 }

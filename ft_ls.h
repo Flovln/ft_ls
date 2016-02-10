@@ -68,14 +68,14 @@ void						ft_add_node(t_lst **head, t_lst *current,
 								t_lst *new_node);
 t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst **head, t_pad *pad);
-void						display_data(t_lst **node);
+void						ft_display_data(t_lst **node);
 int							ft_check_opt(t_opt *opt);
 int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
 void						ft_display_curr(t_lst **node); // ls
-void						ft_display_l(t_lst **node); // ls -l
-void						ft_display_r(t_lst **node, int i); // ls -r
+void						ft_display_l(t_lst **node, int i); // ls -l && -a
+void						ft_display_r(t_lst **node, int i); // ls -r && -a
 t_lst						*ft_time_sort(t_lst *node); // ls -t
 t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt); // char *path);
