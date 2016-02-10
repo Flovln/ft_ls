@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/10 14:03:10 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 16:40:22 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,27 @@ void		ft_display_l(t_lst **node) // ls -l command
 	display_data(node);
 }
 
+void        ft_display_r(t_lst **node, int i) // ls -r command
+{
+	if (i == 0) //display all
+	{
+		if (*node)
+		{
+			ft_display_r(&(*node)->next, i);
+				ft_putendl((*node)->name);
+		}
+	}
+	else
+	{
+		if (*node) // doesn't display hidden files
+		{
+			ft_display_r(&(*node)->next, i);
+			if (ft_strncmp((*node)->name, ".", 1))
+				ft_putendl((*node)->name);
+		}
+	}
+}
+
 static	void	ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
@@ -68,7 +89,7 @@ static	void	ft_read_param(char *path, t_opt *options)
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
 	closedir(dir);
 	ft_padding(&node, pad); //general padding
-	ft_sort_options(node, options);
+	ft_sort_options(node, options); //options managing
 }
 
 int				main(int ac, char **av)
