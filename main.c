@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/10 13:23:52 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/10 14:03:10 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		ft_display_curr(t_lst **node) // ls command
 	while (*node)
 	{
 		if (ft_strncmp((*node)->name, ".", 1) != 0)
-		ft_putendl((*node)->name);
+			ft_putendl((*node)->name);
 		*node = (*node)->next;
 	}
 }
