@@ -6,35 +6,45 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:37:44 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:44:24 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	void	ft_init_pad(t_pad *pad)
+void		ft_display_total(t_lst **node)
 {
-	pad->links = 0;
-	pad->uid = 0;
-	pad->gid = 0;
-	pad->size = 0;
+	t_lst   *head;
+
+	head = *node;
+	while (*node)
+	{
+		if ((*node)->next == NULL)
+		{
+			ft_putstr("total ");
+			ft_putstr((*node)->file_data->blocks);
+			ft_putstr("\n");
+		}
+		*node = (*node)->next;
+	}
+	*node = head;
 }
 
 void			ft_display_data(t_lst **node)
 {
-			ft_putstr((*node)->file_data->get_perm);
-			ft_putstr("  ");
-			ft_putstr((*node)->file_data->links);
-			ft_putstr(" ");
-			ft_putstr((*node)->file_data->uid);
-			ft_putstr("  ");
-			ft_putstr((*node)->file_data->gid);
-			ft_putstr(" ");
-			ft_putstr((*node)->file_data->size);
-			ft_putstr("  ");
-			ft_putstr((*node)->date);
-			ft_putstr(" ");
-			ft_putendl((*node)->name);
+	ft_putstr((*node)->file_data->get_perm);
+	ft_putstr("  ");
+	ft_putstr((*node)->file_data->links);
+	ft_putstr(" ");
+	ft_putstr((*node)->file_data->uid);
+	ft_putstr("  ");
+	ft_putstr((*node)->file_data->gid);
+	ft_putstr(" ");
+	ft_putstr((*node)->file_data->size);
+	ft_putstr("  ");
+	ft_putstr((*node)->date);
+	ft_putstr(" ");
+	ft_putendl((*node)->name);
 }
 
 static	char	*ft_add_space(char *s, int max)

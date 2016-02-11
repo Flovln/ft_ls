@@ -6,11 +6,19 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/10 18:05:04 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:43:53 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static	void	ft_init_pad(t_pad *pad)
+{
+	pad->links = 0;
+	pad->uid = 0;
+	pad->gid = 0;
+	pad->size = 0;
+}
 
 char		*ft_add_slash(char *path)
 {

@@ -6,29 +6,11 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 17:59:52 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:37:16 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:43:19 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void		ft_display_total(t_lst **node)
-{
-	t_lst   *head;
-
-	head = *node;
-	while (*node)
-	{
-		if ((*node)->next == NULL)
-		{
-			ft_putstr("total ");
-			ft_putstr((*node)->file_data->blocks);
-			ft_putstr("\n");
-		}
-		*node = (*node)->next;
-	}
-	*node = head;
-}
 
 void        ft_display_curr(t_lst **node, int i) // ls command
 {
