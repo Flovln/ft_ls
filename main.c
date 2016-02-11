@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:43:53 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:46:19 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	void	ft_init_pad(t_pad *pad)
+void		ft_init_pad(t_pad *pad)
 {
 	pad->links = 0;
 	pad->uid = 0;

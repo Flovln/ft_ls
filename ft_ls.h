@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:28:37 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:46:46 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void						ft_add_node(t_lst **head, t_lst *current,
 								t_lst *new_node);
 t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst **head, t_pad *pad);
+void						ft_init_pad(t_pad *pad);
 int							ft_check_opt(t_opt *opt);
 int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
