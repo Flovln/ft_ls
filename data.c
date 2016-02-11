@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:37:43 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 15:01:15 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 	elem->file_data->get_perm[9] = (file_stat->st_mode & S_IXOTH) ? 'x' : '-';
 }
 
-void			ft_add_data(struct stat file_stat, t_lst *node, char *file) // char *path)
+void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 {
 	struct passwd	*user_name;
 	struct group	*group_name;
-	static int		blocks;
 
-	blocks += file_stat.st_blocks;
-	node->file_data->blocks = ft_itoa(blocks);
+	node->file_data->blocks = file_stat.st_blocks;
 	ft_perm_acc(node, &file_stat);
 	node->file_data->links = ft_itoa(file_stat.st_nlink);
 	if ((user_name = getpwuid(file_stat.st_uid)))
@@ -43,21 +41,21 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file) // char *path
 		node->file_data->gid = ft_strdup(group_name->gr_name);
 	node->file_data->size = ft_itoa(file_stat.st_size);
 	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
-	node->last_edit = (int)(file_stat.st_mtime); //time sort
+	node->last_edit = (int)(file_stat.st_mtime);
 	node->name = file;
 	node->next = NULL;
 }
 
-/*function for creating linked list*/
+/*function creating linked list*/
 
-t_lst		*ft_get_data(t_lst *head, char *file, char *path)
+t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 {
 	struct stat file_st;
 	t_lst		*tmp;
 	t_lst		*current;
 
 	tmp = (t_lst *)malloc(sizeof(t_lst));
-	tmp->file_data = (t_data *)malloc(sizeof(t_data)); //pour structure t_data appelee dans struct t_lst
+	tmp->file_data = (t_data *)malloc(sizeof(t_data)); //struct t_data appelee dans t_lst
 	current = head;
 	if (lstat(path, &file_st) <= 0)
 		ft_add_data(file_st, tmp, file);
