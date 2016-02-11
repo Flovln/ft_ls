@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:46:46 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 17:02:06 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,25 @@ typedef struct				s_pad
 	size_t					uid;
 	size_t					gid;
 	size_t					size;
+	size_t					min; // \dev
+	size_t					maj; // \dev
 }							t_pad;
 
 typedef struct				s_data
 {
-	char					*blocks;
+	int						blocks;
 	char					get_perm[11];
 	char					*links;
 	char					*uid;
 	char					*gid;
 	char					*size;
+	char					*min; // \dev
+	char					*maj; // \dev
 }							t_data;
 
 typedef struct				s_lst
 {
-//	char					*path;
+	dev_t					st_rdev; // major/minor for /dev
 	t_data					*file_data;
 	char					*date; //time display
 	int						last_edit; //time sort
@@ -74,7 +78,7 @@ int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
 void						ft_display_data(t_lst **node);
-void						ft_display_total(t_lst **node);
+void						ft_display_total(t_lst **node, int i);
 void						ft_display_curr(t_lst **node, int i); // ls
 void						ft_display_l(t_lst **node, int i); // ls -l && -a
 void						ft_display_r(t_lst **node, int i); // ls -r && -a

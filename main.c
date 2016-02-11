@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 15:04:08 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 16:28:06 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void			ft_init_pad(t_pad *pad)
 	pad->uid = 0;
 	pad->gid = 0;
 	pad->size = 0;
+	pad->min = 0;
+	pad->maj = 0;
 }
 
 char			*ft_add_slash(char *path)

@@ -6,16 +6,38 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 15:01:15 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 16:57:23 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+static char		ft_get_file_type(struct stat *file_stat)
+{
+	char c;
+
+	if (S_ISBLK(file_stat->st_mode))
+		c = 'b';
+	else if (S_ISCHR(file_stat->st_mode))
+		c = 'c';
+	else if (S_ISDIR(file_stat->st_mode))
+		c = 'd';
+	else if (S_ISLNK(file_stat->st_mode))
+		c = 'l';
+	else if (S_ISFIFO(file_stat->st_mode))
+		c = 'p';
+	else if (S_ISSOCK(file_stat->st_mode))
+		c = 's';
+	else
+		c = '-';
+	return (c);
+}
+
 static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 {
 	ft_memset(elem->file_data->get_perm, 0, 11);
-	elem->file_data->get_perm[0] = (S_ISDIR(file_stat->st_mode)) ? 'd' : '-';
+	//elem->file_data->get_perm[0] = (S_ISDIR(file_stat->st_mode)) ? 'd' : '-';
+	elem->file_data->get_perm[0] = ft_get_file_type(file_stat);
 	elem->file_data->get_perm[1] = (file_stat->st_mode & S_IRUSR) ? 'r' : '-';
 	elem->file_data->get_perm[2] = (file_stat->st_mode & S_IWUSR) ? 'w' : '-';
 	elem->file_data->get_perm[3] = (file_stat->st_mode & S_IXUSR) ? 'x' : '-';
@@ -43,6 +65,8 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
 	node->last_edit = (int)(file_stat.st_mtime);
 	node->name = file;
+	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
+	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
 	node->next = NULL;
 }
 
@@ -64,17 +88,17 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = tmp;
-//	ft_add_node(&head, current, tmp);
+	//	ft_add_node(&head, current, tmp);
 	return (head);
 }
 
 /*
    void		ft_add_node(t_lst **head, t_lst *current, t_lst *new_node)
-{
+   {
    if (!*head)
  *head = new_node;
  while ((*head)->next)
  *head = (*head)->next;
  (*head)->next = new_node;
-}
-*/
+ }
+ */
