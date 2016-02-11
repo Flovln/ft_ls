@@ -6,27 +6,35 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:44:24 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 14:55:34 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_display_total(t_lst **node)
+void			ft_display_total(t_lst **node, int i)
 {
-	t_lst   *head;
+	t_lst	*head;
+	int		res;
 
+	res = 0;
 	head = *node;
-	while (*node)
-	{
-		if ((*node)->next == NULL)
+	if (i)
+		while (*node)
 		{
-			ft_putstr("total ");
-			ft_putstr((*node)->file_data->blocks);
-			ft_putstr("\n");
+			res += (*node)->file_data->blocks;
+			*node = (*node)->next;
 		}
-		*node = (*node)->next;
-	}
+	else
+		while (*node)
+		{
+			if (ft_strncmp((*node)->name, ".", 1) != 0)
+				res += (*node)->file_data->blocks;
+			*node = (*node)->next;
+		}
+	ft_putstr("total ");
+	ft_putnbr(res);
+	ft_putstr("\n");
 	*node = head;
 }
 
