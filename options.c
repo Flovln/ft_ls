@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:35:54 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 14:59:10 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ void			ft_sort_options(t_lst *node, t_opt *opt)
 
 	i = 0;
 	node = ft_ascii_sort(node);
-	if (!opt || ft_check_opt(opt))  
+	if (!opt || ft_check_opt(opt))
 		ft_display_curr(&node, i);
 	else
+	{
 		if (opt->a)
 			i = 1;
 		if (opt->t && !opt->a && !opt->l && !opt->r)
@@ -76,13 +77,17 @@ void			ft_sort_options(t_lst *node, t_opt *opt)
 			node = ft_time_sort(node);
 		if (opt->l && opt->r)
 		{
-			ft_display_total(&node);
+			ft_display_total(&node, i);
 			ft_display_l_r(&node, i);
 		}
 		else if (opt->r)
 			ft_display_r(&node, i);
 		if (opt->l && !(opt->r))
+		{
+			ft_display_total(&node, i);
 			ft_display_l(&node, i);
+		}
 		if (opt->a && !opt->r)
 			ft_display_curr(&node, i);
+	}
 }
