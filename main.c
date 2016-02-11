@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:46:19 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/11 15:04:08 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_init_pad(t_pad *pad)
+void			ft_init_pad(t_pad *pad)
 {
 	pad->links = 0;
 	pad->uid = 0;
@@ -20,7 +20,7 @@ void		ft_init_pad(t_pad *pad)
 	pad->size = 0;
 }
 
-char		*ft_add_slash(char *path)
+char			*ft_add_slash(char *path)
 {
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_strjoin(path, "/");
@@ -52,7 +52,7 @@ static	void	ft_read_param(char *path, t_opt *options)
 
 int				main(int ac, char **av)
 {
-	int 	i;
+	int		i;
 	char	*path;
 	t_opt	options;
 
