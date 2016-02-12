@@ -46,16 +46,18 @@ int				ft_options(char *s, t_opt *opt)
 	{
 		if (s[i] == 'l')
 			opt->l = 1;
-		if (s[i] == 'R')
+		else if (s[i] == 'R')
 			opt->R = 1;
-		if (s[i] == 'a')
+		else if (s[i] == 'a')
 			opt->a = 1;
-		if (s[i] == 'r')
+		else if (s[i] == 'r')
 			opt->r = 1;
-		if (s[i] == 't')
+		else if (s[i] == 't')
 			opt->t = 1;
 		i++;
 	}
+	if (s[i])
+		ft_error_opt(&s[i]);
 	return (0);
 }
 

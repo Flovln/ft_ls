@@ -12,6 +12,14 @@
 
 #include "ft_ls.h"
 
+void		ft_error_opt(char *s)
+{
+	ft_putstr_fd("ft_ls: illegal option -- ", 2);
+	ft_putendl_fd(s, 2);
+	ft_putstr_fd("usage: ft_ls [-Ralrt] [file ...]\n", 2);
+	exit(1);
+}
+
 t_lst			*ft_lst_swap(t_lst *node, t_lst *node_next)
 {
 	node->next = node_next->next;

@@ -87,5 +87,6 @@ void						ft_display_l_r(t_lst **node, int i); // ls -l -r
 t_lst						*ft_time_sort(t_lst *node); // ls -t
 t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt); // char *path);
+void						ft_error_opt(char *s);
 
 #endif
