@@ -29,6 +29,15 @@ char			*ft_add_slash(char *path)
 	return (path);
 }
 
+static char		*ft_remove_slash(char *path)
+{
+	int len;
+
+	len = ft_strlen(path);
+	path[len - 1] = '\0';
+	return (path);
+}
+
 static	void	ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
@@ -38,7 +47,8 @@ static	void	ft_read_param(char *path, t_opt *options)
 
 	if (!(dir = opendir(path)))
 	{
-		ft_putendl("opening error");
+		ft_putstr("ft_ls: ");
+		perror(ft_remove_slash(path));
 		return ;
 	}
 	pad = (t_pad *)malloc(sizeof(t_pad));
