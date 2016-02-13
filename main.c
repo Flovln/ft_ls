@@ -71,6 +71,11 @@ int				main(int ac, char **av)
 	i = 1;
 	path = NULL;
 	ft_init_opt(&options);
+	if (!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i]))
+	{
+		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
+		exit(1);
+	}
 	while (i < ac)
 	{
 		if (av[i][0] == '-')
