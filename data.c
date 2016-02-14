@@ -88,12 +88,48 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = tmp;
-	//	ft_add_node(&head, current, tmp);
+	//	ft_new_node(&head, current, tmp);
 	return (head);
 }
-
 /*
-   void		ft_add_node(t_lst **head, t_lst *current, t_lst *new_node)
+void 	ft_erase_data(t_lst **node)
+{	
+	if ((*node)->file_data->blocks)
+		ft_strdel((*node)->file_data->blocks);
+	if ((*node)->file_data->get_perm)
+		ft_strdel((*node)->file_data->get_perm);
+	if ((*node)->file_data->links)
+		ft_strdel((*node)->file_data->links);
+	if ((*node)->file_data->uid)
+		ft_strdel((*node)->file_data->uid);
+	if ((*node)->file_data->gid)
+		ft_strdel((*node)->file_data->gid);
+	if ((*node)->file_data->size)
+		ft_strdel((*node)->file_data->size);
+	if ((*node)->file_data->min)
+		ft_strdel((*node)->file_data->min);
+	if ((*node)->file_data->maj)
+		ft_strdel((*node)->file_data->maj);
+	if ((*node)->date)
+		ft_strdel((*node)->file_data->date);
+	if ((*node)->name)
+		ft_strdel((*node)->file_data->name);
+}
+
+
+void	ft_free_list(t_lst **node)
+{
+	if (*node)
+	{
+		ft_free_list((*node)->next); //recursif
+		ft_erase_data(&(*node));
+		free((*node));
+		node = NULL;
+	}
+}
+*/
+/*
+   void		ft_new_node(t_lst **head, t_lst *current, t_lst *new_node)
    {
    if (!*head)
  *head = new_node;
