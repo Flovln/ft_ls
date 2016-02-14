@@ -36,7 +36,6 @@ static char		ft_get_file_type(struct stat *file_stat)
 static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 {
 	ft_memset(elem->file_data->get_perm, 0, 11);
-	//elem->file_data->get_perm[0] = (S_ISDIR(file_stat->st_mode)) ? 'd' : '-';
 	elem->file_data->get_perm[0] = ft_get_file_type(file_stat);
 	elem->file_data->get_perm[1] = (file_stat->st_mode & S_IRUSR) ? 'r' : '-';
 	elem->file_data->get_perm[2] = (file_stat->st_mode & S_IWUSR) ? 'w' : '-';
@@ -67,6 +66,7 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->name = file;
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
 	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
+	node->is_dir = (node->file_data->get_perm[0] == 'd' && REAL_DIR(node->name)); // recursive
 	node->next = NULL;
 }
 

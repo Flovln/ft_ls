@@ -38,7 +38,7 @@ static char		*ft_remove_slash(char *path)
 	return (path);
 }
 
-static	void	ft_read_param(char *path, t_opt *options)
+void	ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
 	struct dirent	*ret;
@@ -59,35 +59,35 @@ static	void	ft_read_param(char *path, t_opt *options)
 		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
 	closedir(dir);
 	ft_padding(&node, pad); //general padding
-	ft_sort_options(node, options); //options managing
+	ft_sort_options(node, options); //, path); //options managing
 }
 
 int				main(int ac, char **av)
 {
 	int		i;
 	char	*path;
-	t_opt	options;
+	t_opt	opt;
 
 	i = 1;
 	path = NULL;
-	ft_init_opt(&options);
-	if (!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i]))
+	ft_init_opt(&opt);
+/*	if (!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i]))
 	{
 		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
 		exit(1);
-	}
+	}*/
 	while (i < ac)
 	{
 		if (av[i][0] == '-')
-			ft_options(av[i], &options);
+			ft_options(av[i], &opt);
 		else
 		{
 			path = av[i];
-			ft_read_param(ft_add_slash(path), &options);
+			ft_read_param(ft_add_slash(path), &opt);
 		}
 		i++;
 	}
 	if (!path)
-		ft_read_param("./", &options);
+		ft_read_param("./", &opt);
 	return (0);
 }

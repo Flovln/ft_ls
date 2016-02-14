@@ -56,3 +56,54 @@ t_lst			*ft_time_sort(t_lst *node)
 	}
 	return (node);
 }
+
+int			ft_count_dir(t_lst *node)
+{
+	int		i;
+
+	i = 0;
+	while (node)
+	{
+		if (node->is_dir)
+			i++;
+		node = node->next;
+	}
+	return (i);
+}
+/*
+static void			ft_putcss(char c, char *s1, char *s2) /////
+{
+	ft_putchar(c);
+	ft_putstr(s1);
+	ft_putstr(s2);
+}
+
+void			ft_recursive(char *path, t_lst *node, t_opt *opt, int nb_dir) /////
+{
+	char	**all_dir;
+	int		i;
+
+	i = 0;
+	if (!(all_dir = (char **)malloc(sizeof(char *) * nb_dir + 1)))
+		return ;
+	*all_dir[nb_dir + 1] = '\0';
+	while (node)
+	{
+		if (node->is_dir == 1)
+		{
+			all_dir[i] = ft_strdup(node->name);
+			i++;
+		}
+		node = node->next;
+	}
+	i = -1;
+	while (i < nb_dir)
+	{
+		if (opt && all_dir[i][0] == '.')
+			ft_putcss('\n', ft_strjoin(path, all_dir[i]), ":\n");
+		else if (all_dir[i][0] != '.')
+			ft_putcss('\n', ft_strjoin(path, all_dir[i]), ":\n");
+		ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[i])), opt);			
+		i++;
+	}
+}*/

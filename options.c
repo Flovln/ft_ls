@@ -61,7 +61,7 @@ int				ft_options(char *s, t_opt *opt)
 	return (0);
 }
 
-void			ft_sort_options(t_lst *node, t_opt *opt)
+void			ft_sort_options(t_lst *node, t_opt *opt) //, char *path)
 {
 	int i;
 
@@ -91,5 +91,7 @@ void			ft_sort_options(t_lst *node, t_opt *opt)
 		}
 		if (opt->a && !opt->r)
 			ft_display_curr(&node, i);
+//		if (opt->R)
+//			ft_recursive();
 	}
 }
