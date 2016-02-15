@@ -6,13 +6,21 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 17:02:06 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/15 11:11:12 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 # define REAL_DIR(x) (ft_strcmp(x, "..") != 0 && ft_strcmp(x, ".") != 0)
+
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define COLOR_RESET "\x1b[0m"
 
 # include <pwd.h>
 # include <uuid/uuid.h>
@@ -89,7 +97,7 @@ void						ft_display_t(t_lst **node); // ls -t
 void						ft_display_l_r(t_lst **node, int i); // ls -l -r
 t_lst						*ft_time_sort(t_lst *node); // ls -t
 t_lst						*ft_ascii_sort(t_lst *file);
-void						ft_sort_options(t_lst *node, t_opt *opt); //, char *path);
+void						ft_sort_options(t_lst *node, t_opt *opt, char *path);
 void						ft_error_opt(char *s);
 
 void						ft_recursive(char *path, t_lst *node, t_opt *opt, int nb_dir);
