@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/15 11:11:12 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/15 13:22:35 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_lst						*ft_time_sort(t_lst *node); // ls -t
 t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt, char *path);
 void						ft_error_opt(char *s);
+void						ft_free_data(t_lst **node);
+void						ft_free_list(t_lst **node);
 
 void						ft_recursive(char *path, t_lst *node, t_opt *opt, int nb_dir);
 int							ft_count_dir(t_lst *node);

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 16:57:23 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/15 13:24:36 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	return (head);
 }
 /*
-void 	ft_erase_data(t_lst **node)
+void 	ft_free_data(t_lst **node)
 {	
 	if ((*node)->file_data->blocks)
 		ft_strdel((*node)->file_data->blocks);
@@ -119,13 +119,13 @@ void 	ft_erase_data(t_lst **node)
 
 void	ft_free_list(t_lst **node)
 {
-	if (*node)
+	while (*node)
 	{
-		ft_free_list((*node)->next); //recursif
-		ft_erase_data(&(*node));
-		free((*node));
-		node = NULL;
+		ft_free_data(&(*node));
+		*node = (*node)->next;
 	}
+	free((*node));
+	node = NULL;
 }
 */
 /*
