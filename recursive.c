@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 13:22:11 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 14:49:46 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void            ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 	if (!(all_dir = (char **)malloc(sizeof(char *) * nb_dir + 1)))
 		exit(1);
 	all_dir[nb_dir + 1] = NULL;
-	while (node != NULL)
+	while (node)
 	{
 		if (node->is_dir == 1)
 		{
@@ -54,7 +54,7 @@ void            ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 	i = -1;
 	while (++i < nb_dir)
 	{
-		if (opt->R && all_dir[i][0] == '.')
+		if (opt->a && all_dir[i][0] == '.')
 			ft_putcss('\n', ft_strjoin(path, all_dir[i]), ":\n");
 		else if (all_dir[i][0] != '.')
 			ft_putcss('\n', ft_strjoin(path, all_dir[i]), ":\n");
