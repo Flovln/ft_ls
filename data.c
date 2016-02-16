@@ -66,7 +66,7 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->name = file;
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
 	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
-	node->is_dir = (node->file_data->get_perm[0] == 'd' && ft_strncmp(node->name, ".", 1) && ft_strncmp(node->name, "..", 2));
+	node->is_dir = (node->file_data->get_perm[0] == 'd' && ft_strcmp(node->name, ".") && ft_strcmp(node->name, ".."));
 	node->next = NULL;
 }
 
