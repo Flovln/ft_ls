@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 17:59:52 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 14:16:30 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 16:18:14 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@ void	ft_display_curr(t_lst *node, int i)
 	}
 }
 
-void	ft_display_l(t_lst **node, int i)
+void	ft_display_l(t_lst *node, int i)
 {
 	if (i)
-		while (*node)
+		while (node)
 		{
-			ft_display_data(node);
-			*node = (*node)->next;
+			ft_display_data(&node);
+			node = node->next;
 		}
 	else
-		while (*node)
+		while (node)
 		{
-			if (ft_strncmp((*node)->name, ".", 1) != 0)
-				ft_display_data(node);
-			*node = (*node)->next;
+			if (ft_strncmp(node->name, ".", 1) != 0)
+				ft_display_data(&node);
+			node = node->next;
 		}
 }
 
@@ -91,7 +91,7 @@ void	ft_display_l_r(t_lst **node, int i)
 		}
 	}
 }
-
+/*
 void	ft_display_t(t_lst **node)
 {
 	*node = ft_time_sort(*node);
@@ -101,4 +101,4 @@ void	ft_display_t(t_lst **node)
 			ft_putendl((*node)->name);
 		*node = (*node)->next;
 	}
-}
+}*/

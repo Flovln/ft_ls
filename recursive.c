@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 14:49:46 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 14:59:38 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int         ft_count_dir(t_lst *node)
+int				ft_count_dir(t_lst *node)
 {
 	int     i;
 
@@ -26,7 +26,7 @@ int         ft_count_dir(t_lst *node)
 	return (i);
 }
 
-static void         ft_putcss(char c, char *s1, char *s2)
+static	void	ft_put_css(char c, char *s1, char *s2)
 {
 	ft_putchar(c);
 	ft_putstr(s1);
@@ -55,9 +55,9 @@ void            ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 	while (++i < nb_dir)
 	{
 		if (opt->a && all_dir[i][0] == '.')
-			ft_putcss('\n', ft_strjoin(path, all_dir[i]), ":\n");
+			ft_put_css('\n', ft_strjoin(path, all_dir[i]), ":\n");
 		else if (all_dir[i][0] != '.')
-			ft_putcss('\n', ft_strjoin(path, all_dir[i]), ":\n");
+			ft_put_css('\n', ft_strjoin(path, all_dir[i]), ":\n");
 		ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[i])), opt);
 	}
 }

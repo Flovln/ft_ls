@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 14:27:44 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 16:06:16 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void						ft_init_opt(t_opt *opt);
 void						ft_display_data(t_lst **node);
 void						ft_display_total(t_lst **node, int i);
 void						ft_display_curr(t_lst *node, int i); // ls
-void						ft_display_l(t_lst **node, int i); // ls -l && -a
+void						ft_display_l(t_lst *node, int i); // ls -l && -a
 void						ft_display_r(t_lst **node, int i); // ls -r && -a
 void						ft_display_t(t_lst **node); // ls -t
 void						ft_display_l_r(t_lst **node, int i); // ls -l -r
@@ -104,5 +104,6 @@ void						ft_free_list(t_lst **node);
 void						ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir);
 int							ft_count_dir(t_lst *node);
 void    					ft_read_param(char *path, t_opt *opt);
+void						ft_color_name(t_lst *node);
 
 #endif

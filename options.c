@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 14:28:50 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 16:16:58 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,22 @@ int				ft_options(char *s, t_opt *opt)
 	return (0);
 }
 
-void	ft_sort_options(t_lst *node, t_opt *opt, char *path)
+static void		ft_sort_options_bis(t_lst *node, t_opt *opt, char *path, int i)
+{
+	if (opt->l && (!opt->r))
+	{
+		ft_display_total(&node, i);
+		ft_display_l(node, i);
+	}
+	else if (node && opt->a && (!opt->r))
+		ft_display_curr(node, i);
+	else if (node && (!opt->a) && (!opt->r))
+		ft_display_curr(node, i);
+	if (node && opt->R)
+		ft_recursive(node, opt, path, ft_count_dir(node));
+}
+
+void			ft_sort_options(t_lst *node, t_opt *opt, char *path)
 {
 	int i;
 
@@ -82,22 +97,11 @@ void	ft_sort_options(t_lst *node, t_opt *opt, char *path)
 		}
 		else if (opt->r)
 			ft_display_r(&node, i);
-		if (opt->l && (!opt->r))
-		{
-			ft_display_total(&node, i);
-			ft_display_l(&node, i);
-		}
-		else if (node && opt->a && (!opt->r))
-			ft_display_curr(node, i);
-		else if (node && (!opt->a) && (!opt->r))
-			ft_display_curr(node, i);
-		if (node && opt->R)
-			ft_recursive(node, opt, path, ft_count_dir(node));
+		ft_sort_options_bis(node, opt, path, i);
 	}
 }
 
-/*
-static void			ft_color_name(t_lst *node)
+void			ft_color_name(t_lst *node)
 {
 	if (node->file_data->get_perm[0] == 'd')
 		ft_putstr(GREEN);
@@ -109,4 +113,4 @@ static void			ft_color_name(t_lst *node)
 		ft_putstr(MAGENTA);
 	ft_putstr(node->name);
 	ft_putstr(COLOR_RESET);
-}*/
+}
