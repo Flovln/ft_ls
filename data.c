@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/15 13:24:36 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 14:43:36 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char		ft_get_file_type(struct stat *file_stat)
 
 static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 {
-	ft_memset(elem->file_data->get_perm, 0, 11);
+	ft_bzero(elem->file_data->get_perm, 11);
 	elem->file_data->get_perm[0] = ft_get_file_type(file_stat);
 	elem->file_data->get_perm[1] = (file_stat->st_mode & S_IRUSR) ? 'r' : '-';
 	elem->file_data->get_perm[2] = (file_stat->st_mode & S_IWUSR) ? 'w' : '-';
@@ -66,7 +66,7 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->name = file;
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
 	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
-	node->is_dir = (node->file_data->get_perm[0] == 'd' && REAL_DIR(node->name)); // recursive
+	node->is_dir = (node->file_data->get_perm[0] == 'd' && ft_strncmp(node->name, ".", 1) && ft_strncmp(node->name, "..", 2));
 	node->next = NULL;
 }
 
@@ -79,7 +79,7 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	t_lst		*current;
 
 	tmp = (t_lst *)malloc(sizeof(t_lst));
-	tmp->file_data = (t_data *)malloc(sizeof(t_data)); //struct t_data appelee dans t_lst
+	tmp->file_data = (t_data *)malloc(sizeof(t_data));
 	current = head;
 	if (lstat(path, &file_st) <= 0)
 		ft_add_data(file_st, tmp, file);
