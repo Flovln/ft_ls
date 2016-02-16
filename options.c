@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 14:59:10 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 14:28:50 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,37 +61,52 @@ int				ft_options(char *s, t_opt *opt)
 	return (0);
 }
 
-void			ft_sort_options(t_lst *node, t_opt *opt) //, char *path)
+void	ft_sort_options(t_lst *node, t_opt *opt, char *path)
 {
 	int i;
 
 	i = 0;
 	node = ft_ascii_sort(node);
 	if (!opt || ft_check_opt(opt))
-		ft_display_curr(&node, i);
+		ft_display_curr(node, i);
 	else
 	{
 		if (opt->a)
 			i = 1;
-		if (opt->t && !opt->a && !opt->l && !opt->r)
-			ft_display_t(&node);
-		else if (opt->t)
+		if (opt->t)
 			node = ft_time_sort(node);
-		if (opt->l && opt->r)
+		if (opt->r && opt->l)
 		{
 			ft_display_total(&node, i);
 			ft_display_l_r(&node, i);
 		}
 		else if (opt->r)
 			ft_display_r(&node, i);
-		if (opt->l && !(opt->r))
+		if (opt->l && (!opt->r))
 		{
 			ft_display_total(&node, i);
 			ft_display_l(&node, i);
 		}
-		if (opt->a && !opt->r)
-			ft_display_curr(&node, i);
-//		if (opt->R)
-//			ft_recursive();
+		else if (node && opt->a && (!opt->r))
+			ft_display_curr(node, i);
+		else if (node && (!opt->a) && (!opt->r))
+			ft_display_curr(node, i);
+		if (node && opt->R)
+			ft_recursive(node, opt, path, ft_count_dir(node));
 	}
 }
+
+/*
+static void			ft_color_name(t_lst *node)
+{
+	if (node->file_data->get_perm[0] == 'd')
+		ft_putstr(GREEN);
+	else if (node->file_data->get_perm[0] == 'l')
+		ft_putstr(RED);
+	else if (node->file_data->get_perm[0] == 'c')
+		ft_putstr(BLUE);
+	else if (node->file_data->get_perm[0] == 'b')
+		ft_putstr(MAGENTA);
+	ft_putstr(node->name);
+	ft_putstr(COLOR_RESET);
+}*/
