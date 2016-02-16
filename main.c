@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/15 16:21:43 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 12:53:05 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				main(int ac, char **av)
 	char	*path;
 	t_opt	opt;
 
-	i = 1;
+	i = 0;
 	path = NULL;
 	ft_init_opt(&opt);
 /*	if (!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i]))
@@ -78,26 +78,20 @@ int				main(int ac, char **av)
 		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
 		exit(1);
 	}*/
-	while (i < ac)
+	while (++i < ac)
 	{
-		if (av[i][0] == '-') // donne la ou les options utilisees en param
-		{
-			ft_putstr("AAA\n");
+		if (av[i][0] == '-')
 			ft_options(av[i], &opt);
-		}
-		else // fichier passe en parametre
+		else
 		{
-			ft_putstr("BBB\n");
 			path = av[i];
 //			ft_read_files(ac, av);
-//			ft_read_param(ft_add_slash(path), &opt);
+			ft_read_param(ft_add_slash(path), &opt);
+			if (av[i + 1])
+				ft_putchar('\n');
 		}
-		i++;
 	}
-	if (!path) // affiche le contenu suivant options passees en param
-	{
-		ft_putstr("CCC\n");
+	if (!path)
 		ft_read_param("./", &opt);
-	}
 	return (0);
 }
