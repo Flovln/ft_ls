@@ -6,13 +6,12 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/15 13:22:35 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/16 14:27:44 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-# define REAL_DIR(x) (ft_strcmp(x, "..") != 0 && ft_strcmp(x, ".") != 0)
 
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
@@ -55,6 +54,7 @@ typedef struct				s_pad
 
 typedef struct				s_data
 {
+//	int						is_dir; // recursive
 	int						blocks;
 	char					get_perm[11];
 	char					*links;
@@ -67,10 +67,10 @@ typedef struct				s_data
 
 typedef struct				s_lst
 {
-	int						is_dir; // recursive
 	dev_t					st_rdev; // major/minor for /dev
 	t_data					*file_data;
 	char					*date; //time display
+	int						is_dir; //recursive
 	int						last_edit; //time sort
 	char					*name;
 	struct s_lst			*next;
@@ -90,7 +90,7 @@ int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
 void						ft_display_data(t_lst **node);
 void						ft_display_total(t_lst **node, int i);
-void						ft_display_curr(t_lst **node, int i); // ls
+void						ft_display_curr(t_lst *node, int i); // ls
 void						ft_display_l(t_lst **node, int i); // ls -l && -a
 void						ft_display_r(t_lst **node, int i); // ls -r && -a
 void						ft_display_t(t_lst **node); // ls -t
@@ -101,8 +101,7 @@ void						ft_sort_options(t_lst *node, t_opt *opt, char *path);
 void						ft_error_opt(char *s);
 void						ft_free_data(t_lst **node);
 void						ft_free_list(t_lst **node);
-
-void						ft_recursive(char *path, t_lst *node, t_opt *opt, int nb_dir);
+void						ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir);
 int							ft_count_dir(t_lst *node);
 void    					ft_read_param(char *path, t_opt *opt);
 
