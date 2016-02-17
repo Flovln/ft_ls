@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 17:59:52 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 16:18:14 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/17 16:50:30 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,3 @@ void	ft_display_l_r(t_lst **node, int i)
 		}
 	}
 }
-/*
-void	ft_display_t(t_lst **node)
-{
-	*node = ft_time_sort(*node);
-	while (*node)
-	{
-		if (ft_strncmp((*node)->name, ".", 1) != 0)
-			ft_putendl((*node)->name);
-		*node = (*node)->next;
-	}
-}*/

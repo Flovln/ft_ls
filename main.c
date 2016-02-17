@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 12:53:05 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/17 18:57:17 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char			*ft_add_slash(char *path)
 	return (path);
 }
 
-static char		*ft_remove_slash(char *path)
+char			*ft_remove_slash(char *path)
 {
 	int len;
 
@@ -38,7 +38,7 @@ static char		*ft_remove_slash(char *path)
 	return (path);
 }
 
-void	ft_read_param(char *path, t_opt *options)
+void			ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
 	struct dirent	*ret;
