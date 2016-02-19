@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 14:43:36 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 11:39:26 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->file_data->size = ft_itoa(file_stat.st_size);
 	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
 	node->last_edit = (int)(file_stat.st_mtime);
-	node->name = file;
+	node->name = ft_strdup(file);
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
 	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
 	node->is_dir = (node->file_data->get_perm[0] == 'd' && ft_strcmp(node->name, ".") && ft_strcmp(node->name, ".."));
+//	node->is_dir_bis = (node->file_data->get_perm[0] == 'd' && ft_strncmp(node->name, ".", 1) && ft_strncmp(node->name, "..", 2));
 	node->next = NULL;
 }
 
