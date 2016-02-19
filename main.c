@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/17 18:57:17 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 17:58:28 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,34 @@ void			ft_read_param(char *path, t_opt *options)
 	struct dirent	*ret;
 	t_lst			*node;
 	t_pad			*pad;
+	int				is_file;
 
-	if (!(dir = opendir(path)))
-	{
-		ft_putstr("ft_ls: ");
-		perror(ft_remove_slash(path));
-		return ;
-	}
+	is_file = 0;
 	pad = (t_pad *)malloc(sizeof(t_pad));
 	if (!(node = (t_lst *)malloc(sizeof(t_lst))))
 		exit(1);
 	node = NULL;
-	while ((ret = readdir(dir)))
-		node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
-	closedir(dir);
+	if (!(dir = opendir(path)))
+	{
+		node = manage_av_file(path, node, dir);
+		if (node == NULL)
+		{
+			ft_putstr("ft_ls: ");
+			perror(path);
+			return ;
+		}
+		is_file = 1;
+	}
+	else if (is_file == 0)
+	{
+		path = ft_add_slash(path);
+		while ((ret = readdir(dir)))
+			node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
+		closedir(dir);
+	}
 	ft_padding(&node, pad); //general padding
 	ft_sort_options(node, options, path); //options managing
 }
-
-//static void		ft_read_files(int ac, char **av)
 
 int				main(int ac, char **av)
 {
@@ -75,7 +84,7 @@ int				main(int ac, char **av)
 	ft_init_opt(&opt);
 	if (!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i]))
 	{
-		ft_putstr("AAAA\n");
+//		ft_putstr("AAAA\n");
 		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
 		exit(1);
 	}
@@ -86,8 +95,7 @@ int				main(int ac, char **av)
 		else
 		{
 			path = av[i];
-//			ft_read_files(ac, av);
-			ft_read_param(ft_add_slash(path), &opt);
+			ft_read_param(path, &opt);
 		}
 	}
 	if (!path)

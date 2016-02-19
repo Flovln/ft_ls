@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 11:39:26 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 17:44:35 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->name = ft_strdup(file);
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
 	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
-	node->is_dir = (node->file_data->get_perm[0] == 'd' && ft_strcmp(node->name, ".") && ft_strcmp(node->name, ".."));
-//	node->is_dir_bis = (node->file_data->get_perm[0] == 'd' && ft_strncmp(node->name, ".", 1) && ft_strncmp(node->name, "..", 2));
+	node->is_dir = (node->file_data->get_perm[0] == 'd' && ft_strcmp(node->name, ".") && ft_strcmp(node->name, "..")); // asign 1 to is_dir if condition ok else 0
 	node->next = NULL;
 }
 
@@ -89,7 +88,6 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = tmp;
-	//	ft_new_node(&head, current, tmp);
 	return (head);
 }
 /*

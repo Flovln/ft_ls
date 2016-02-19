@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 13:25:15 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/16 13:42:44 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 17:45:27 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_lst			*ft_time_sort(t_lst *node)
 		return (NULL);
 	if (node->next && (node->last_edit < node->next->last_edit))
 		node = ft_lst_swap(node, node->next);
-	node->next = ft_time_sort(node->next); // recusive infix
+	node->next = ft_time_sort(node->next);
 	if (node->next && (node->last_edit < node->next->last_edit))
 	{
 		node = ft_lst_swap(node, node->next);

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/11 17:00:55 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 17:56:11 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,21 +92,37 @@ static	char	*ft_add_space(char *s, int max)
 	else
 		return (s);
 }
+/* Has to be move to another file / 6 functions not allowed */
+static int		ft_count_node(t_lst *head)
+{
+	int count;
+
+	count = 0;
+	while (head)
+	{
+		head = head->next;
+		count++;
+	}
+	return (count);
+}
 
 static void		ft_set_padding(t_lst **head, t_pad *pad)
 {
 	t_lst *tmp;
 
 	tmp = *head;
-	while (tmp)
+	if (ft_count_node(tmp) > 1)
 	{
-		tmp->file_data->links = ft_add_space(tmp->file_data->links, pad->links);
-		tmp->file_data->uid = ft_strnjoin(tmp->file_data->uid, " ", (pad->uid - ft_strlen(tmp->file_data->uid)));
-		tmp->file_data->gid = ft_strnjoin(tmp->file_data->gid, " ", (pad->gid - ft_strlen(tmp->file_data->gid)));
-		tmp->file_data->size = ft_add_space(tmp->file_data->size, pad->size);
-		tmp->file_data->min = ft_add_space(tmp->file_data->min, pad->min);
-		tmp->file_data->maj = ft_add_space(tmp->file_data->maj, pad->maj);
-		tmp = tmp->next;
+		while (tmp)
+		{
+			tmp->file_data->links = ft_add_space(tmp->file_data->links, pad->links);
+			tmp->file_data->uid = ft_strnjoin(tmp->file_data->uid, " ", (pad->uid - ft_strlen(tmp->file_data->uid)));
+			tmp->file_data->gid = ft_strnjoin(tmp->file_data->gid, " ", (pad->gid - ft_strlen(tmp->file_data->gid)));
+			tmp->file_data->size = ft_add_space(tmp->file_data->size, pad->size);
+			tmp->file_data->min = ft_add_space(tmp->file_data->min, pad->min);
+			tmp->file_data->maj = ft_add_space(tmp->file_data->maj, pad->maj);
+			tmp = tmp->next;
+		}
 	}
 }
 

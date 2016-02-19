@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/17 18:57:20 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 17:58:06 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char		*get_file_name(char *path)
 	return (tmp);
 }
 
-static char		*format_path(char *path)
+char		*format_path(char *path)
 {
 	int		i;
 	char	*tmp;
@@ -60,7 +60,7 @@ static char		*format_path(char *path)
 			}
 			else
 			{
-				tmp = ft_add_slash(ft_strndup(path, i)); //////
+				tmp = ft_add_slash(ft_strndup(path, i));
 				return (tmp);
 			}
 		}
@@ -84,7 +84,7 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 		perror(ft_remove_slash(path));
 		exit(1);
 	}
-	if (!(dir = opendir(formated)))
+	if (!(dir = opendir(formated))) /* open */
 	{
 		ft_putstr("ft_ls: ");
 		perror(ft_remove_slash(path));
@@ -93,16 +93,17 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 	else
 	{
 		file_name = get_file_name(path);
-		while ((ret = readdir(dir)))
+		while ((ret = readdir(dir))) /* read */
 		{
 			if ((ft_strcmp(ret->d_name, file_name) == 0))
 			{
-				lst = ft_get_data(lst, ret->d_name, path); ///
+				lst = ft_get_data(lst, ret->d_name, path);
 				break ;
 			}
 		}
 		if (!lst)
 			return (NULL);
+		closedir(dir); /* close */
 		return (lst);
 	}
 	return (NULL);

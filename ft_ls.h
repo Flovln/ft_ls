@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/17 18:56:37 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 17:58:49 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct				s_data
 	char					*uid;
 	char					*gid;
 	char					*size;
-	char					*min; // /dev
-	char					*maj; // /dev
+	char					*min;
+	char					*maj;
 }							t_data;
 
 typedef struct				s_lst
@@ -108,5 +108,6 @@ void						ft_color_name(t_lst *node);
 
 char						*ft_remove_slash(char *path);
 t_lst						*manage_av_file(char *path, t_lst *lst, DIR *dir);
+char						*format_path(char *path); ///////////
 
 #endif
