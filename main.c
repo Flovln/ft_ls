@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 17:58:28 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 18:07:49 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void			ft_read_param(char *path, t_opt *options)
 	{
 		path = ft_add_slash(path);
 		while ((ret = readdir(dir)))
-			node = ft_get_data(node, ret->d_name, ft_strjoin(path, ret->d_name));
+			node = ft_get_data(node, ret->d_name,
+					ft_strjoin(path, ret->d_name));
 		closedir(dir);
 	}
 	ft_padding(&node, pad); //general padding

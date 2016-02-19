@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 13:25:15 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 17:45:27 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 18:18:50 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_error_opt(char *s)
+void			ft_error_opt(char *s)
 {
 	ft_putstr_fd("ft_ls: illegal option -- ", 2);
 	ft_putendl_fd(s, 2);

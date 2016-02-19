@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 17:50:26 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 18:18:30 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				ft_count_dir(t_lst *node)
 {
-	int     i;
+	int	i;
 
 	i = 0;
 	while (node)
@@ -33,10 +33,10 @@ static	void	ft_put_css(char c, char *s1, char *s2)
 	ft_putstr(s2);
 }
 
-void            ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
+void			ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 {
-	char    **all_dir;
-	int     i;
+	char	**all_dir;
+	int		i;
 
 	i = 0;
 	if (!(all_dir = (char **)malloc(sizeof(char *) * nb_dir + 1)))

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 17:58:06 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/19 18:11:59 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char		*ft_strndup(char const *s1, size_t len)
 static char		*get_file_name(char *path)
 {
 	int		end;
-	int 	start;
+	int		start;
 	char	*tmp;
 
 	end = ft_strlen(path) - 1;
@@ -38,7 +38,7 @@ static char		*get_file_name(char *path)
 	return (tmp);
 }
 
-char		*format_path(char *path)
+char			*format_path(char *path)
 {
 	int		i;
 	char	*tmp;
@@ -76,8 +76,8 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 	struct dirent	*ret;
 
 	formated = format_path(path);
-	if (formated != NULL)
-		formated = ft_strdup(format_path(path));
+//	if (formated != NULL)
+//		formated = ft_strdup(format_path(path));
 	if (formated == NULL)
 	{
 		ft_putstr("ft_ls: ");
