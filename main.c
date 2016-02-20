@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 18:07:49 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/20 15:32:26 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,13 @@ void			ft_init_pad(t_pad *pad)
 	pad->maj = 0;
 }
 
-char			*ft_add_slash(char *path)
+void			ft_init_opt(t_opt *opt)
 {
-	if (path[ft_strlen(path) - 1] != '/')
-		path = ft_strjoin(path, "/");
-	return (path);
-}
-
-char			*ft_remove_slash(char *path)
-{
-	int len;
-
-	len = ft_strlen(path);
-	path[len - 1] = '\0';
-	return (path);
+	opt->l = 0;
+	opt->R = 0;
+	opt->a = 0;
+	opt->r = 0;
+	opt->t = 0;
 }
 
 void			ft_read_param(char *path, t_opt *options)
@@ -54,7 +47,7 @@ void			ft_read_param(char *path, t_opt *options)
 	if (!(dir = opendir(path)))
 	{
 		node = manage_av_file(path, node, dir);
-		if (node == NULL)
+		if (!node)
 		{
 			ft_putstr("ft_ls: ");
 			perror(path);
@@ -83,11 +76,11 @@ int				main(int ac, char **av)
 	i = 0;
 	path = NULL;
 	ft_init_opt(&opt);
-	if (!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i]))
+	if (ft_strcmp("''", av[i]) || ft_strcmp("""", av[i]))
 	{
-//		ft_putstr("AAAA\n");
 		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
-		exit(1);
+	//	exit(1);
+//		i++;
 	}
 	while (++i < ac)
 	{

@@ -6,13 +6,13 @@
 #    By: fviolin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/15 11:41:32 by fviolin           #+#    #+#              #
-#    Updated: 2016/02/17 18:51:33 by fviolin          ###   ########.fr        #
+#    Updated: 2016/02/20 15:17:31 by fviolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = main.c data.c padding.c sort.c  options.c display.c recursive.c manage_path.c
+SRC = main.c data.c padding.c sort.c  options.c display.c recursive.c manage_path.c tools.c
 
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a

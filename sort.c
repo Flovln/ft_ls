@@ -6,11 +6,24 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 13:25:15 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 18:18:50 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/20 15:12:38 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+int				ft_count_node(t_lst *node)
+{
+	int count;
+
+	count = 0;
+	while (node)
+	{
+		node = node->next;
+		count++;
+	}
+	return (count);
+}
 
 void			ft_error_opt(char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 18:22:55 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/20 15:12:52 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,21 +92,6 @@ static	char	*ft_add_space(char *s, int max)
 	}
 	else
 		return (s);
-}
-
-/* Has to be move to another file / 6 functions not allowed */
-
-static int		ft_count_node(t_lst *head)
-{
-	int count;
-
-	count = 0;
-	while (head)
-	{
-		head = head->next;
-		count++;
-	}
-	return (count);
 }
 
 static void		ft_set_padding(t_lst **head, t_pad *pad)

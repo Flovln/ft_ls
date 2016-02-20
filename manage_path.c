@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 18:11:59 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/20 15:04:57 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,47 +53,56 @@ char			*format_path(char *path)
 			tmp = ft_strdup(path);
 			while (tmp[i] != '/' && i > 0)
 				i--;
-			if (i == 0)
-			{
+			if (i == 0) // modif return(tmp)
 				tmp = ft_strdup("./");
-				return (tmp);
-			}
-			else
-			{
+			else //modif return(tmp)
 				tmp = ft_add_slash(ft_strndup(path, i));
-				return (tmp);
-			}
+			return (tmp);
 		}
 	}
 	else
 		return (NULL);
 }
+/*
+static t_lst	*manage_av_file_bis(char *path, t_lst *lst, DIR *dir)
+{
+	char			*file_name;
+	struct dirent	*ret;
 
+	file_name = get_file_name(path);
+	while ((ret = readdir(dir))) //read 
+	{
+		if ((ft_strcmp(ret->d_name, file_name) == 0))
+		{
+			lst = ft_get_data(lst, ret->d_name, path);
+			break ;
+		}
+	}
+	if (!lst)
+		return (NULL);
+	closedir(dir); // close
+	return (lst);
+}
+*/
 t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 {
 	char			*formated;
 	char			*file_name;
 	struct dirent	*ret;
 
-	formated = format_path(path);
-//	if (formated != NULL)
-//		formated = ft_strdup(format_path(path));
-	if (formated == NULL)
-	{
-		ft_putstr("ft_ls: ");
-		perror(ft_remove_slash(path));
-		exit(1);
-	}
+	formated = format_path(path); //ft_strdup ?
+	if (!formated)
+		return (NULL);
 	if (!(dir = opendir(formated))) /* open */
 	{
 		ft_putstr("ft_ls: ");
-		perror(ft_remove_slash(path));
-		exit(1);
+		perror(path);
+		return (NULL);
 	}
 	else
 	{
 		file_name = get_file_name(path);
-		while ((ret = readdir(dir))) /* read */
+		while ((ret = readdir(dir))) // read
 		{
 			if ((ft_strcmp(ret->d_name, file_name) == 0))
 			{
@@ -103,7 +112,7 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 		}
 		if (!lst)
 			return (NULL);
-		closedir(dir); /* close */
+		closedir(dir); // close
 		return (lst);
 	}
 	return (NULL);
