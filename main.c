@@ -79,12 +79,6 @@ int				main(int ac, char **av)
 	flag = 1;
 	path = NULL;
 	ft_init_opt(&opt);
-/*	if ((!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i])))
-	{
-		//doesn't work because i = 0;
-		ft_putstr("ft_ls: fts_open: No such file or directory");
-		exit(1);
-	}*/
 	if (ac > 1)
 	{
 		while (av[i] && av[i][0] == '-')
