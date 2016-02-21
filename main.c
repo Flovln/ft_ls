@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/21 14:00:20 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/21 19:21:46 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,39 @@ void			ft_read_param(char *path, t_opt *options)
 int				main(int ac, char **av)
 {
 	int		i;
+	int		flag;
 	char	*path;
 	t_opt	opt;
 
-	i = 0;
+	i = 1;
+	flag = 1;
 	path = NULL;
 	ft_init_opt(&opt);
-	if ((!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i])))
+/*	if ((!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i])))
 	{
 		//doesn't work because i = 0;
 		ft_putstr("ft_ls: fts_open: No such file or directory");
 		exit(1);
-	}
-	while (++i < ac)
+	}*/
+	if (ac > 1)
 	{
-		if (av[i][0] == '-')
-			ft_options(av[i], &opt);
-		else
+		while (av[i] && av[i][0] == '-')
 		{
-			path = av[i];
-			ft_read_param(path, &opt);
+			ft_options(av[i], &opt);
+			flag++;
+			i++;
+		}
+		if (ac > flag)
+			av = ft_create_tab(av, &opt, ac, flag);
+		i = 0;
+		if (ac > 2)
+		{
+			while (i < ac - flag)
+			{
+				path = av[i];
+				ft_read_param(path, &opt);
+				i++;
+			}
 		}
 	}
 	if (!path)
