@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/20 15:04:57 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/21 18:09:48 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 		return (NULL);
 	if (!(dir = opendir(formated))) /* open */
 	{
-		ft_putstr("ft_ls: ");
+		ft_putstr("ft_ls: "); // for Permission Denied Error
 		perror(path);
 		return (NULL);
 	}

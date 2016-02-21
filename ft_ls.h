@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/20 15:12:14 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/21 18:47:45 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ int							ft_count_dir(t_lst *node);
 void    					ft_read_param(char *path, t_opt *opt);
 void						ft_color_name(t_lst *node);
 int							ft_count_node(t_lst *node);
+void						ft_tab_swap(char **s1, char **s2);
+void						ft_sort_tab(char **tab, t_opt *opt, int flag);
+char						**ft_create_tab(char **av, t_opt *opt, int ac, int flag);
 
 char						*ft_remove_slash(char *path);
 t_lst						*manage_av_file(char *path, t_lst *lst, DIR *dir);
