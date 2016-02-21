@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/20 15:32:26 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/21 14:00:20 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void			ft_read_param(char *path, t_opt *options)
 			node = ft_get_data(node, ret->d_name,
 					ft_strjoin(path, ret->d_name));
 		closedir(dir);
+		//ft_putchar('\n'); // WRONG
 	}
 	ft_padding(&node, pad); //general padding
 	ft_sort_options(node, options, path); //options managing
@@ -76,11 +77,11 @@ int				main(int ac, char **av)
 	i = 0;
 	path = NULL;
 	ft_init_opt(&opt);
-	if (ft_strcmp("''", av[i]) || ft_strcmp("""", av[i]))
+	if ((!ft_strcmp("''", av[i]) || !ft_strcmp("""", av[i])))
 	{
-		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
-	//	exit(1);
-//		i++;
+		//doesn't work because i = 0;
+		ft_putstr("ft_ls: fts_open: No such file or directory");
+		exit(1);
 	}
 	while (++i < ac)
 	{
