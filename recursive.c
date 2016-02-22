@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/19 18:18:30 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 12:01:05 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 	else if (opt->r == 1)
 	{
 		j = nb_dir;
-		while (j > -1)
+		while (j > - 1)
 		{
 			if (all_dir[j])
 			{
-				ft_put_css('\n', ft_strjoin(path, all_dir[i]), ":\n");
-				ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[i])), opt);
+				ft_put_css('\n', ft_strjoin(path, all_dir[j]), ":\n");
+				ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[j])), opt);
 			}
 			j--;
 		}
