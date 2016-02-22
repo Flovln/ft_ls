@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/21 18:47:45 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 14:38:06 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ typedef struct				s_pad
 	size_t					uid;
 	size_t					gid;
 	size_t					size;
-	size_t					min; // /dev
-	size_t					maj; // /dev
+	size_t					min;
+	size_t					maj;
+	size_t					maj_min;
 }							t_pad;
 
 typedef struct				s_data
@@ -63,6 +64,7 @@ typedef struct				s_data
 	char					*size;
 	char					*min;
 	char					*maj;
+	char					*maj_min;
 }							t_data;
 
 typedef struct				s_lst
@@ -83,35 +85,37 @@ void						ft_add_node(t_lst **head, t_lst *current,
 char						*ft_add_slash(char *path);
 t_lst						*ft_get_data(t_lst *head, char *path, char *file);
 void						ft_padding(t_lst **head, t_pad *pad);
-void						ft_init_pad(t_pad *pad);
+void						ft_init_pad(t_pad *pad, t_lst **node);
 int							ft_check_opt(t_opt *opt);
 int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
 void						ft_display_data(t_lst **node);
 void						ft_display_total(t_lst **node, int i);
-void						ft_display_curr(t_lst *node, int i); // ls
-void						ft_display_l(t_lst *node, int i); // ls -l && -a
-void						ft_display_r(t_lst **node, int i); // ls -r && -a
-void						ft_display_t(t_lst **node); // ls -t
-void						ft_display_l_r(t_lst **node, int i); // ls -l -r
-t_lst						*ft_time_sort(t_lst *node); // ls -t
+void						ft_display_curr(t_lst *node, int i);
+void						ft_display_l(t_lst *node, int i);
+void						ft_display_r(t_lst **node, int i);
+void						ft_display_t(t_lst **node);
+void						ft_display_l_r(t_lst **node, int i);
+t_lst						*ft_time_sort(t_lst *node);
 t_lst						*ft_ascii_sort(t_lst *file);
-void						ft_sort_options(t_lst *node, t_opt *opt, char *path);
+void						ft_sort_options(t_lst *node, t_opt *opt,
+								char *path);
 void						ft_error_opt(char *s);
 void						ft_free_data(t_lst **node);
 void						ft_free_list(t_lst **node);
-void						ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir);
+void						ft_recursive(t_lst *node, t_opt *opt,
+								char *path, int nb_dir);
 int							ft_count_dir(t_lst *node);
-void    					ft_read_param(char *path, t_opt *opt);
+void						ft_read_param(char *path, t_opt *opt);
 void						ft_color_name(t_lst *node);
 int							ft_count_node(t_lst *node);
 void						ft_tab_swap(char **s1, char **s2);
 void						ft_sort_tab(char **tab, t_opt *opt, int flag);
-char						**ft_create_tab(char **av, t_opt *opt, int ac, int flag);
-
+char						**ft_create_tab(char **av, t_opt *opt,
+								int ac, int flag);
 char						*ft_remove_slash(char *path);
 t_lst						*manage_av_file(char *path, t_lst *lst, DIR *dir);
-char						*format_path(char *path); ///////////
+char						*format_path(char *path);
 
 #endif

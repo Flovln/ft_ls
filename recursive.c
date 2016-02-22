@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/22 12:46:58 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 14:08:06 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,36 @@ static	void	ft_put_css(char c, char *s1, char *s2)
 	ft_putchar(c);
 	ft_putstr(s1);
 	ft_putstr(s2);
+//	ft_read_param(ft_strjoin(path, ft_add_slash(all_d[i])), opt);
 }
 
-static void		ft_recursive_r(t_opt *opt, char *path, int nb_dir, int i, char **all_dir)
+static void		ft_recursive_r(t_opt *opt, char *path, int nb_d, char **all_d)
 {
 	int		j;
+	int		i;
 
 	if (opt->r == 0)
 	{
 		i = -1;
-		while (++i < nb_dir)
+		while (++i < nb_d)
 		{
-			if (all_dir[i])
+			if (all_d[i])
 			{
-				ft_put_css('\n', ft_strjoin(path, all_dir[i]), ":\n");
-				ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[i])), opt);
+				ft_put_css('\n', ft_strjoin(path, all_d[i]), ":\n");
+				ft_read_param(ft_strjoin(path, ft_add_slash(all_d[i])), opt);
 			}
 		}
 	}
 	else if (opt->r == 1)
 	{
-		j = nb_dir;
-		while (j > -1)
+		j = nb_d;
+		while (--j > -1)
 		{
-			if (all_dir[j])
+			if (all_d[j])
 			{
-				ft_put_css('\n', ft_strjoin(path, all_dir[j]), ":\n");
-				ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[j])), opt);
+				ft_put_css('\n', ft_strjoin(path, all_d[j]), ":\n");
+				ft_read_param(ft_strjoin(path, ft_add_slash(all_d[j])), opt);
 			}
-			j--;
 		}
 	}
 }
@@ -90,5 +91,5 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 		node = node->next;
 	}
 	all_dir[i] = NULL;
-	ft_recursive_r(opt, path, nb_dir, i, all_dir);
+	ft_recursive_r(opt, path, nb_dir, all_dir);
 }

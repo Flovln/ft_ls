@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/21 18:09:48 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 14:51:29 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char			*format_path(char *path)
 			tmp = ft_strdup(path);
 			while (tmp[i] != '/' && i > 0)
 				i--;
-			if (i == 0) // modif return(tmp)
+			if (i == 0)
 				tmp = ft_strdup("./");
-			else //modif return(tmp)
+			else
 				tmp = ft_add_slash(ft_strndup(path, i));
 			return (tmp);
 		}
@@ -63,6 +63,7 @@ char			*format_path(char *path)
 	else
 		return (NULL);
 }
+
 /*
 static t_lst	*manage_av_file_bis(char *path, t_lst *lst, DIR *dir)
 {
@@ -70,7 +71,7 @@ static t_lst	*manage_av_file_bis(char *path, t_lst *lst, DIR *dir)
 	struct dirent	*ret;
 
 	file_name = get_file_name(path);
-	while ((ret = readdir(dir))) //read 
+	while ((ret = readdir(dir))) //read
 	{
 		if ((ft_strcmp(ret->d_name, file_name) == 0))
 		{
@@ -90,19 +91,19 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 	char			*file_name;
 	struct dirent	*ret;
 
-	formated = format_path(path); //ft_strdup ?
+	formated = format_path(path);
 	if (!formated)
 		return (NULL);
-	if (!(dir = opendir(formated))) /* open */
+	if (!(dir = opendir(formated)))
 	{
-		ft_putstr("ft_ls: "); // for Permission Denied Error
+		ft_putstr("ft_ls: ");
 		perror(path);
 		return (NULL);
 	}
 	else
 	{
 		file_name = get_file_name(path);
-		while ((ret = readdir(dir))) // read
+		while ((ret = readdir(dir)))
 		{
 			if ((ft_strcmp(ret->d_name, file_name) == 0))
 			{
@@ -112,7 +113,7 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 		}
 		if (!lst)
 			return (NULL);
-		closedir(dir); // close
+		closedir(dir);
 		return (lst);
 	}
 	return (NULL);

@@ -6,20 +6,21 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/21 19:21:46 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 14:52:20 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			ft_init_pad(t_pad *pad)
+void			ft_init_pad(t_pad *pad, t_lst **node)
 {
-	pad->links = 0;
-	pad->uid = 0;
-	pad->gid = 0;
-	pad->size = 0;
-	pad->min = 0;
-	pad->maj = 0;
+	pad->links = ft_strlen((*node)->file_data->links);
+	pad->uid = ft_strlen((*node)->file_data->uid);
+	pad->gid = ft_strlen((*node)->file_data->gid);
+	pad->size = ft_strlen((*node)->file_data->size);
+	pad->min = ft_strlen((*node)->file_data->min);
+	pad->maj = ft_strlen((*node)->file_data->maj);
+	pad->maj_min = 0;
 }
 
 void			ft_init_opt(t_opt *opt)
@@ -62,10 +63,9 @@ void			ft_read_param(char *path, t_opt *options)
 			node = ft_get_data(node, ret->d_name,
 					ft_strjoin(path, ret->d_name));
 		closedir(dir);
-		//ft_putchar('\n'); // WRONG
 	}
-	ft_padding(&node, pad); //general padding
-	ft_sort_options(node, options, path); //options managing
+	ft_padding(&node, pad);
+	ft_sort_options(node, options, path);
 }
 
 int				main(int ac, char **av)

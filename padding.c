@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/20 15:12:52 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 14:29:30 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,16 @@ void			ft_display_data(t_lst **node)
 	ft_putstr("  ");
 	ft_putstr((*node)->file_data->gid);
 	ft_putstr(" ");
-	if (!(ft_strncmp((*node)->file_data->maj, "0", 1)
-				&& ft_strncmp((*node)->file_data->min, "0", 1)))
+	if ((*node)->file_data->get_perm[0] != 'c' &&
+					(*node)->file_data->get_perm[0] != 'b')
 	{
+		ft_putstr("  ");
 		ft_putstr((*node)->file_data->size);
 		ft_putstr("  ");
 	}
 	else
 	{
-		ft_putstr((*node)->file_data->maj);
-		ft_putstr(" ");
-		ft_putstr((*node)->file_data->min);
+		ft_putstr((*node)->file_data->maj_min);
 		ft_putstr(" ");
 	}
 	ft_putstr((*node)->date);
@@ -113,6 +112,9 @@ static void		ft_set_padding(t_lst **head, t_pad *pad)
 					pad->size);
 			tmp->file_data->min = ft_add_space(tmp->file_data->min, pad->min);
 			tmp->file_data->maj = ft_add_space(tmp->file_data->maj, pad->maj);
+			tmp->file_data->maj_min = ft_strjoin(tmp->file_data->maj, " ");
+			tmp->file_data->maj_min = ft_strjoin(tmp->file_data->maj_min,
+									tmp->file_data->min);
 			tmp = tmp->next;
 		}
 	}
@@ -123,7 +125,7 @@ void			ft_padding(t_lst **head, t_pad *pad)
 	t_lst	*tmp;
 
 	tmp = *head;
-	ft_init_pad(pad);
+	ft_init_pad(pad, head);
 	while (tmp->next)
 	{
 		if (pad->links < ft_strlen(tmp->next->file_data->links))
@@ -140,5 +142,6 @@ void			ft_padding(t_lst **head, t_pad *pad)
 			pad->maj = ft_strlen(tmp->next->file_data->maj);
 		tmp = tmp->next;
 	}
+	pad->maj_min = pad->min + pad->maj;
 	ft_set_padding(head, pad);
 }

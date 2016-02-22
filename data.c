@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/20 14:10:12 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/22 14:51:12 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	node->file_data->maj = ft_strjoin(ft_itoa(major(file_stat.st_rdev)), ",");
 	node->is_dir = (node->file_data->get_perm[0] == 'd'
 			&& ft_strcmp(node->name, ".") && ft_strcmp(node->name, ".."));
-	/* asign 1 to is_dir if condition ok else 0 */
 	node->next = NULL;
 }
 
-/*function creating linked list*/
 t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 {
 	struct stat file_st;
