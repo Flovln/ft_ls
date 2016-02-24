@@ -89,39 +89,3 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	current->next = tmp;
 	return (head);
 }
-/*
-void 	ft_free_data(t_lst **node)
-{
-	if ((*node)->file_data->blocks)
-		ft_strdel((*node)->file_data->blocks);
-	if ((*node)->file_data->get_perm)
-		ft_strdel((*node)->file_data->get_perm);
-	if ((*node)->file_data->links)
-		ft_strdel((*node)->file_data->links);
-	if ((*node)->file_data->uid)
-		ft_strdel((*node)->file_data->uid);
-	if ((*node)->file_data->gid)
-		ft_strdel((*node)->file_data->gid);
-	if ((*node)->file_data->size)
-		ft_strdel((*node)->file_data->size);
-	if ((*node)->file_data->min)
-		ft_strdel((*node)->file_data->min);
-	if ((*node)->file_data->maj)
-		ft_strdel((*node)->file_data->maj);
-	if ((*node)->date)
-		ft_strdel((*node)->file_data->date);
-	if ((*node)->name)
-		ft_strdel((*node)->file_data->name);
-}
-
-void	ft_free_list(t_lst **node)
-{
-	while (*node)
-	{
-		ft_free_data(&(*node));
-		*node = (*node)->next;
-	}
-	free((*node));
-	node = NULL;
-}
-*/
