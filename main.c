@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/22 14:52:20 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/25 14:36:35 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void			ft_read_param(char *path, t_opt *options)
 	}
 	ft_padding(&node, pad);
 	ft_sort_options(node, options, path);
+//	if (!options->R) si R == 1 alors il est active donc on free dans la ft_recursive
+//		ft_free_list(&node); si R == 0 alors on free ici
 }
 
 int				main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/23 10:48:52 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/25 15:28:49 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path, int nb_dir)
 			j--;
 		}
 	}
+	ft_free_list(&node); // free
 }

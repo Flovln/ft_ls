@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 14:38:11 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/25 15:43:39 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,7 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 			&& ft_strcmp(node->name, ".") && ft_strcmp(node->name, ".."));
 	node->next = NULL;
 }
-/*
-static void		init_liste(t_lst *ptr)
-{
-	ptr->date = NULL;
-	ptr->name = NULL;
-}
 
-static void		init_file_data(t_data *ptr)
-{
-	ft_memset(ptr->get_perm, 0, 11);
-	ptr->links = NULL;
-	ptr->uid = NULL;
-	ptr->gid  = NULL;
-	ptr->size = NULL;
-	ptr->min = NULL;
-	ptr->maj = NULL;
-	ptr->maj_min = NULL;
-}
-*/
 t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 {
 	struct stat file_st;
@@ -100,9 +82,7 @@ t_lst			*ft_get_data(t_lst *head, char *file, char *path)
 	t_lst		*current;
 
 	tmp = (t_lst *)malloc(sizeof(t_lst));
-//	init_liste(tmp);
 	tmp->file_data = (t_data *)malloc(sizeof(t_data));
-//	init_file_data(tmp->file_data);
 	current = head;
 	if (lstat(path, &file_st) <= 0)
 		ft_add_data(file_st, tmp, file);
