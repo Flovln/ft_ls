@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 14:36:35 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/25 19:37:56 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,21 @@ void			ft_read_param(char *path, t_opt *options)
 	}
 	ft_padding(&node, pad);
 	ft_sort_options(node, options, path);
-//	if (!options->R) si R == 1 alors il est active donc on free dans la ft_recursive
-//		ft_free_list(&node); si R == 0 alors on free ici
+//	if (!options->R) // opt->R == 0 free list when no opt->R on
+//		ft_free_list(&node);
 }
 
 int				main(int ac, char **av)
 {
 	int		i;
+//	int		put_space;
 	int		flag;
 	char	*path;
 	t_opt	opt;
 
 	i = 1;
 	flag = 1;
+//	put_space = 0;
 	path = NULL;
 	ft_init_opt(&opt);
 	if (ac > 1)
@@ -94,11 +96,20 @@ int				main(int ac, char **av)
 		i = 0;
 		if (ac > 1)
 		{
+//			ft_arg_type(path);
 			while (i < ac - flag)
 			{
 				path = av[i];
+/*				if (ac - flag > 1 && ft_arg_type(path) == 1)
+				{
+					if (put_space != 0)
+						ft_putchar('\n');
+					ft_putstr(path);
+					ft_putendl(":");
+				}*/
 				ft_read_param(path, &opt);
 				i++;
+//				put_space = 1;
 			}
 		}
 	}
