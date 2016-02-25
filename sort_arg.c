@@ -6,13 +6,13 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 14:53:50 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/22 14:59:05 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/25 17:23:01 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	ft_arg_type(char *tab)
+int			ft_arg_type(char *tab)
 {
 	DIR			*dir;
 	struct stat	st;
@@ -68,7 +68,7 @@ char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 		return (NULL);
 	while (i < ac)
 	{
-		if (ft_arg_type(av[i]) == -1)
+		if (ft_arg_type(av[i]) == -1) // error not a file not a dir
 		{
 			tab[j] = ft_strdup(av[i]);
 			j++;
@@ -78,7 +78,7 @@ char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 	i = flag;
 	while (i < ac)
 	{
-		if (ft_arg_type(av[i]) == 0)
+		if (ft_arg_type(av[i]) == 0) // file
 		{
 			tab[j] = ft_strdup(av[i]);
 			j++;
@@ -88,7 +88,7 @@ char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 	i = flag;
 	while (i < ac)
 	{
-		if (ft_arg_type(av[i]) == 1)
+		if (ft_arg_type(av[i]) == 1) // directory
 		{
 			tab[j] = ft_strdup(av[i]);
 			j++;
