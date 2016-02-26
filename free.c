@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 17:01:52 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 17:05:47 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/26 17:08:13 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ void 	ft_free_data(t_lst **node)
 		ft_strdel(&(*node)->file_data->uid);
 	if ((*node)->file_data->gid)
 		ft_strdel(&(*node)->file_data->gid);
-	if ((*node)->file_data->size)
-		ft_strdel(&(*node)->file_data->size);
 	if ((*node)->file_data->min)
 		ft_strdel(&(*node)->file_data->min);
 	if ((*node)->file_data->maj)
 		ft_strdel(&(*node)->file_data->maj);
-	if ((*node)->file_data->maj_min)
+	if ((*node)->file_data->size)
+		ft_strdel(&(*node)->file_data->size);
+	//if ((*node)->file_data->maj_min)
+	else
 		ft_strdel(&(*node)->file_data->maj_min);
 	if ((*node)->date)
 		ft_strdel(&(*node)->date);
@@ -50,15 +51,11 @@ void 	ft_free_data(t_lst **node)
 
 void	ft_free_list(t_lst **node)
 {
-	int i;// test printf
-
-	i = 0;// test
 	while (*node)
 	{
 //		printf("Node freed nb = |%d|  name : %s\n", i, (*node)->name);
 		ft_free_data(node);
 		*node = (*node)->next;
-//		i++; //test 
 	}
 	free((*node));
 	node = NULL;
