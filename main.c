@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 19:37:56 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/26 18:17:03 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,26 @@ void			ft_read_param(char *path, t_opt *options)
 					ft_strjoin(path, ret->d_name));
 		closedir(dir);
 	}
-	ft_padding(&node, pad);
+	if (options && options->l)
+		ft_padding(&node, pad);
 	ft_sort_options(node, options, path);
-//	if (!options->R) // opt->R == 0 free list when no opt->R on
-//		ft_free_list(&node);
+	if (!options->R && !node->next) // free arguments passes en parametres 
+		ft_free_list(&node);
+	else if (!options->R && node) // opt->R = 0 (rep courant ou ../ etc..) 
+		ft_free_list(&node);
 }
 
 int				main(int ac, char **av)
 {
 	int		i;
-//	int		put_space;
+	int		put_space; //
 	int		flag;
 	char	*path;
 	t_opt	opt;
 
 	i = 1;
 	flag = 1;
-//	put_space = 0;
+	put_space = 0; //
 	path = NULL;
 	ft_init_opt(&opt);
 	if (ac > 1)
@@ -96,24 +99,26 @@ int				main(int ac, char **av)
 		i = 0;
 		if (ac > 1)
 		{
-//			ft_arg_type(path);
+			ft_arg_type(path); //
 			while (i < ac - flag)
 			{
 				path = av[i];
-/*				if (ac - flag > 1 && ft_arg_type(path) == 1)
-				{
+				if (ac - flag > 1 && ft_arg_type(path) == 1) //
+				{ 
 					if (put_space != 0)
 						ft_putchar('\n');
 					ft_putstr(path);
 					ft_putendl(":");
-				}*/
+				} ///
 				ft_read_param(path, &opt);
 				i++;
-//				put_space = 1;
+				put_space = 1; //
 			}
 		}
 	}
 	if (!path)
 		ft_read_param("./", &opt);
+	else
+		ft_free_tab(av);
 	return (0);
 }
