@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/26 18:17:03 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/27 19:11:01 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_read_param(char *path, t_opt *options)
 					ft_strjoin(path, ret->d_name));
 		closedir(dir);
 	}
-	if (options && options->l)
+	if (options && options->l) //Segfault without padding w/ -R + -Rr /library ~/
 		ft_padding(&node, pad);
 	ft_sort_options(node, options, path);
 	if (!options->R && !node->next) // free arguments passes en parametres 
@@ -100,6 +100,7 @@ int				main(int ac, char **av)
 		if (ac > 1)
 		{
 			ft_arg_type(path); //
+//			DEBUG //
 			while (i < ac - flag)
 			{
 				path = av[i];
