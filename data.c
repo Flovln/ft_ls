@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 15:43:39 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/02/27 18:42:55 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,50 @@ static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 	elem->file_data->get_perm[8] = (file_stat->st_mode & S_IWOTH) ? 'w' : '-';
 	elem->file_data->get_perm[9] = (file_stat->st_mode & S_IXOTH) ? 'x' : '-';
 }
+/* new function for ft_get_time */
+static char    *ft_lastword(char *s)
+{
+	char    *ptr;
+	int     is_word;
+
+	ptr = NULL;
+	is_word = 0;
+	while (*s)
+	{
+		if (!ft_isspace(*s) && !is_word)
+		{
+			ptr = s;
+			is_word = 1;
+		}
+		else if (ft_isspace(*s))
+			is_word = 0;
+		++s;
+	}
+	return (ptr);
+}
+/* new function for time managing */
+static char			*ft_get_time(const long *f_time)
+{
+	char 	*tmp;
+	char 	*prev;
+	char 	*new;
+	time_t	today;
+
+	time(&today);
+	tmp = ctime(f_time);
+	if (today - 15724800 > *f_time || today < *f_time)
+	{
+		prev = ft_strsub(tmp, 4, 6); // month + day
+		new = ft_strjoin(prev, ft_lastword(tmp) - 1); // lastword = year
+		new[ft_strlen(new)] = '\0';
+		ft_strdel(&prev);
+	}
+	else
+		new = ft_strsub(tmp, 4, 12); // date + heure
+	if (ft_strchr(new, '\n')) //ctime ajoute un '\n' apres l'annee
+		(ft_strchr(new, '\n'))[0] = '\0';
+	return (new);
+}
 
 void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 {
@@ -65,7 +109,8 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	else
 		node->file_data->gid = ft_itoa(file_stat.st_gid);
 	node->file_data->size = ft_itoa(file_stat.st_size);
-	node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
+	//node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
+	node->date = ft_get_time(&file_stat.st_mtime); // new function
 	node->last_edit = (int)(file_stat.st_mtime);
 	node->name = ft_strdup(file);
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
