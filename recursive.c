@@ -45,7 +45,7 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path) //, int nb_dir)
 	if (!(all_dir = (char **)malloc(sizeof(char *) * nb_dir + 1)))
 		exit(1);
 	while (node)
-	{
+	{	
 		if (node->is_dir == 1)
 		{
 			if (opt->a == 0 && node->name[0] != '.')
@@ -58,19 +58,27 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path) //, int nb_dir)
 				all_dir[i] = ft_strdup(node->name);
 				i++;
 			}
-		}
+		}	
 		node = node->next;
 	}
 	all_dir[i] = NULL;
 	if (opt->r == 0)
-	{
+	{	
 		i = -1;
 		while (++i < nb_dir)
 		{
+			DEBUG //
+			printf("-- 0 -------> all_dir[i] = |%s|\n", all_dir[i]);
 			if (all_dir[i])
 			{
+				printf("-- 1 -------> path  = |%s|\n", path);
+				DEBUG //
+				printf("-- 1 -------> all_dir[i] = |%s|\n", all_dir[i]);
+				DEBUG //
 				ft_put_css('\n', ft_strjoin(path, all_dir[i]), ":\n");
+				DEBUG //
 				ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[i])), opt);
+				DEBUG //
 			}
 		}
 	}
@@ -81,12 +89,18 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path) //, int nb_dir)
 		{
 			if (all_dir[j])
 			{
+				printf("-- 1 -------> path w/ -r  = |%s|\n", path);
+				DEBUG //
+				printf("-- 1 -------> all_dir[j] = |%s|\n", all_dir[j]);
+				DEBUG //
 				ft_put_css('\n', ft_strjoin(path, all_dir[j]), ":\n");
+				DEBUG //
 				ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[j])), opt);
+				DEBUG //
 			}
 			j--;
 		}
 	}
-//	ft_free_list(&node); // doesn't work
+//	ft_free_list(&node); // ft_free_tab instead !
 	opt->R = 1; // for free in ft_read_param
 }
