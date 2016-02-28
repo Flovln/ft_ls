@@ -80,7 +80,7 @@ static char			*ft_get_time(const long *f_time)
 	tmp = ctime(f_time);
 	if (today - 15724800 > *f_time || today < *f_time)
 	{
-		prev = ft_strsub(tmp, 4, 6); // month + day
+		prev = ft_strsub(tmp, 4, 7); // month + day
 		new = ft_strjoin(prev, ft_lastword(tmp) - 1); // lastword = year
 		new[ft_strlen(new)] = '\0';
 		ft_strdel(&prev);
