@@ -54,6 +54,13 @@ void			ft_read_param(char *path, t_opt *options)
 			perror(path);
 			return ;
 		}
+		else if (node->file_data->get_perm[0] == 'd' && node->file_data->get_perm[1] == '-')
+		{
+			ft_putstr("ft_ls: ");
+			ft_putstr(path);
+			ft_putendl(": Permission denied");
+			return ;	
+		}
 		is_file = 1;
 	}
 	else if (is_file == 0)
@@ -64,7 +71,7 @@ void			ft_read_param(char *path, t_opt *options)
 					ft_strjoin(path, ret->d_name));
 		closedir(dir);
 	}
-	if (options && options->l) //Segfault without padding w/ -R + -Rr /library ~/
+//	if (options && options->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
 		ft_padding(&node, pad);
 	ft_sort_options(node, options, path);
 	if (!options->R && !node->next) // free arguments passes en parametres 
@@ -76,19 +83,19 @@ void			ft_read_param(char *path, t_opt *options)
 int				main(int ac, char **av)
 {
 	int		i;
-	int		put_space; //
+	int		put_space;
 	int		flag;
 	char	*path;
 	t_opt	opt;
 
 	i = 1;
 	flag = 1;
-	put_space = 0; //
+	put_space = 0;
 	path = NULL;
 	ft_init_opt(&opt);
 	if (ac > 1)
 	{
-		while (av[i] && av[i][0] == '-')
+		while (av[i] && av[i][0] == '-' && av[i][1])
 		{
 			ft_options(av[i], &opt);
 			flag++;
@@ -99,21 +106,20 @@ int				main(int ac, char **av)
 		i = 0;
 		if (ac > 1)
 		{
-			ft_arg_type(path); //
-//			DEBUG //
+			ft_arg_type(path);
 			while (i < ac - flag)
 			{
 				path = av[i];
-				if (ac - flag > 1 && ft_arg_type(path) == 1) //
+				if (ac - flag > 1 && ft_arg_type(path) == 1)
 				{ 
 					if (put_space != 0)
 						ft_putchar('\n');
 					ft_putstr(path);
 					ft_putendl(":");
-				} ///
+				}
 				ft_read_param(path, &opt);
 				i++;
-				put_space = 1; //
+				put_space = 1;
 			}
 		}
 	}

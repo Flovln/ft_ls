@@ -65,7 +65,7 @@ static void		ft_sort_options_bis(t_lst *node, t_opt *opt, char *path, int i)
 	else if (node && (!opt->a) && (!opt->r))
 		ft_display_curr(node, i);
 	if (node && opt->R)
-		ft_recursive(node, opt, path, ft_count_dir(node));
+		ft_recursive(node, opt, path); //, ft_count_dir(node));
 }
 
 void			ft_sort_options(t_lst *node, t_opt *opt, char *path)
