@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:18:36 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:22:31 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,25 @@ static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 	elem->file_data->get_perm[9] = (file_stat->st_mode & S_IXOTH) ? 'x' : '-';
 }
 
-static char			*ft_get_time(const long *f_time)
+static char		*ft_get_time(const long *f_time)
 {
-	char 	*tmp;
-	char 	*prev;
-	char 	*new;
+	char	*tmp;
+	char	*prev;
+	char	*new;
 	time_t	today;
 
 	time(&today);
 	tmp = ctime(f_time);
 	if (today - 15724800 > *f_time || today < *f_time)
 	{
-		prev = ft_strsub(tmp, 4, 7); // month + day
-		new = ft_strjoin(prev, ft_lastword(tmp) - 1); // lastword = year
+		prev = ft_strsub(tmp, 4, 7);
+		new = ft_strjoin(prev, ft_lastword(tmp) - 1);
 		new[ft_strlen(new)] = '\0';
 		ft_strdel(&prev);
 	}
 	else
-		new = ft_strsub(tmp, 4, 12); // date + heure
-	if (ft_strchr(new, '\n')) //ctime ajoute un '\n' apres l'annee
+		new = ft_strsub(tmp, 4, 12);
+	if (ft_strchr(new, '\n'))
 		(ft_strchr(new, '\n'))[0] = '\0';
 	return (new);
 }
@@ -88,8 +88,7 @@ void			ft_add_data(struct stat file_stat, t_lst *node, char *file)
 	else
 		node->file_data->gid = ft_itoa(file_stat.st_gid);
 	node->file_data->size = ft_itoa(file_stat.st_size);
-	//node->date = ft_strsub(ctime(&file_stat.st_mtime), 4, 12);
-	node->date = ft_get_time(&file_stat.st_mtime); // new function
+	node->date = ft_get_time(&file_stat.st_mtime);
 	node->last_edit = (int)(file_stat.st_mtime);
 	node->name = ft_strdup(file);
 	node->file_data->min = ft_itoa(minor(file_stat.st_rdev));
