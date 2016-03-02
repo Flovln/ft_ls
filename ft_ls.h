@@ -68,7 +68,7 @@ typedef struct				s_lst
 	int						is_dir;
 	int						last_edit;
 	char					*name;
-	char					*path; //
+	char					*path;
 	struct s_lst			*next;
 }							t_lst;
 
@@ -84,13 +84,13 @@ int							ft_check_opt(t_opt *opt);
 int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
-void						ft_display_data(t_lst **node);
+void						ft_display_data(t_lst *node);
 void						ft_display_total(t_lst **node, int i);
 void						ft_display_curr(t_lst *node, int i);
 void						ft_display_l(t_lst *node, int i);
-void						ft_display_r(t_lst **node, int i);
-void						ft_display_t(t_lst **node);
-void						ft_display_l_r(t_lst **node, int i);
+void						ft_display_r(t_lst *node, int i);
+void						ft_display_t(t_lst *node);
+void						ft_display_l_r(t_lst *node, int i);
 t_lst						*ft_time_sort(t_lst *node);
 t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt,

@@ -34,35 +34,35 @@ void			ft_display_total(t_lst **node, int i)
 		}
 	ft_putstr("total ");
 	ft_putnbr(res);
-	ft_putstr("\n");
+	ft_putchar('\n');
 	*node = head;
 }
 
-void			ft_display_data(t_lst **node)
+void			ft_display_data(t_lst *node)
 {
-	ft_putstr((*node)->file_data->get_perm);
+	ft_putstr(node->file_data->get_perm);
 	ft_putstr(" ");
-	ft_putstr((*node)->file_data->links);
+	ft_putstr(node->file_data->links);
 	ft_putstr(" ");
-	ft_putstr((*node)->file_data->uid);
+	ft_putstr(node->file_data->uid);
 	ft_putstr("  ");
-	ft_putstr((*node)->file_data->gid);
+	ft_putstr(node->file_data->gid);
 	ft_putstr(" ");
-	if ((*node)->file_data->get_perm[0] != 'c' &&
-					(*node)->file_data->get_perm[0] != 'b')
+	if (node->file_data->get_perm[0] != 'c' &&
+			node->file_data->get_perm[0] != 'b')
 	{
 		ft_putstr("  ");
-		ft_putstr((*node)->file_data->size);
+		ft_putstr(node->file_data->size);
 		ft_putstr("  ");
 	}
 	else
 	{
-		ft_putstr((*node)->file_data->maj_min);
+		ft_putstr(node->file_data->maj_min);
 		ft_putstr(" ");
 	}
-	ft_putstr((*node)->date);
+	ft_putstr(node->date);
 	ft_putstr(" ");
-	ft_putendl((*node)->name);
+	ft_putendl(node->name);
 }
 
 static	char	*ft_add_space(char *s, int max)
@@ -90,7 +90,11 @@ static	char	*ft_add_space(char *s, int max)
 		return (tmp);
 	}
 	else
+	{
+		free(tmp);
+		tmp = NULL;
 		return (s);
+	}
 }
 
 static void		ft_set_padding(t_lst **head, t_pad *pad)
@@ -114,7 +118,7 @@ static void		ft_set_padding(t_lst **head, t_pad *pad)
 			tmp->file_data->maj = ft_add_space(tmp->file_data->maj, pad->maj);
 			tmp->file_data->maj_min = ft_strjoin(tmp->file_data->maj, " ");
 			tmp->file_data->maj_min = ft_strjoin(tmp->file_data->maj_min,
-									tmp->file_data->min);
+					tmp->file_data->min);
 			tmp = tmp->next;
 		}
 	}
