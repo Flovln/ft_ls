@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/27 19:11:01 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:17:23 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ void			ft_read_param(char *path, t_opt *options)
 			perror(path);
 			return ;
 		}
-		else if (node->file_data->get_perm[0] == 'd' && node->file_data->get_perm[1] == '-')
+		else if (node->file_data->get_perm[0] == 'd'
+				&& node->file_data->get_perm[1] == '-')
 		{
 			ft_putstr("ft_ls: ");
 			ft_putstr(path);
 			ft_putendl(": Permission denied");
-			return ;	
+			return ;
 		}
 		is_file = 1;
 	}
@@ -72,11 +73,11 @@ void			ft_read_param(char *path, t_opt *options)
 		closedir(dir);
 	}
 //	if (options && options->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
-		ft_padding(&node, pad);
+	ft_padding(&node, pad);
 	ft_sort_options(node, options, path);
-	if (!options->R && !node->next) // free arguments passes en parametres 
+	if (!options->R && !node->next)
 		ft_free_list(&node);
-	else if (!options->R && node) // opt->R = 0 (rep courant ou ../ etc..) 
+	else if (!options->R && node)
 		ft_free_list(&node);
 }
 
@@ -111,7 +112,7 @@ int				main(int ac, char **av)
 			{
 				path = av[i];
 				if (ac - flag > 1 && ft_arg_type(path) == 1)
-				{ 
+				{
 					if (put_space != 0)
 						ft_putchar('\n');
 					ft_putstr(path);
