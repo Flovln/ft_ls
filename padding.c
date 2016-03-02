@@ -38,7 +38,7 @@ void			ft_display_total(t_lst **node, int i)
 	*node = head;
 }
 
-void			ft_display_data(t_lst *node)
+void			ft_display_data(t_lst *node, char *path)
 {
 	ft_putstr(node->file_data->get_perm);
 	ft_putstr(" ");
@@ -62,7 +62,11 @@ void			ft_display_data(t_lst *node)
 	}
 	ft_putstr(node->date);
 	ft_putstr(" ");
-	ft_putendl(node->name);
+//	ft_putendl(node->name);
+	ft_putstr(node->name);
+	if (node->file_data->get_perm[0] == 'l')
+		ft_put_link(path);
+	ft_putchar('\n');
 }
 
 static	char	*ft_add_space(char *s, int max)

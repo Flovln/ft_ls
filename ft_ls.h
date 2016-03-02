@@ -84,13 +84,13 @@ int							ft_check_opt(t_opt *opt);
 int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
-void						ft_display_data(t_lst *node);
+void						ft_display_data(t_lst *node, char *path); // path
 void						ft_display_total(t_lst **node, int i);
 void						ft_display_curr(t_lst *node, int i);
-void						ft_display_l(t_lst *node, int i);
+void						ft_display_l(t_lst *node, char *path, int i); //path
 void						ft_display_r(t_lst *node, int i);
 void						ft_display_t(t_lst *node);
-void						ft_display_l_r(t_lst *node, int i);
+void						ft_display_l_r(t_lst *node, char *path, int i); //path
 t_lst						*ft_time_sort(t_lst *node);
 t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt,
@@ -100,7 +100,7 @@ void						ft_free_data(t_lst **node);
 void						ft_free_list(t_lst **node);
 void						ft_free_tab(char **tab);
 void						ft_recursive(t_lst *node, t_opt *opt,
-								char *path); //, int nb_dir);
+								char *path);
 int							ft_count_dir(t_lst *node);
 void						ft_read_param(char *path, t_opt *opt);
 void						ft_color_name(t_lst *node);
@@ -112,8 +112,9 @@ char						**ft_create_tab(char **av, t_opt *opt,
 char						*ft_remove_slash(char *path);
 t_lst						*manage_av_file(char *path, t_lst *lst, DIR *dir);
 char						*format_path(char *path);
-int							ft_arg_type(char *tab);
+int							ft_arg_type(char *path);
 char						*ft_lastword(char *s);
 void						ft_error(char *path);
+void						ft_put_link(char *path);
 
 #endif

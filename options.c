@@ -58,7 +58,7 @@ static void		ft_sort_options_bis(t_lst *node, t_opt *opt, char *path, int i)
 	{
 		if (node->next != NULL)
 			ft_display_total(&node, i);
-		ft_display_l(node, i);
+		ft_display_l(node, path, i); // path
 	}
 	else if (node && opt->a && (!opt->r))
 		ft_display_curr(node, i);
@@ -86,7 +86,7 @@ void			ft_sort_options(t_lst *node, t_opt *opt, char *path)
 		{
 			if (node->next != NULL)
 				ft_display_total(&node, i);
-			ft_display_l_r(node, i);
+			ft_display_l_r(node, path, i);
 		}
 		else if (opt->r)
 			ft_display_r(node, i);

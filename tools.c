@@ -18,8 +18,8 @@ void        ft_put_link(char *path)
 	int     ret;
 
 	ret = readlink(path, buffer, 1023);
-	if (ret == -1)
-		return ;
+	//if (ret == -1)
+	//	return ;
 	buffer[ret] = '\0';
 	ft_putstr(" -> ");
 	ft_putstr(buffer);

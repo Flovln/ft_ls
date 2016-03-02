@@ -12,17 +12,17 @@
 
 #include "ft_ls.h"
 
-int			ft_arg_type(char *tab)
+int			ft_arg_type(char *path)
 {
 	DIR			*dir;
 	struct stat	st;
 
-	if ((dir = opendir(tab)))
+	if ((dir = opendir(path)))
 	{
 		closedir(dir);
 		return (1);
 	}
-	else if (!stat(tab, &st))
+	else if (!stat(path, &st))
 		return (0);
 	else
 		return (-1);
