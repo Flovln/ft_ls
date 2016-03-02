@@ -6,24 +6,31 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:15:35 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 17:05:57 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:19:04 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_color_name(t_lst *node)
+char		*ft_lastword(char *s)
 {
-	if (node->file_data->get_perm[0] == 'd')
-		ft_putstr(GREEN);
-	else if (node->file_data->get_perm[0] == 'l')
-		ft_putstr(RED);
-	else if (node->file_data->get_perm[0] == 'c')
-		ft_putstr(BLUE);
-	else if (node->file_data->get_perm[0] == 'b')
-		ft_putstr(MAGENTA);
-	ft_putstr(node->name);
-	ft_putstr(COLOR_RESET);
+	char    *ptr;
+	int     is_word;
+
+	ptr = NULL;
+	is_word = 0;
+	while (*s)
+	{
+		if (!ft_isspace(*s) && !is_word)
+		{
+			ptr = s;
+			is_word = 1;
+		}
+		else if (ft_isspace(*s))
+			is_word = 0;
+		++s;
+	}
+	return (ptr);
 }
 
 char		*ft_add_slash(char *path)

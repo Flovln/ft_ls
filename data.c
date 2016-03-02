@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/27 18:42:55 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:18:36 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,7 @@ static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 	elem->file_data->get_perm[8] = (file_stat->st_mode & S_IWOTH) ? 'w' : '-';
 	elem->file_data->get_perm[9] = (file_stat->st_mode & S_IXOTH) ? 'x' : '-';
 }
-/* new function for ft_get_time */
-static char    *ft_lastword(char *s)
-{
-	char    *ptr;
-	int     is_word;
 
-	ptr = NULL;
-	is_word = 0;
-	while (*s)
-	{
-		if (!ft_isspace(*s) && !is_word)
-		{
-			ptr = s;
-			is_word = 1;
-		}
-		else if (ft_isspace(*s))
-			is_word = 0;
-		++s;
-	}
-	return (ptr);
-}
-/* new function for time managing */
 static char			*ft_get_time(const long *f_time)
 {
 	char 	*tmp;
