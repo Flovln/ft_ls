@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:15:35 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:19:04 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:23:46 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char		*ft_lastword(char *s)
 {
-	char    *ptr;
-	int     is_word;
+	char	*ptr;
+	int		is_word;
 
 	ptr = NULL;
 	is_word = 0;
