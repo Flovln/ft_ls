@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 14:53:50 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:10:41 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 16:01:08 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ int			ft_arg_type(char *tab)
 	if ((dir = opendir(tab)))
 	{
 		closedir(dir);
-		return (1); // is dir
+		return (1);
 	}
 	else if (!stat(tab, &st))
-		return (0); // is file
+		return (0);
 	else
-		return (-1); // is none (error)
+		return (-1);
 }
-
-/* tri les arguments passes en parametre suivant la ou les options choisies */
 
 void		ft_sort_tab(char **tab, t_opt *opt, int flag)
 {
@@ -53,48 +51,28 @@ void		ft_sort_tab(char **tab, t_opt *opt, int flag)
 	}
 }
 
-/* tableau pour stocker et trier les arguments passes en parametre */
-
 char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 {
 	int		i;
 	int		j;
 	char	**tab;
 
-	i = flag;
+	i = flag - 1;
 	j = 0;
 	ft_sort_tab(av, opt, flag);
 	if (!(tab = (char **)malloc(sizeof(char *) * ac + 1)))
 		return (NULL);
-	while (i < ac)
-	{
+	while (++i < ac)
 		if (ft_arg_type(av[i]) == -1)
-		{
-			tab[j] = ft_strdup(av[i]);
-			j++;
-		}
-		i++;
-	}
-	i = flag;
-	while (i < ac)
-	{
+			tab[j++] = ft_strdup(av[i]);
+	i = flag - 1;
+	while (++i < ac)
 		if (ft_arg_type(av[i]) == 0)
-		{
-			tab[j] = ft_strdup(av[i]);
-			j++;
-		}
-		i++;
-	}
-	i = flag;
-	while (i < ac)
-	{
+			tab[j++] = ft_strdup(av[i]);
+	i = flag - 1;
+	while (++i < ac)
 		if (ft_arg_type(av[i]) == 1)
-		{
-			tab[j] = ft_strdup(av[i]);
-			j++;
-		}
-		i++;
-	}
+			tab[j++] = ft_strdup(av[i]);
 	tab[j] = NULL;
 	return (tab);
 }

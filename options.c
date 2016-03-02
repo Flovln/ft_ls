@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/21 18:50:06 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:59:46 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		ft_sort_options_bis(t_lst *node, t_opt *opt, char *path, int i)
 	else if (node && (!opt->a) && (!opt->r))
 		ft_display_curr(node, i);
 	if (node && opt->R)
-		ft_recursive(node, opt, path); //, ft_count_dir(node));
+		ft_recursive(node, opt, path);
 }
 
 void			ft_sort_options(t_lst *node, t_opt *opt, char *path)
