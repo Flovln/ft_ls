@@ -6,11 +6,24 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:15:35 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:37:33 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 18:03:06 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void        ft_put_link(char *path)
+{
+	char    buffer[1024];
+	int     ret;
+
+	ret = readlink(path, buffer, 1023);
+	if (ret == -1)
+		return ;
+	buffer[ret] = '\0';
+	ft_putstr(" -> ");
+	ft_putstr(buffer);
+}
 
 void		ft_error(char *path)
 {

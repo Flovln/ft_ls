@@ -6,20 +6,12 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:36:37 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 18:03:22 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-
-# define RED "\x1b[31m"
-# define GREEN "\x1b[32m"
-# define YELLOW "\x1b[33m"
-# define BLUE "\x1b[34m"
-# define MAGENTA "\x1b[35m"
-# define CYAN "\x1b[36m"
-# define COLOR_RESET "\x1b[0m"
 
 # include <pwd.h>
 # include <uuid/uuid.h>
@@ -33,7 +25,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-#define DEBUG printf("%d: %s\n", __LINE__, __func__);
+#define DEBUG printf("%d: %s\n", __LINE__, __func__); /// ---DEBUG--- ////
 
 typedef struct				s_opt
 {
@@ -57,7 +49,6 @@ typedef struct				s_pad
 
 typedef struct				s_data
 {
-//	int						is_dir; // recursive
 	int						blocks;
 	char					get_perm[11];
 	char					*links;
@@ -71,12 +62,13 @@ typedef struct				s_data
 
 typedef struct				s_lst
 {
-	dev_t					st_rdev; // major/minor for /dev
+	dev_t					st_rdev;
 	t_data					*file_data;
-	char					*date; //time display
-	int						is_dir; //recursive
-	int						last_edit; //time sort
+	char					*date;
+	int						is_dir;
+	int						last_edit;
 	char					*name;
+	char					*path; //
 	struct s_lst			*next;
 }							t_lst;
 
