@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 14:53:50 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/25 17:23:01 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:10:41 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			ft_arg_type(char *tab)
 	else if (!stat(tab, &st))
 		return (0); // is file
 	else
-		return (-1); // is none (is an error)
+		return (-1); // is none (error)
 }
 
 /* tri les arguments passes en parametre suivant la ou les options choisies */
@@ -68,7 +68,7 @@ char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 		return (NULL);
 	while (i < ac)
 	{
-		if (ft_arg_type(av[i]) == -1) // error not a file not a dir
+		if (ft_arg_type(av[i]) == -1)
 		{
 			tab[j] = ft_strdup(av[i]);
 			j++;
@@ -78,7 +78,7 @@ char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 	i = flag;
 	while (i < ac)
 	{
-		if (ft_arg_type(av[i]) == 0) // file
+		if (ft_arg_type(av[i]) == 0)
 		{
 			tab[j] = ft_strdup(av[i]);
 			j++;
@@ -88,7 +88,7 @@ char		**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 	i = flag;
 	while (i < ac)
 	{
-		if (ft_arg_type(av[i]) == 1) // directory
+		if (ft_arg_type(av[i]) == 1)
 		{
 			tab[j] = ft_strdup(av[i]);
 			j++;
