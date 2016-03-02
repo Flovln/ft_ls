@@ -6,11 +6,17 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:15:35 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:23:46 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 15:37:33 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void		ft_error(char *path)
+{
+	ft_putstr("ft_ls: ");
+	perror(path);
+}
 
 char		*ft_lastword(char *s)
 {

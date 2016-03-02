@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/22 14:51:29 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/02 16:18:16 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,9 @@ char			*format_path(char *path)
 		return (NULL);
 }
 
-/*
-static t_lst	*manage_av_file_bis(char *path, t_lst *lst, DIR *dir)
-{
-	char			*file_name;
-	struct dirent	*ret;
-
-	file_name = get_file_name(path);
-	while ((ret = readdir(dir))) //read
-	{
-		if ((ft_strcmp(ret->d_name, file_name) == 0))
-		{
-			lst = ft_get_data(lst, ret->d_name, path);
-			break ;
-		}
-	}
-	if (!lst)
-		return (NULL);
-	closedir(dir); // close
-	return (lst);
-}
-*/
 t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 {
 	char			*formated;
-	char			*file_name;
 	struct dirent	*ret;
 
 	formated = format_path(path);
@@ -96,21 +74,17 @@ t_lst			*manage_av_file(char *path, t_lst *lst, DIR *dir)
 		return (NULL);
 	if (!(dir = opendir(formated)))
 	{
-		ft_putstr("ft_ls: ");
-		perror(path);
+		ft_error(path);
 		return (NULL);
 	}
 	else
 	{
-		file_name = get_file_name(path);
 		while ((ret = readdir(dir)))
-		{
-			if ((ft_strcmp(ret->d_name, file_name) == 0))
+			if ((ft_strcmp(ret->d_name, get_file_name(path)) == 0))
 			{
 				lst = ft_get_data(lst, ret->d_name, path);
 				break ;
 			}
-		}
 		if (!lst)
 			return (NULL);
 		closedir(dir);
