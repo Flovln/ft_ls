@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:15:35 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 11:24:53 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 13:41:04 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		*ft_lastword(char *s)
 
 void		ft_putstr_s(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -45,7 +45,9 @@ void		ft_putstr_s(char *s)
 	}
 	ft_putstr(" ");
 }
-
+/*
+ * * get_path function
+ */
 char		*ft_add_slash(char *path)
 {
 	if (path[ft_strlen(path) - 1] != '/')

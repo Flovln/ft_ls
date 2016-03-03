@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:59:46 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 13:43:35 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		ft_sort_options_bis(t_lst *node, t_opt *opt, char *path, int i)
 	{
 		if (node->next != NULL)
 			ft_display_total(&node, i);
-		ft_display_l(node, path, i); // path
+		ft_display_l(node, i);
 	}
 	else if (node && opt->a && (!opt->r))
 		ft_display_curr(node, i);
@@ -86,7 +86,7 @@ void			ft_sort_options(t_lst *node, t_opt *opt, char *path)
 		{
 			if (node->next != NULL)
 				ft_display_total(&node, i);
-			ft_display_l_r(node, path, i);
+			ft_display_l_r(node, i);
 		}
 		else if (opt->r)
 			ft_display_r(node, i);

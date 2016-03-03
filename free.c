@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 17:01:52 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 15:25:07 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 13:29:18 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	ft_free_data(t_lst **node)
 		ft_strdel(&(*node)->date);
 	if ((*node)->name)
 		ft_strdel(&(*node)->name);
+	if ((*node)->path)
+		ft_strdel(&(*node)->path);
 }
 
 void	ft_free_list(t_lst **node)

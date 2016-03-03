@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 11:26:00 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 13:41:59 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			ft_display_total(t_lst **node, int i)
 	*node = head;
 }
 
-void			ft_display_data(t_lst *node, char *path)
+void			ft_display_data(t_lst *node)
 {
 	ft_putstr_s(node->file_data->get_perm);
 	ft_putstr_s(node->file_data->links);
@@ -54,10 +54,9 @@ void			ft_display_data(t_lst *node, char *path)
 	else
 		ft_putstr_s(node->file_data->maj_min);
 	ft_putstr_s(node->date);
-//	ft_putendl(node->name);
 	ft_putstr(node->name);
 	if (node->file_data->get_perm[0] == 'l')
-		ft_put_link(path);
+		ft_put_link(node->path);
 	ft_putchar('\n');
 }
 
@@ -85,7 +84,7 @@ static	char	*ft_add_space(char *s, int max)
 		}
 		return (tmp);
 	}
-	else // modif
+	else
 		ft_strdel(&tmp);
 	return (s);
 }
