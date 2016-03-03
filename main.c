@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 11:30:19 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 17:28:58 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,33 @@ void			ft_init_opt(t_opt *opt)
 	opt->t = 0;
 }
 
+static void		ft_test(t_lst *node, char *path, t_pad *pad, t_opt *opt)
+{
+	//	if (opt && opt->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
+	ft_padding(&node, pad);
+	ft_sort_options(node, opt, path);
+	if (!opt->R && !node->next)
+		ft_free_list(&node);
+	else if (!opt->R && node)
+		ft_free_list(&node);
+}
+/*
+static void		ft_test2(t_lst *node, char *path)
+{
+	if (!node)
+	{
+		printf("path -> |%s|\n", path);
+		ft_error(path);
+		return ;
+	}
+	else if (node->file_data->get_perm[0] == 'd'
+			&& node->file_data->get_perm[1] == '-')
+	{
+		ft_error_rights(node, path);
+		return ;
+	}
+}
+*/
 void			ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
@@ -50,35 +77,34 @@ void			ft_read_param(char *path, t_opt *options)
 		node = manage_av_file(path, node, dir);
 		if (!node)
 		{
-			ft_putstr("ft_ls: ");
-			perror(path);
+			ft_error(path);
 			return ;
 		}
 		else if (node->file_data->get_perm[0] == 'd'
 				&& node->file_data->get_perm[1] == '-')
 		{
-			ft_putstr("ft_ls: ");
-			ft_putstr(path);
-			ft_putendl(": Permission denied");
+			ft_error_rights(node, path);
 			return ;
 		}
 		is_file = 1;
 	}
 	else if (is_file == 0)
 	{
-		path = ft_add_slash(path);
+		path = ft_add_slash(path); // get_path function
 		while ((ret = readdir(dir)))
 			node = ft_get_data(node, ret->d_name,
 					ft_strjoin(path, ret->d_name));
 		closedir(dir);
 	}
-//	if (options && options->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
-	ft_padding(&node, pad);
-	ft_sort_options(node, options, path);
-	if (!options->R && !node->next)
-		ft_free_list(&node);
-	else if (!options->R && node)
-		ft_free_list(&node);
+	ft_test(node, path, pad, options);
+}
+
+static void		ft_test2(char *path, int put_space)
+{
+	if (put_space != 0)
+		ft_putchar('\n');
+	ft_putstr(path);
+	ft_putendl(":");
 }
 
 int				main(int ac, char **av)
@@ -112,12 +138,7 @@ int				main(int ac, char **av)
 			{
 				path = av[i];
 				if (ac - flag > 1 && ft_arg_type(path) == 1)
-				{
-					if (put_space != 0)
-						ft_putchar('\n');
-					ft_putstr(path);
-					ft_putendl(":");
-				}
+					ft_test2(path, put_space);
 				ft_read_param(path, &opt);
 				i++;
 				put_space = 1;

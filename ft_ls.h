@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 11:30:44 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 16:15:18 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ typedef struct				s_lst
 	int						is_dir;
 	int						last_edit;
 	char					*name;
-	char					*path; //
+	char					*path;
 	struct s_lst			*next;
 }							t_lst;
 
-void						ft_add_data(struct stat file_stat,
-								t_lst *node, char *file);
+void						ft_add_data(struct stat f_st, t_lst *node,
+								char *file, char *path);
 void						ft_add_node(t_lst **head, t_lst *current,
 								t_lst *new_node);
 char						*ft_add_slash(char *path);
@@ -84,13 +84,13 @@ int							ft_check_opt(t_opt *opt);
 int							ft_valid_opt(char c);
 int							ft_options(char *s, t_opt *opt);
 void						ft_init_opt(t_opt *opt);
-void						ft_display_data(t_lst *node, char *path); // path
+void						ft_display_data(t_lst *node);
 void						ft_display_total(t_lst **node, int i);
 void						ft_display_curr(t_lst *node, int i);
-void						ft_display_l(t_lst *node, char *path, int i); //path
+void						ft_display_l(t_lst *node, int i);
 void						ft_display_r(t_lst *node, int i);
 void						ft_display_t(t_lst *node);
-void						ft_display_l_r(t_lst *node, char *path, int i); //path
+void						ft_display_l_r(t_lst *node, int i);
 t_lst						*ft_time_sort(t_lst *node);
 t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt,
@@ -117,5 +117,9 @@ char						*ft_lastword(char *s);
 void						ft_error(char *path);
 void						ft_put_link(char *path);
 void						ft_putstr_s(char *s);
+char						*ft_get_pathname(t_lst *node, char *pathname);
+void						ft_sort_time(char **tab);
+char						*ft_get_time(const long *f_time);
+void						ft_error_rights(t_lst *node, char *path);
 
 #endif
