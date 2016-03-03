@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 18:03:22 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 11:30:44 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-#define DEBUG printf("%d: %s\n", __LINE__, __func__); /// ---DEBUG--- ////
+# define DEBUG printf("%d: %s\n", __LINE__, __func__); /// ---DEBUG--- ////
 
 typedef struct				s_opt
 {
@@ -68,7 +68,7 @@ typedef struct				s_lst
 	int						is_dir;
 	int						last_edit;
 	char					*name;
-	char					*path;
+	char					*path; //
 	struct s_lst			*next;
 }							t_lst;
 
@@ -116,5 +116,6 @@ int							ft_arg_type(char *path);
 char						*ft_lastword(char *s);
 void						ft_error(char *path);
 void						ft_put_link(char *path);
+void						ft_putstr_s(char *s);
 
 #endif

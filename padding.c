@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/22 14:29:30 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 11:26:00 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,10 @@ void			ft_display_total(t_lst **node, int i)
 
 void			ft_display_data(t_lst *node, char *path)
 {
-	ft_putstr(node->file_data->get_perm);
-	ft_putstr(" ");
-	ft_putstr(node->file_data->links);
-	ft_putstr(" ");
-	ft_putstr(node->file_data->uid);
-	ft_putstr("  ");
-	ft_putstr(node->file_data->gid);
-	ft_putstr(" ");
+	ft_putstr_s(node->file_data->get_perm);
+	ft_putstr_s(node->file_data->links);
+	ft_putstr_s(node->file_data->uid);
+	ft_putstr_s(node->file_data->gid);
 	if (node->file_data->get_perm[0] != 'c' &&
 			node->file_data->get_perm[0] != 'b')
 	{
@@ -56,12 +52,8 @@ void			ft_display_data(t_lst *node, char *path)
 		ft_putstr("  ");
 	}
 	else
-	{
-		ft_putstr(node->file_data->maj_min);
-		ft_putstr(" ");
-	}
-	ft_putstr(node->date);
-	ft_putstr(" ");
+		ft_putstr_s(node->file_data->maj_min);
+	ft_putstr_s(node->date);
 //	ft_putendl(node->name);
 	ft_putstr(node->name);
 	if (node->file_data->get_perm[0] == 'l')
@@ -93,12 +85,9 @@ static	char	*ft_add_space(char *s, int max)
 		}
 		return (tmp);
 	}
-	else
-	{
-		free(tmp);
-		tmp = NULL;
-		return (s);
-	}
+	else // modif
+		ft_strdel(&tmp);
+	return (s);
 }
 
 static void		ft_set_padding(t_lst **head, t_pad *pad)
