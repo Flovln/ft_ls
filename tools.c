@@ -6,30 +6,11 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:15:35 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 18:03:06 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 11:24:53 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void        ft_put_link(char *path)
-{
-	char    buffer[1024];
-	int     ret;
-
-	ret = readlink(path, buffer, 1023);
-	//if (ret == -1)
-	//	return ;
-	buffer[ret] = '\0';
-	ft_putstr(" -> ");
-	ft_putstr(buffer);
-}
-
-void		ft_error(char *path)
-{
-	ft_putstr("ft_ls: ");
-	perror(path);
-}
 
 char		*ft_lastword(char *s)
 {
@@ -50,6 +31,19 @@ char		*ft_lastword(char *s)
 		++s;
 	}
 	return (ptr);
+}
+
+void		ft_putstr_s(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	ft_putstr(" ");
 }
 
 char		*ft_add_slash(char *path)
