@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 16:15:18 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/07 18:15:10 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ t_lst						*manage_av_file(char *path, t_lst *lst, DIR *dir);
 char						*format_path(char *path);
 int							ft_arg_type(char *path);
 char						*ft_lastword(char *s);
-void						ft_error(char *path);
+int							ft_error(char *path);
 void						ft_put_link(char *path);
 void						ft_putstr_s(char *s);
 char						*ft_get_pathname(t_lst *node, char *pathname);
 void						ft_sort_time(char **tab);
 char						*ft_get_time(const long *f_time);
-void						ft_error_rights(t_lst *node, char *path);
+int							ft_error_rights(t_lst *node, char *path);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:51:06 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/02 16:18:16 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/07 11:12:30 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char		*ft_strndup(char const *s1, size_t len)
 {
 	char *scpy;
 
-	if (!(scpy = (char *)malloc(sizeof(char) * len + 1)))
+	if (!(scpy = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	return (ft_strncpy(scpy, s1, len));
 }

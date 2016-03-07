@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 13:41:59 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/07 11:12:10 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static	char	*ft_add_space(char *s, int max)
 
 	i = 0;
 	j = max - (int)ft_strlen(s);
-	if (!(tmp = (char *)malloc(sizeof(char) * ft_strlen(s) + 1)))
+	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))))
 		return (NULL);
 	if (j > 0)
 	{

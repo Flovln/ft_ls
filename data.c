@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 13:46:52 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/03 15:59:21 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	void	ft_perm_acc(t_lst *elem, struct stat *file_stat)
 	elem->file_data->get_perm[9] = (file_stat->st_mode & S_IXOTH) ? 'x' : '-';
 }
 
-static char		*ft_get_time(const long *f_time)
+char			*ft_get_time(const long *f_time)
 {
 	char	*tmp;
 	char	*prev;
@@ -71,7 +71,8 @@ static char		*ft_get_time(const long *f_time)
 	return (new);
 }
 
-void			ft_add_data(struct stat f_st, t_lst *node, char *file, char *path)
+void			ft_add_data(struct stat f_st, t_lst *node,
+					char *file, char *path)
 {
 	struct passwd	*user_name;
 	struct group	*group_name;
