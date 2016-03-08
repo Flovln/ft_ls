@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/07 18:34:56 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 12:37:59 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ int				ft_count_dir(t_lst *node)
 	return (i);
 }
 
-static	void	ft_put_css(char c, char *s1, char *s2)
+static void		ft_put_css(char c, char *s1, char *s2)
 {
 	ft_putchar(c);
 	ft_putstr(s1);
 	ft_putstr(s2);
 }
-/* 
- * * opti pour norme
- */
-static	void 	ft_cpy_dir_rec(t_lst *node, t_opt *opt, char **all_dir)
+
+static void		ft_cpy_dir_rec(t_lst *node, t_opt *opt, char **all_dir)
 {
 	int i;
 
@@ -60,17 +58,17 @@ static	void 	ft_cpy_dir_rec(t_lst *node, t_opt *opt, char **all_dir)
 	all_dir[i] = NULL;
 }
 
-static void		ft_apply_r_rec(char **all_dir, char *path, int nb_dir, t_opt *opt)
+static void		ft_apply_r_rec(char **all_d, char *path, int nb_d, t_opt *opt)
 {
 	int j;
 
-	j = nb_dir - 1;
+	j = nb_d - 1;
 	while (j > -1)
 	{
-		if (all_dir[j])
+		if (all_d[j])
 		{
-			ft_put_css('\n', ft_strjoin(path, all_dir[j]), ":\n");
-			ft_read_param(ft_strjoin(path, ft_add_slash(all_dir[j])), opt);
+			ft_put_css('\n', ft_strjoin(path, all_d[j]), ":\n");
+			ft_read_param(ft_strjoin(path, ft_add_slash(all_d[j])), opt);
 		}
 		j--;
 	}

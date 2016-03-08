@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/07 18:34:45 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 14:34:25 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ void			ft_init_opt(t_opt *opt)
 	opt->t = 0;
 }
 
+static void		ft_get_lst(t_lst **node, DIR *dir, char *path)
+{
+	struct dirent *ret;
+
+	while ((ret = readdir(dir)))
+			*node = ft_get_data(*node, ret->d_name,
+					ft_strjoin(path, ret->d_name));
+		closedir(dir);
+}
+
 static void		ft_test(t_lst *node, char *path, t_pad *pad, t_opt *opt)
 {
 //	if (opt && opt->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
@@ -41,12 +51,13 @@ static void		ft_test(t_lst *node, char *path, t_pad *pad, t_opt *opt)
 		ft_free_list(&node);
 	else if (!opt->R && node)
 		ft_free_list(&node);
+	free(pad);
+	pad = NULL;
 }
 
 void			ft_read_param(char *path, t_opt *options)
 {
 	DIR				*dir;
-	struct dirent	*ret;
 	t_lst			*node;
 	t_pad			*pad;
 	int				is_file;
@@ -61,19 +72,14 @@ void			ft_read_param(char *path, t_opt *options)
 		node = manage_av_file(path, node, dir);
 		if (!node && ft_error(path))
 			return ;
-		else if (node->file_data->get_perm[0] == 'd'
-				&& node->file_data->get_perm[1] == '-'
-					&& ft_error_rights(node, path))
+		else if (ft_error_rights(node, path))
 			return ;
 		is_file = 1;
 	}
 	else if (is_file == 0)
 	{
 		path = ft_add_slash(path); // get_path function
-		while ((ret = readdir(dir)))
-			node = ft_get_data(node, ret->d_name,
-					ft_strjoin(path, ret->d_name));
-		closedir(dir);
+		ft_get_lst(&node, dir, path);
 	}
 	ft_test(node, path, pad, options);
 }
