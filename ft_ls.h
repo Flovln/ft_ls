@@ -101,7 +101,7 @@ void						ft_free_list(t_lst **node);
 void						ft_free_tab(char **tab);
 void						ft_recursive(t_lst *node, t_opt *opt,
 								char *path);
-int							ft_count_dir(t_lst *node);
+int							ft_count_dir(t_lst *node, t_opt *opt);
 void						ft_read_param(char *path, t_opt *opt);
 void						ft_color_name(t_lst *node);
 int							ft_count_node(t_lst *node);

@@ -24,7 +24,7 @@ static void		ft_get_lst(t_lst **node, DIR *dir, char *path)
 
 static void		ft_read_bis(t_lst *node, char *path, t_pad *pad, t_opt *opt)
 {
-//	if (opt && opt->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
+	if (opt && opt->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
 		ft_padding(&node, pad);
 	ft_sort_options(node, opt, path);
 	if (!opt->maj_r && !node->next)
@@ -58,7 +58,7 @@ void			ft_read_param(char *path, t_opt *options)
 	}
 	else if (is_file == 0)
 	{
-		path = ft_add_slash(path); // get_path function
+		path = ft_add_slash(path);
 		ft_get_lst(&node, dir, path);
 	}
 	ft_read_bis(node, path, pad, options);

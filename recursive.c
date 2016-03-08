@@ -12,18 +12,32 @@
 
 #include "ft_ls.h"
 
-int				ft_count_dir(t_lst *node)
+int				ft_count_dir(t_lst *node, t_opt *opt)
 {
 	int	i;
 
 	i = 0;
-	while (node)
+	if (opt->a)
 	{
-		if (node->is_dir)
-			i++;
-		node = node->next;
+		while (node)
+		{
+			if (node->is_dir)
+				i++;
+			node = node->next;
+		}
+		return (i);
 	}
-	return (i);
+	else if (!opt->a)
+	{
+		while (node)
+		{
+			if (node->is_dir && ft_strncmp(&node->name[0], ".", 1))
+				i++;
+			node = node->next;
+		}
+		return (i);
+	}
+	return (0);
 }
 
 static void		ft_put_css(char c, char *s1, char *s2)
@@ -58,7 +72,7 @@ static void		ft_cpy_dir_rec(t_lst *node, t_opt *opt, char **all_dir)
 	all_dir[i] = NULL;
 }
 
-static void		ft_apply_r_rec(char **all_d, char *path, int nb_d, t_opt *opt)
+static void		rec_r_on(char **all_d, char *path, int nb_d, t_opt *opt)
 {
 	int j;
 
@@ -80,7 +94,7 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path)
 	int		i;
 	int		nb_dir;
 
-	nb_dir = ft_count_dir(node);
+	nb_dir = ft_count_dir(node, opt);
 	if (!(all_dir = (char **)malloc(sizeof(char *) * (nb_dir + 1))))
 		exit(1);
 	ft_cpy_dir_rec(node, opt, all_dir);
@@ -97,8 +111,8 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path)
 				break ;
 	}
 	else if (opt->r == 1)
-		ft_apply_r_rec(all_dir, path, nb_dir, opt);
-//	ft_free_list(&node);
+		rec_r_on(all_dir, path, nb_dir, opt);
+	//	ft_free_list(&node);
 	ft_free_tab(all_dir);
 	opt->maj_r = 1;
 }
