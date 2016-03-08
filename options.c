@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 17:18:55 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 17:57:27 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int				ft_valid_opt(char c)
 
 int				ft_check_opt(t_opt *opt)
 {
-	if (opt->l == 0 && opt->maj_r == 0 && opt->a == 0 && opt->r == 0 && opt->t == 0)
+	if (opt->l == 0 && opt->maj_r == 0 && opt->a == 0
+			&& opt->r == 0 && opt->t == 0)
 		return (1);
 	else
 		return (0);
