@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/07 18:15:10 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 14:21:52 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ char						*ft_get_pathname(t_lst *node, char *pathname);
 void						ft_sort_time(char **tab);
 char						*ft_get_time(const long *f_time);
 int							ft_error_rights(t_lst *node, char *path);
+char						**ft_sort_tab_time(char **tab, t_opt *opt, int len);
 
 #endif
