@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 17:01:52 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 14:01:55 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 16:06:16 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 void	ft_free_tab(char **tab)
 {
 	int	i;
+	int len;
 
 	i = 0;
-	while (tab[i])
+	len = ft_tablen(tab);
+	while (i < len)
 	{
 		free(tab[i]);
 		tab[i] = NULL;
 		i++;
 	}
+	free(tab);
+	tab = NULL;
 }
 
 void	ft_free_data(t_lst **node)
@@ -45,8 +49,8 @@ void	ft_free_data(t_lst **node)
 		ft_strdel(&(*node)->date);
 	if ((*node)->name)
 		ft_strdel(&(*node)->name);
-//	if ((*node)->path)
-//		ft_strdel(&(*node)->path);
+//	if ((*node)->path) //
+//		ft_strdel(&(*node)->path); //
 }
 
 void	ft_free_list(t_lst **node)

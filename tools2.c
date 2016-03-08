@@ -6,11 +6,31 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 11:23:13 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 14:09:27 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 17:19:19 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void			ft_init_pad(t_pad *pad, t_lst **node)
+{
+	pad->links = ft_strlen((*node)->file_data->links);
+	pad->uid = ft_strlen((*node)->file_data->uid);
+	pad->gid = ft_strlen((*node)->file_data->gid);
+	pad->size = ft_strlen((*node)->file_data->size);
+	pad->min = ft_strlen((*node)->file_data->min);
+	pad->maj = ft_strlen((*node)->file_data->maj);
+	pad->maj_min = 0;
+}
+
+void			ft_init_opt(t_opt *opt)
+{
+	opt->l = 0;
+	opt->maj_r = 0;
+	opt->a = 0;
+	opt->r = 0;
+	opt->t = 0;
+}
 
 void			ft_put_link(char *path)
 {
@@ -40,45 +60,18 @@ char			*ft_get_pathname(t_lst *node, char *pathname)
 	return (pathname);
 }
 
-static char		*get_path_error(char *path)
+int				ft_arg_type(char *path)
 {
-	int		i;
-	int		j;
-	int		end;
-	char	*new;
+	DIR			*dir;
+	struct stat	st;
 
-	j = 0;
-	path = ft_remove_slash(path);
-	i = ft_strlen(path);
-	end = i;
-	while (i > 0 && path[i - 1] != '/')
-		i--;
-	new = ft_strnew(end - i + 1);
-	while (path[i])
+	if ((dir = opendir(path)))
 	{
-		new[j] = path[i];
-		i++;
-		j++;
-	}
-	return (new);
-}
-
-int				ft_error(char *path)
-{
-	ft_putstr("ft_ls: ");
-	perror(get_path_error(path));
-	return (1);
-}
-
-int				ft_error_rights(t_lst *node, char *path)
-{
-	if (node->file_data->get_perm[0] == 'd'
-			&& node->file_data->get_perm[1] == '-')
-	{
-		ft_putstr("ft_ls: ");
-		ft_putstr(path);
-		ft_putendl(": Permission denied");
+		closedir(dir);
 		return (1);
 	}
-	return (0);
+	else if (!stat(path, &st))
+		return (0);
+	else
+		return (-1);
 }

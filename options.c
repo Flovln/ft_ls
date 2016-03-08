@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:14:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/03 13:43:35 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 17:18:55 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				ft_valid_opt(char c)
 
 int				ft_check_opt(t_opt *opt)
 {
-	if (opt->l == 0 && opt->R == 0 && opt->a == 0 && opt->r == 0 && opt->t == 0)
+	if (opt->l == 0 && opt->maj_r == 0 && opt->a == 0 && opt->r == 0 && opt->t == 0)
 		return (1);
 	else
 		return (0);
@@ -38,7 +38,7 @@ int				ft_options(char *s, t_opt *opt)
 		if (s[i] == 'l')
 			opt->l = 1;
 		else if (s[i] == 'R')
-			opt->R = 1;
+			opt->maj_r = 1;
 		else if (s[i] == 'a')
 			opt->a = 1;
 		else if (s[i] == 'r')
@@ -64,7 +64,7 @@ static void		ft_sort_options_bis(t_lst *node, t_opt *opt, char *path, int i)
 		ft_display_curr(node, i);
 	else if (node && (!opt->a) && (!opt->r))
 		ft_display_curr(node, i);
-	if (node && opt->R)
+	if (node && opt->maj_r)
 		ft_recursive(node, opt, path);
 }
 

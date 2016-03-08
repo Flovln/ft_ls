@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 14:19:16 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 14:34:23 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 16:41:02 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char		**sort_time(int start, int end, char **name, int *time)
 {
-	int i;
-	int itmp;
-	char *stmp;
+	int		i;
+	int		itmp;
+	char	*stmp;
 
 	itmp = 0;
 	i = start;
@@ -45,8 +45,8 @@ static int		while_is_error(char **tab, char **cpy_name, int *cpy_date)
 	int i;
 
 	i = 0;
-	if (is_what(tab[i]) == -1)
-		while (is_what(tab[i]) == -1)
+	if (ft_arg_type(tab[i]) == -1)
+		while (ft_arg_type(tab[i]) == -1)
 		{
 			cpy_name[i] = ft_strdup(tab[i]);
 			cpy_date[i] = 0;
@@ -57,14 +57,13 @@ static int		while_is_error(char **tab, char **cpy_name, int *cpy_date)
 
 static int		while_is_file(char **tab, char **cpy_name, int *cpy_date, int i)
 {
-	int end;
-	t_opt *opt;
-	int start;
-	struct stat st;
+	int			end;
+	int			start;
+	struct stat	st;
 
 	start = i;
-	if (is_what(tab[i]) == 0)
-		while (is_what(tab[i]) == 0)
+	if (ft_arg_type(tab[i]) == 0)
+		while (ft_arg_type(tab[i]) == 0)
 		{
 			stat(tab[i], &st);
 			cpy_name[i] = ft_strdup(tab[i]);
@@ -79,14 +78,14 @@ static int		while_is_file(char **tab, char **cpy_name, int *cpy_date, int i)
 
 static int		while_is_dir(char **tab, char **cpy_name, int *cpy_date, int i)
 {
-	struct dirent *ret;
-	struct stat st;
-	int start;
-	DIR *dir;
+	struct dirent	*ret;
+	struct stat		st;
+	int				start;
+	DIR				*dir;
 
 	start = i;
-	if (is_what(tab[i]) == 1)
-		while (is_what(tab[i]) == 1)
+	if (ft_arg_type(tab[i]) == 1)
+		while (ft_arg_type(tab[i]) == 1)
 		{
 			dir = opendir(tab[i]);
 			ret = readdir(dir);
@@ -101,11 +100,11 @@ static int		while_is_dir(char **tab, char **cpy_name, int *cpy_date, int i)
 	return (i);
 }
 
-char		**ft_sort_tab_time(char **tab, t_opt *opt, int len)
+char			**ft_sort_tab_time(char **tab, int len)
 {
-	int i;
-	char **cpy_name;
-	int	*cpy_date;
+	int		i;
+	char	**cpy_name;
+	int		*cpy_date;
 
 	i = 0;
 	if (!(cpy_name = (char **)malloc(sizeof(char *) * (len + 1))))

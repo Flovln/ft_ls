@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:28:41 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 12:37:59 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/08 17:19:33 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void			ft_recursive(t_lst *node, t_opt *opt, char *path)
 	}
 	else if (opt->r == 1)
 		ft_apply_r_rec(all_dir, path, nb_dir, opt);
-	//	ft_free_list(&node);
+//	ft_free_list(&node);
 	ft_free_tab(all_dir);
-	opt->R = 1;
+	opt->maj_r = 1;
 }
