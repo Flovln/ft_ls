@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 16:48:01 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 17:19:56 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 13:34:52 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		ft_get_lst(t_lst **node, DIR *dir, char *path)
 
 static void		ft_read_bis(t_lst *node, char *path, t_pad *pad, t_opt *opt)
 {
-	if (opt && opt->l) //Segfault with padding w/ -Rr + -Rlr /library ~/
+	if (opt && opt->l)
 		ft_padding(&node, pad);
 	ft_sort_options(node, opt, path);
 	if (!opt->maj_r && !node->next)

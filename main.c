@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 17:16:44 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 14:45:28 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,6 @@ static int		ft_opt_check(char **av, t_opt *opt, int flag)
 	return (flag);
 }
 
-static void		ft_get_args(int ac, char *path, int flag, t_opt *opt)
-{
-	int i;
-
-	i = 0;
-	ft_put_path(path, ac, flag, i);
-	if (i == 0)
-		i = 1;
-	ft_read_param(path, opt);
-}
-
 int				main(int ac, char **av)
 {
 	int		i;
@@ -82,7 +71,10 @@ int				main(int ac, char **av)
 		i = -1;
 		ft_check_void_av(ac, av, flag);
 		while (++i < ac - flag && (path = av[i]))
-			ft_get_args(ac, path, flag, &opt);
+		{
+			ft_put_path(path, ac, flag, i);
+			ft_read_param(path, &opt);
+		}
 	}
 	if (!path)
 		ft_read_param("./", &opt);

@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 14:19:16 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 16:41:02 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 14:35:22 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,24 @@ static char		**sort_time(int start, int end, char **name, int *time)
 
 	itmp = 0;
 	i = start;
-	while (start < end)
-	{
-		if (time[start + 1] != 0)
+	if (end - start > 1)
+		while (start < end - 1)
 		{
-			if (time[start] < time[start + 1])
+			if (time[start + 1] != 0)
 			{
-				itmp = time[start];
-				time[start] = time[start + 1];
-				time[start + 1] = itmp;
-				stmp = name[start];
-				name[start] = ft_strdup(name[start + 1]);
-				name[start + 1] = ft_strdup(stmp);
-				start = i;
+				if (time[start] < time[start + 1])
+				{
+					itmp = time[start];
+					time[start] = time[start + 1];
+					time[start + 1] = itmp;
+					stmp = name[start];
+					name[start] = ft_strdup(name[start + 1]);
+					name[start + 1] = ft_strdup(stmp);
+					start = i;
+				}
 			}
+			start++;
 		}
-		start++;
-	}
 	return (name);
 }
 
