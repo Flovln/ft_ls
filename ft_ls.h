@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 17:18:08 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 11:58:28 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "libft/libft.h"
 
 # define DEBUG printf("%d: %s\n", __LINE__, __func__); /// ---DEBUG--- ////
+# define st_mtimensec st_mtimespec.tv_nsec
 
 typedef struct				s_opt
 {
@@ -67,6 +68,7 @@ typedef struct				s_lst
 	char					*date;
 	int						is_dir;
 	int						last_edit;
+	int						ntime; // check nano second mtime
 	char					*name;
 	char					*path;
 	struct s_lst			*next;

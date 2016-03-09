@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 14:53:50 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 16:41:18 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 11:37:26 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char			**ft_create_tab(char **av, t_opt *opt, int ac, int flag)
 	if (!(tab = (char **)malloc(sizeof(char *) * (ac - flag + 1))))
 		return (NULL);
 	ft_cpy_in_tab(i, ac, tab, av);
-	if (opt && opt->t && !opt->r)
+	if (opt && opt->t)
 		tab = ft_sort_tab_time(tab, ft_tablen(tab));
 	if (opt && opt->t && opt->r)
 		tab = reverse_tab(tab);

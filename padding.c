@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 13:09:49 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 17:30:23 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 11:51:48 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static	char	*ft_add_space(char *s, int max)
 				tmp[i++] = s[k++];
 			i++;
 		}
-		tmp[--i] = '\0'; /// regle probleme d'aller trop loin en memoire
+		tmp[--i] = '\0';
 		return (tmp);
 	}
 	else
