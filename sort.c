@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 13:25:15 by fviolin           #+#    #+#             */
-/*   Updated: 2016/02/20 15:12:38 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/09 12:18:14 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,25 @@ t_lst			*ft_time_sort(t_lst *node)
 	if (!node)
 		return (NULL);
 	if (node->next && (node->last_edit < node->next->last_edit))
+	{
 		node = ft_lst_swap(node, node->next);
+	}
+	else if (node->next && node->last_edit == node->next->last_edit)
+		if (node->next && (node->ntime < node->next->ntime))
+			node = ft_lst_swap(node, node->next);
 	node->next = ft_time_sort(node->next);
 	if (node->next && (node->last_edit < node->next->last_edit))
 	{
 		node = ft_lst_swap(node, node->next);
 		node->next = ft_time_sort(node->next);
+	}
+	else if (node->next && node->last_edit == node->next->last_edit)
+	{
+		if (node->next && (node->ntime < node->next->ntime))
+		{
+			node = ft_lst_swap(node, node->next);
+			node->next = ft_time_sort(node->next);
+		}
 	}
 	return (node);
 }
