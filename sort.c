@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 13:25:15 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/09 12:18:14 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/10 14:01:30 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ int				ft_count_node(t_lst *node)
 		count++;
 	}
 	return (count);
-}
-
-void			ft_error_opt(char *s)
-{
-	ft_putstr_fd("ft_ls: illegal option -- ", 2);
-	ft_putendl_fd(s, 2);
-	ft_putstr_fd("usage: ft_ls [-Ralrt] [file ...]\n", 2);
-	exit(1);
 }
 
 t_lst			*ft_lst_swap(t_lst *node, t_lst *node_next)
