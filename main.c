@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/09 14:45:28 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/10 14:57:45 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		ft_check_void_av(int ac, char **av, int flag)
 	{
 		if (!ft_strcmp(av[i], ""))
 		{
-			ft_putendl("ft_ls: fts_open: No such file or directory");
+			ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
 			exit(0);
 		}
 		i++;
@@ -66,9 +66,8 @@ int				main(int ac, char **av)
 	if (ac > 1)
 	{
 		flag = ft_opt_check(av, &opt, flag);
-		if (ac > flag)
+		if ((i = -1) && ac > flag)
 			av = ft_create_tab(av, &opt, ac, flag);
-		i = -1;
 		ft_check_void_av(ac, av, flag);
 		while (++i < ac - flag && (path = av[i]))
 		{

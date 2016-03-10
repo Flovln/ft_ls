@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:41:51 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/09 11:58:28 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/10 13:57:00 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define DEBUG printf("%d: %s\n", __LINE__, __func__); /// ---DEBUG--- ////
-# define st_mtimensec st_mtimespec.tv_nsec
+# define TIMENSEC st_mtimespec.tv_nsec
 
 typedef struct				s_opt
 {
@@ -68,7 +67,7 @@ typedef struct				s_lst
 	char					*date;
 	int						is_dir;
 	int						last_edit;
-	int						ntime; // check nano second mtime
+	int						ntime;
 	char					*name;
 	char					*path;
 	struct s_lst			*next;
@@ -98,7 +97,7 @@ t_lst						*ft_ascii_sort(t_lst *file);
 void						ft_sort_options(t_lst *node, t_opt *opt,
 								char *path);
 void						ft_error_opt(char *s);
-void						ft_free_data(t_lst **node);
+void						ft_free_data(t_lst *node);
 void						ft_free_list(t_lst **node);
 void						ft_free_tab(char **tab);
 void						ft_recursive(t_lst *node, t_opt *opt,

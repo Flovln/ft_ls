@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 14:19:16 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/09 14:35:22 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/10 15:31:38 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int		while_is_error(char **tab, char **cpy_name, int *cpy_date)
 
 	i = 0;
 	if (ft_arg_type(tab[i]) == -1)
-		while (ft_arg_type(tab[i]) == -1)
+		while (tab[i] && ft_arg_type(tab[i]) == -1)
 		{
 			cpy_name[i] = ft_strdup(tab[i]);
 			cpy_date[i] = 0;
@@ -115,5 +115,7 @@ char			**ft_sort_tab_time(char **tab, int len)
 	i = while_is_error(tab, cpy_name, cpy_date);
 	i = while_is_file(tab, cpy_name, cpy_date, i);
 	i = while_is_dir(tab, cpy_name, cpy_date, i);
+	free(cpy_date);
+	cpy_date = 0;
 	return (cpy_name);
 }

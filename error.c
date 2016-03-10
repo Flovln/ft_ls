@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 16:13:00 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/10 14:01:15 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/10 15:38:11 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			ft_error_opt(char *s)
 
 int				ft_error(char *path)
 {
-	ft_putstr("ft_ls: ");
+	ft_putstr_fd("ft_ls: ", 2);
 	path = get_path_error(path);
 	perror(path);
 	return (1);
@@ -56,9 +56,9 @@ int				ft_error_rights(t_lst *node, char *path)
 	if (node->file_data->get_perm[0] == 'd'
 			&& node->file_data->get_perm[1] == '-')
 	{
-		ft_putstr("ft_ls: ");
-		ft_putstr(path);
-		ft_putendl(": Permission denied");
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putendl_fd(": Permission denied", 2);
 		return (1);
 	}
 	return (0);

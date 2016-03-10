@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:01:09 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/09 17:10:42 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/10 11:39:03 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			ft_add_data(struct stat f_st, t_lst *node,
 	node->file_data->size = ft_itoa(f_st.st_size);
 	node->date = ft_get_time(&f_st.st_mtime);
 	node->last_edit = (int)(f_st.st_mtime);
-	node->ntime = f_st.st_mtimensec;
+	node->ntime = f_st.TIMENSEC;
 	node->name = ft_strdup(file);
 	node->file_data->min = ft_itoa(minor(f_st.st_rdev));
 	node->file_data->maj = ft_strjoin(ft_itoa(major(f_st.st_rdev)), ",");
