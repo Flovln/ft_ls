@@ -6,7 +6,7 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 13:25:15 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/10 14:01:30 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/11 13:15:03 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ t_lst			*ft_time_sort(t_lst *node)
 {
 	if (!node)
 		return (NULL);
-	if (node->next && (node->last_edit < node->next->last_edit))
-	{
+	if (!node->next)
+		return (node);
+	if (node->last_edit < node->next->last_edit)
 		node = ft_lst_swap(node, node->next);
-	}
-	else if (node->next && node->last_edit == node->next->last_edit)
-		if (node->next && (node->ntime < node->next->ntime))
+	else if (node->last_edit == node->next->last_edit)
+		if (node->ntime < node->next->ntime)
 			node = ft_lst_swap(node, node->next);
 	node->next = ft_time_sort(node->next);
-	if (node->next && (node->last_edit < node->next->last_edit))
+	if (node->last_edit < node->next->last_edit)
 	{
 		node = ft_lst_swap(node, node->next);
 		node->next = ft_time_sort(node->next);
 	}
-	else if (node->next && node->last_edit == node->next->last_edit)
+	else if (node->last_edit == node->next->last_edit)
 	{
-		if (node->next && (node->ntime < node->next->ntime))
+		if (node->ntime < node->next->ntime)
 		{
 			node = ft_lst_swap(node, node->next);
 			node->next = ft_time_sort(node->next);
