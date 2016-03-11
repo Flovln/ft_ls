@@ -6,11 +6,20 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 12:18:26 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/10 14:57:45 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/11 16:19:52 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void            ft_init_opt(t_opt *opt)
+{
+	opt->l = 0;
+	opt->maj_r = 0;
+	opt->a = 0;
+	opt->r = 0;
+	opt->t = 0;
+}
 
 static void		ft_check_void_av(int ac, char **av, int flag)
 {

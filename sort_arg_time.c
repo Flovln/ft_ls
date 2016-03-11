@@ -6,42 +6,41 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 14:19:16 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/10 15:31:38 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/11 17:16:15 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static char		**sort_time(int start, int end, char **name, int *time)
+static char		**sort_time(int start, int end, char **name, int *time[])
 {
 	int		i;
-	int		itmp;
-	char	*stmp;
 
-	itmp = 0;
-	i = start;
+	i = start - 1;
 	if (end - start > 1)
-		while (start < end - 1)
+	{
+		while (start < end - 1 && time[0][start + 1])
 		{
-			if (time[start + 1] != 0)
+			if (time[0][start] < time [0][start + 1])
 			{
-				if (time[start] < time[start + 1])
+				ft_swap_string(time, name, start, 0);
+				start = i;
+			}
+			else if (time[0][start] == time[0][start + 1])
+			{
+				if (time[1][start] < time[1][start + 1])
 				{
-					itmp = time[start];
-					time[start] = time[start + 1];
-					time[start + 1] = itmp;
-					stmp = name[start];
-					name[start] = ft_strdup(name[start + 1]);
-					name[start + 1] = ft_strdup(stmp);
+					ft_swap_string(time, name, start, 1);
 					start = i;
 				}
 			}
 			start++;
 		}
+	}
 	return (name);
 }
 
-static int		while_is_error(char **tab, char **cpy_name, int *cpy_date)
+static int		while_is_error(char **tab, char **cpy_name, int *time[])
 {
 	int i;
 
@@ -50,13 +49,14 @@ static int		while_is_error(char **tab, char **cpy_name, int *cpy_date)
 		while (tab[i] && ft_arg_type(tab[i]) == -1)
 		{
 			cpy_name[i] = ft_strdup(tab[i]);
-			cpy_date[i] = 0;
+			time[0][i] = 0;
+			time[1][i] = 0;
 			i++;
 		}
 	return (i);
 }
 
-static int		while_is_file(char **tab, char **cpy_name, int *cpy_date, int i)
+static int		while_is_file(char **tab, char **cpy_name, int *time[], int i)
 {
 	int			end;
 	int			start;
@@ -68,16 +68,17 @@ static int		while_is_file(char **tab, char **cpy_name, int *cpy_date, int i)
 		{
 			stat(tab[i], &st);
 			cpy_name[i] = ft_strdup(tab[i]);
-			cpy_date[i] = (int)st.st_mtime;
+			time[0][i] = (int)st.st_mtime;
+			time[1][i] = (int)st.TIMENSEC;
 			i++;
 		}
 	end = i;
 	cpy_name[i] = NULL;
-	cpy_name = sort_time(start, end, cpy_name, cpy_date);
+	cpy_name = sort_time(start, end, cpy_name, time);
 	return (i);
 }
 
-static int		while_is_dir(char **tab, char **cpy_name, int *cpy_date, int i)
+static int		while_is_dir(char **tab, char **cpy_name, int *time[], int i)
 {
 	struct dirent	*ret;
 	struct stat		st;
@@ -92,12 +93,13 @@ static int		while_is_dir(char **tab, char **cpy_name, int *cpy_date, int i)
 			ret = readdir(dir);
 			stat(tab[i], &st);
 			cpy_name[i] = ft_strdup(tab[i]);
-			cpy_date[i] = (int)st.st_mtime;
+			time[0][i] = (int)st.st_mtime;
+			time[1][i] = (int)st.TIMENSEC;
 			closedir(dir);
 			i++;
 		}
 	cpy_name[i] = NULL;
-	cpy_name = sort_time(start, i, cpy_name, cpy_date);
+	cpy_name = sort_time(start, i, cpy_name, time);
 	return (i);
 }
 
@@ -105,17 +107,19 @@ char			**ft_sort_tab_time(char **tab, int len)
 {
 	int		i;
 	char	**cpy_name;
-	int		*cpy_date;
+	int		*cpy_date[2];
 
 	i = 0;
 	if (!(cpy_name = (char **)malloc(sizeof(char *) * (len + 1))))
 		return (NULL);
-	if (!(cpy_date = (int *)malloc(sizeof(int) * (len + 1))))
-		return (NULL);
+	cpy_date[0] = (int *)malloc(sizeof(int) * (len + 1));
+	cpy_date[1] = (int *)malloc(sizeof(int) * (len + 1));
 	i = while_is_error(tab, cpy_name, cpy_date);
 	i = while_is_file(tab, cpy_name, cpy_date, i);
 	i = while_is_dir(tab, cpy_name, cpy_date, i);
-	free(cpy_date);
-	cpy_date = 0;
+	free(cpy_date[0]);
+	cpy_date[0] = NULL;
+	free(cpy_date[1]);
+	cpy_date[1] = NULL;
 	return (cpy_name);
 }

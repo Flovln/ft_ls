@@ -6,11 +6,25 @@
 /*   By: fviolin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 11:23:13 by fviolin           #+#    #+#             */
-/*   Updated: 2016/03/08 17:19:19 by fviolin          ###   ########.fr       */
+/*   Updated: 2016/03/11 16:23:13 by fviolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void            ft_swap_string(int *time[], char **name, int start, int j)
+{
+	int     itmp;
+	char    *stmp;
+
+	itmp = 0;
+	itmp = time[j][start];
+	time[j][start] = time[j][start + 1];
+	time[j][start + 1] = itmp;
+	stmp = name[start];
+	name[start] = ft_strdup(name[start + 1]);
+	name[start + 1] = ft_strdup(stmp);
+}
 
 void			ft_init_pad(t_pad *pad, t_lst **node)
 {
@@ -21,15 +35,6 @@ void			ft_init_pad(t_pad *pad, t_lst **node)
 	pad->min = ft_strlen((*node)->file_data->min);
 	pad->maj = ft_strlen((*node)->file_data->maj);
 	pad->maj_min = 0;
-}
-
-void			ft_init_opt(t_opt *opt)
-{
-	opt->l = 0;
-	opt->maj_r = 0;
-	opt->a = 0;
-	opt->r = 0;
-	opt->t = 0;
 }
 
 void			ft_put_link(char *path)
